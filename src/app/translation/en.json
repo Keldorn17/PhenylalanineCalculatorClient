@@ -1,0 +1,77 @@
+{
+  "common": {
+    "appName": "Phenylalanine Calculator",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Phenylalanine Calculator",
+    "subtitle": "Authentication Portal",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "signIn": "Sign In",
+    "authenticating": "Authenticating...",
+    "success": "Login successful!",
+    "errorRequired": "Please fill in both username and password.",
+    "errorInvalid": "Login failed. Please check your credentials.",
+    "loggedIn": "Logged In",
+    "tokenTruncated": "Access Token (Truncated):",
+    "fetchFoodType": "Fetch Food Type 1",
+    "forceRefresh": "Force Token Refresh",
+    "userSettings": "User Settings",
+    "language": "Language",
+    "themeLight": "Light Mode",
+    "themeDark": "Dark Mode",
+    "errorUsernameRequired": "Username is required.",
+    "errorPasswordRequired": "Password is required.",
+    "errorPasswordStrength": "Password must be at least 8 characters, and contain uppercase, lowercase, number, and special character.",
+    "dontHaveAccount": "Don't have an account? Register"
+  },
+  "nav": {
+    "home": "Home",
+    "foodTypes": "Food Types",
+    "viewList": "View List",
+    "addFoodType": "Add Food Type"
+  },
+  "settings": {
+    "changeUsername": "Change Username",
+    "changePassword": "Change Password",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light Mode",
+    "themeDark": "Dark Mode"
+  },
+  "language": {
+    "english": "English",
+    "hungarian": "Hungarian"
+  },
+  "landing": {
+    "welcome": "Welcome to Phenylalanine Calculator",
+    "description": "Manage and track your phenylalanine intake easily and efficiently.",
+    "login": "Login",
+    "register": "Register"
+  },
+  "register": {
+    "title": "Create Account",
+    "subtitle": "Join Phenylalanine Calculator",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-type your password",
+    "signUp": "Sign Up",
+    "creatingAccount": "Creating Account...",
+    "alreadyHaveAccount": "Already have an account? Sign In",
+    "errorEmailRequired": "Email is required.",
+    "errorEmailInvalid": "Please enter a valid email address.",
+    "errorUsernameRequired": "Username is required.",
+    "errorPasswordRequired": "Password is required.",
+    "errorPasswordStrength": "Password must be at least 8 characters, and contain uppercase, lowercase, number, and special character.",
+    "errorPasswordMismatch": "Passwords do not match.",
+    "errorFailed": "Registration failed. Username or email might be taken."
+  }
+}

@@ -1,5 +1,5 @@
-import { HttpParams } from '@angular/common/http';
-import { ApiQueryParams } from './api-types';
+import {HttpParams} from '@angular/common/http';
+import {ApiQueryParams} from './api-types';
 
 /**
  * Builds HttpParams from standard ApiQueryParams for pagination and RSQL.

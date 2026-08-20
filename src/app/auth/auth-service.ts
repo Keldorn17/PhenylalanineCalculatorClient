@@ -1,8 +1,8 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap, catchError, throwError } from 'rxjs';
-import { ApiPath } from '../http/api-path';
-import { AuthRequest, AuthResponse } from './auth-types';
+import {Injectable, inject, signal} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, tap, catchError, throwError} from 'rxjs';
+import {ApiPath} from '../http/api-path';
+import {AuthRequest, AuthResponse, AuthRegisterRequest} from './auth-types';
 
 @Injectable({
   providedIn: 'root'
@@ -26,16 +26,25 @@ export class AuthService {
     return this.http.post<AuthResponse>(ApiPath.auth.authenticate, authRequest).pipe(
       tap(response => {
         this.accessTokenSignal.set(response.accessToken);
-        this.scheduleTokenRefresh(response.accessToken);
+        this.scheduleTokenRefresh(response.expiresIn);
       })
     );
+  }
+
+  public register(authRegisterRequest: AuthRegisterRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(ApiPath.auth.register, authRegisterRequest).pipe(
+      tap(response => {
+        this.accessTokenSignal.set(response.accessToken);
+        this.scheduleTokenRefresh(response.expiresIn);
+      })
+    )
   }
 
   public refresh(): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(ApiPath.auth.refresh, {}).pipe(
       tap(response => {
         this.accessTokenSignal.set(response.accessToken);
-        this.scheduleTokenRefresh(response.accessToken);
+        this.scheduleTokenRefresh(response.expiresIn);
       }),
       catchError(error => {
         this.accessTokenSignal.set(null);
@@ -63,20 +72,12 @@ export class AuthService {
     return !!this.accessTokenSignal();
   }
 
-  private scheduleTokenRefresh(token: string): void {
+  private scheduleTokenRefresh(expiresIn: number): void {
     this.clearRefreshTimeout();
 
-    const payload = this.decodeJwt(token);
-    if (!payload?.exp) {
-      return;
-    }
+    const refreshDelay = Math.max(0, (expiresIn - 30) * 1000);
 
-    const expiryTime = payload.exp * 1000;
-    const now = Date.now();
-
-    const refreshDelay = Math.max(0, expiryTime - now - 10000);
-
-    console.log(`[Auth] Token expires in ${Math.round((expiryTime - now) / 1000)}s. Scheduled refresh in ${Math.round(refreshDelay / 1000)}s.`);
+    console.log(`[Auth] Token expires in ${expiresIn}s. Scheduled refresh in ${Math.round(refreshDelay / 1000)}s.`);
 
     this.refreshTimeout = setTimeout((): void => {
       this.refresh().subscribe({
@@ -94,20 +95,6 @@ export class AuthService {
     if (this.refreshTimeout) {
       clearTimeout(this.refreshTimeout);
       this.refreshTimeout = null;
-    }
-  }
-
-  private decodeJwt(token: string): { exp?: number } | null {
-    try {
-      const parts = token.split('.');
-      if (parts.length !== 3) {
-        return null;
-      }
-      const payloadBase64 = parts[1].replaceAll('-', '+').replaceAll('_', '/');
-      const decodedPayload = window.atob(payloadBase64);
-      return JSON.parse(decodedPayload) as { exp?: number };
-    } catch {
-      return null;
     }
   }
 }

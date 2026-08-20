@@ -6,7 +6,8 @@ export const ApiPath = {
   auth: {
     authenticate: `${env}/auth/authenticate`,
     refresh: `${env}/auth/refresh`,
-    logout: `${env}/auth/logout`
+    logout: `${env}/auth/logout`,
+    register: `${env}/auth/register`
   },
 
   foodTypes: {

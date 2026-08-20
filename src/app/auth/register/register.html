@@ -1,0 +1,131 @@
+<div class="min-h-[80vh] flex items-center justify-center bg-base-200 p-4">
+  <div class="card w-full max-w-sm bg-base-100 shadow-xl border border-base-200">
+    <div class="card-body">
+      <h2 class="card-title text-2xl font-bold justify-center text-primary">{{ 'register.title' | translate }}</h2>
+      <p class="text-center text-sm opacity-70 mb-4">{{ 'register.subtitle' | translate }}</p>
+
+      @if (errorMessage()) {
+        <div class="alert alert-error text-xs shadow-sm py-2 px-3 mb-4 rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>{{ errorMessage()! | translate }}</span>
+        </div>
+      }
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+        <div class="form-control w-full relative pb-5">
+          <label for="email" class="label py-1">
+            <span class="label-text font-semibold">{{ 'register.email' | translate }}</span>
+          </label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            [placeholder]="'register.emailPlaceholder' | translate"
+            class="input input-bordered w-full input-sm md:input-md"
+            [class.input-error]="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" />
+          @if (registerForm.get('email')?.touched) {
+            @if (registerForm.get('email')?.errors?.['required']) {
+              <div class="absolute left-0 bottom-0 text-[11px] text-error font-medium whitespace-nowrap">
+                {{ 'register.errorEmailRequired' | translate }}
+              </div>
+            } @else if (registerForm.get('email')?.errors?.['email']) {
+              <div class="absolute left-0 bottom-0 text-[11px] text-error font-medium whitespace-nowrap">
+                {{ 'register.errorEmailInvalid' | translate }}
+              </div>
+            }
+          }
+        </div>
+
+        <div class="form-control w-full relative pb-5">
+          <label for="username" class="label py-1">
+            <span class="label-text font-semibold">{{ 'register.username' | translate }}</span>
+          </label>
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+            [placeholder]="'register.usernamePlaceholder' | translate"
+            class="input input-bordered w-full input-sm md:input-md"
+            [class.input-error]="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" />
+          @if (registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['required']) {
+            <div class="absolute left-0 bottom-0 text-[11px] text-error font-medium whitespace-nowrap">
+              {{ 'register.errorUsernameRequired' | translate }}
+            </div>
+          }
+        </div>
+
+        <div class="form-control w-full relative pb-8">
+          <label for="password" class="label py-1">
+            <span class="label-text font-semibold">{{ 'register.password' | translate }}</span>
+          </label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            [placeholder]="'register.passwordPlaceholder' | translate"
+            class="input input-bordered w-full input-sm md:input-md"
+            [class.input-error]="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" />
+          @if (registerForm.get('password')?.touched) {
+            @if (registerForm.get('password')?.errors?.['required']) {
+              <div class="absolute left-0 bottom-3 text-[11px] text-error font-medium whitespace-nowrap">
+                {{ 'register.errorPasswordRequired' | translate }}
+              </div>
+            } @else if (registerForm.get('password')?.errors?.['pattern']) {
+              <div class="absolute left-0 bottom-0 text-[10px] text-error font-medium leading-tight max-w-full">
+                {{ 'register.errorPasswordStrength' | translate }}
+              </div>
+            }
+          }
+        </div>
+
+        <div class="form-control w-full relative pb-5">
+          <label for="confirmPassword" class="label py-1">
+            <span class="label-text font-semibold">{{ 'register.confirmPassword' | translate }}</span>
+          </label>
+          <input
+            id="confirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            [placeholder]="'register.confirmPasswordPlaceholder' | translate"
+            class="input input-bordered w-full input-sm md:input-md"
+            [class.input-error]="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid" />
+          @if (registerForm.get('confirmPassword')?.touched) {
+            @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+              <div class="absolute left-0 bottom-0 text-[11px] text-error font-medium whitespace-nowrap">
+                {{ 'register.errorPasswordRequired' | translate }}
+              </div>
+            } @else if (registerForm.get('confirmPassword')?.errors?.['passwordMismatch']) {
+              <div class="absolute left-0 bottom-0 text-[11px] text-error font-medium whitespace-nowrap">
+                {{ 'register.errorPasswordMismatch' | translate }}
+              </div>
+            }
+          }
+        </div>
+
+        <div class="form-control mt-2">
+          <button
+            type="submit"
+            class="btn btn-primary w-full shadow-md"
+            [disabled]="isLoading()">
+            @if (isLoading()) {
+              <span class="loading loading-spinner loading-xs"></span>
+              {{ 'register.creatingAccount' | translate }}
+            } @else {
+              {{ 'register.signUp' | translate }}
+            }
+          </button>
+        </div>
+      </form>
+
+      <div class="divider my-4"></div>
+
+      <div class="text-center text-sm">
+        <a routerLink="/login" class="link link-hover link-primary font-medium">
+          {{ 'register.alreadyHaveAccount' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

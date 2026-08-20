@@ -1,0 +1,77 @@
+{
+  "common": {
+    "appName": "Fenilalanin Kalkulátor",
+    "logout": "Kijelentkezés"
+  },
+  "login": {
+    "title": "Fenilalanin Kalkulátor",
+    "subtitle": "Bejelentkezési Portál",
+    "username": "Felhasználónév",
+    "usernamePlaceholder": "Adja meg a felhasználónevét",
+    "password": "Jelszó",
+    "passwordPlaceholder": "Adja meg a jelszavát",
+    "signIn": "Bejelentkezés",
+    "authenticating": "Azonosítás...",
+    "success": "Sikeres bejelentkezés!",
+    "errorRequired": "Kérjük, adja meg a felhasználónevet és a jelszót is.",
+    "errorInvalid": "Sikertelen bejelentkezés. Ellenőrizze a hitelesítési adatokat.",
+    "loggedIn": "Bejelentkezve",
+    "tokenTruncated": "Hozzáférési token (csonkolt):",
+    "fetchFoodType": "Étel típus 1 lekérése",
+    "forceRefresh": "Token kényszerített frissítése",
+    "userSettings": "Felhasználói Beállítások",
+    "language": "Nyelv",
+    "themeLight": "Világos Mód",
+    "themeDark": "Sötét Mód",
+    "errorUsernameRequired": "A felhasználónév megadása kötelező.",
+    "errorPasswordRequired": "A jelszó megadása kötelező.",
+    "errorPasswordStrength": "A jelszónak legalább 8 karakterből kell állnia, és tartalmaznia kell nagybetűt, kisbetűt, számot és különleges karaktert.",
+    "dontHaveAccount": "Nincs még fiókja? Regisztráció"
+  },
+  "nav": {
+    "home": "Főoldal",
+    "foodTypes": "Étel típusok",
+    "viewList": "Lista megtekintése",
+    "addFoodType": "Étel típus hozzáadása"
+  },
+  "settings": {
+    "changeUsername": "Felhasználónév módosítása",
+    "changePassword": "Jelszó módosítása",
+    "language": "Nyelv",
+    "theme": "Téma",
+    "themeLight": "Világos Mód",
+    "themeDark": "Sötét Mód"
+  },
+  "language": {
+    "english": "Angol",
+    "hungarian": "Magyar"
+  },
+  "landing": {
+    "welcome": "Üdvözöljük a Fenilalanin Kalkulátorban",
+    "description": "Kövesse és kezelje fenilalanin bevitelét egyszerűen és hatékonyan.",
+    "login": "Bejelentkezés",
+    "register": "Regisztráció"
+  },
+  "register": {
+    "title": "Fiók létrehozása",
+    "subtitle": "Csatlakozzon a Fenilalanin Kalkulátorhoz",
+    "email": "E-mail cím",
+    "emailPlaceholder": "Adja meg az e-mail címét",
+    "username": "Felhasználónév",
+    "usernamePlaceholder": "Adja meg a felhasználónevét",
+    "password": "Jelszó",
+    "passwordPlaceholder": "Adja meg a jelszavát",
+    "confirmPassword": "Jelszó megerősítése",
+    "confirmPasswordPlaceholder": "Adja meg a jelszavát újra",
+    "signUp": "Regisztráció",
+    "creatingAccount": "Fiók létrehozása...",
+    "alreadyHaveAccount": "Már van fiókja? Bejelentkezés",
+    "errorEmailRequired": "Az e-mail cím megadása kötelező.",
+    "errorEmailInvalid": "Kérjük, adjon meg egy érvényes e-mail címet.",
+    "errorUsernameRequired": "A felhasználónév megadása kötelező.",
+    "errorPasswordRequired": "A jelszó megadása kötelező.",
+    "errorPasswordStrength": "A jelszónak legalább 8 karakterből kell állnia, és tartalmaznia kell nagybetűt, kisbetűt, számot és különleges karaktert.",
+    "errorPasswordMismatch": "A megadott jelszavak nem egyeznek.",
+    "errorFailed": "Sikertelen regisztráció. A felhasználónév vagy e-mail cím már foglalt lehet."
+  }
+}

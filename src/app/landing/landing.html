@@ -1,0 +1,22 @@
+<div class="hero min-h-[80vh] bg-base-200 flex items-center justify-center p-4">
+  <div class="hero-content text-center max-w-md">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-4">
+        {{ 'landing.welcome' | translate }}
+      </h1>
+      <p class="py-6 text-base md:text-lg opacity-85">
+        {{ 'landing.description' | translate }}
+      </p>
+      @if (!this.authService.isAuthenticated()) {
+        <div class="flex gap-4 justify-center mt-4">
+          <a routerLink="/login" class="btn btn-primary btn-wide md:btn-md shadow-md">
+            {{ 'landing.login' | translate }}
+          </a>
+          <a routerLink="/register" class="btn btn-outline btn-wide md:btn-md shadow-sm">
+            {{ 'landing.register' | translate }}
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</div>
