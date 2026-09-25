@@ -1,77 +1,78 @@
-<div class="min-h-[80vh] flex items-center justify-center bg-base-200 p-4">
-  <div class="card w-full max-w-sm bg-base-100 shadow-xl border border-base-200">
-    <div class="card-body">
-      <h2 class="card-title text-2xl font-bold justify-center text-primary">{{ 'login.title' | translate }}</h2>
-      <p class="text-center text-sm opacity-70 mb-4">{{ 'login.subtitle' | translate }}</p>
+<div class="auth-container">
+  <mat-card class="auth-card mat-shadow-2">
+    <mat-card-header>
+      <mat-card-title>{{ 'login.title' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'login.subtitle' | translate }}</mat-card-subtitle>
+    </mat-card-header>
 
+    <mat-card-content>
       @if (errorMessage()) {
-        <div class="alert alert-error text-xs shadow-sm py-2 px-3 mb-4 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+        <div class="error-banner">
+          <mat-icon>error_outline</mat-icon>
           <span>{{ errorMessage()! | translate }}</span>
         </div>
       }
 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
-        <div class="form-control w-full relative pb-5">
-          <label for="username" class="label py-1">
-            <span class="label-text font-semibold">{{ 'login.username' | translate }}</span>
-          </label>
+      <form [formGroup]="loginForm" class="auth-form">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'login.username' | translate }}</mat-label>
           <input
+            matInput
             id="username"
-            type="text"
             formControlName="username"
             [placeholder]="'login.usernamePlaceholder' | translate"
-            class="input input-bordered w-full input-sm md:input-md"
-            [class.input-error]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" />
-          @if (loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['required']) {
-            <div class="absolute left-0 bottom-0 text-[11px] text-error font-medium whitespace-nowrap">
-              {{ 'login.errorUsernameRequired' | translate }}
-            </div>
+            autocomplete="username"
+          />
+          <mat-icon matPrefix>person</mat-icon>
+          @if (loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')) {
+            <mat-error>{{ 'login.errorUsernameRequired' | translate }}</mat-error>
           }
-        </div>
+        </mat-form-field>
 
-        <div class="form-control w-full relative pb-5">
-          <label for="password" class="label py-1">
-            <span class="label-text font-semibold">{{ 'login.password' | translate }}</span>
-          </label>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'login.password' | translate }}</mat-label>
           <input
+            matInput
             id="password"
-            type="password"
+            [type]="hidePassword() ? 'password' : 'text'"
             formControlName="password"
             [placeholder]="'login.passwordPlaceholder' | translate"
-            class="input input-bordered w-full input-sm md:input-md"
-            [class.input-error]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" />
-          @if (loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']) {
-            <div class="absolute left-0 bottom-0 text-[11px] text-error font-medium whitespace-nowrap">
-              {{ 'login.errorPasswordRequired' | translate }}
-            </div>
-          }
-        </div>
-
-        <div class="form-control mt-2">
+            autocomplete="current-password"
+          />
+          <mat-icon matPrefix>lock</mat-icon>
           <button
-            type="submit"
-            class="btn btn-primary w-full shadow-md"
-            [disabled]="isLoading()">
-            @if (isLoading()) {
-              <span class="loading loading-spinner loading-xs"></span>
-              {{ 'login.authenticating' | translate }}
-            } @else {
-              {{ 'login.signIn' | translate }}
-            }
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword.set(!hidePassword())"
+            [attr.aria-label]="'Toggle password visibility'"
+          >
+            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-        </div>
+          @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
+            <mat-error>{{ 'login.errorPasswordRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          class="submit-btn"
+          (click)="loginClicked()"
+          [disabled]="!loginForm.valid"
+        >
+          {{ 'login.signIn' | translate }}
+        </button>
       </form>
 
-      <div class="divider my-4"></div>
+      <mat-divider></mat-divider>
 
-      <div class="text-center text-sm">
-        <a routerLink="/register" class="link link-hover link-primary font-medium">
+      <div class="auth-footer">
+        <a routerLink="/register">
           {{ 'login.dontHaveAccount' | translate }}
         </a>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
 </div>

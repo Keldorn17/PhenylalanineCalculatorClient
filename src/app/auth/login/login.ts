@@ -1,6 +1,13 @@
 import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDividerModule} from '@angular/material/divider';
 import {AuthService} from '../auth-service';
 import {TranslatePipe} from '../../translation/translation-pipe';
 
@@ -9,46 +16,45 @@ import {TranslatePipe} from '../../translation/translation-pipe';
   imports: [
     ReactiveFormsModule,
     RouterLink,
-    TranslatePipe
+    TranslatePipe,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
   ],
   templateUrl: './login.html',
-  styleUrl: './login.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './login.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
-  protected readonly fb = inject(FormBuilder);
+  protected readonly formBuilder = inject(FormBuilder);
   protected readonly authService = inject(AuthService);
   protected readonly router = inject(Router);
 
-  protected readonly loginForm: FormGroup = this.fb.group({
+  protected readonly loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required]]
+    password: ['', [Validators.required]],
   });
 
   protected readonly errorMessage = signal<string | null>(null);
-  protected readonly isLoading = signal(false);
+  protected readonly hidePassword = signal(true);
 
-  protected onSubmit(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-
-    this.isLoading.set(true);
+  protected loginClicked(): void {
     this.errorMessage.set(null);
 
     const {username, password} = this.loginForm.value;
 
     this.authService.login({username, password}).subscribe({
       next: () => {
-        this.isLoading.set(false);
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.isLoading.set(false);
         console.error('Login failed:', err);
         this.errorMessage.set('login.errorInvalid');
-      }
+      },
     });
   }
 }
