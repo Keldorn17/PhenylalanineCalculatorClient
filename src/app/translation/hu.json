@@ -1,11 +1,11 @@
 {
   "common": {
-    "appName": "Fenilalanin Kalkulátor",
+    "appName": "PheSimple",
     "logout": "Kijelentkezés"
   },
   "login": {
-    "title": "Fenilalanin Kalkulátor",
-    "subtitle": "Bejelentkezési Portál",
+    "title": "PheSimple",
+    "subtitle": "Bejelentkezés",
     "username": "Felhasználónév",
     "usernamePlaceholder": "Adja meg a felhasználónevét",
     "password": "Jelszó",
@@ -16,9 +16,6 @@
     "errorRequired": "Kérjük, adja meg a felhasználónevet és a jelszót is.",
     "errorInvalid": "Sikertelen bejelentkezés. Ellenőrizze a hitelesítési adatokat.",
     "loggedIn": "Bejelentkezve",
-    "tokenTruncated": "Hozzáférési token (csonkolt):",
-    "fetchFoodType": "Étel típus 1 lekérése",
-    "forceRefresh": "Token kényszerített frissítése",
     "userSettings": "Felhasználói Beállítások",
     "language": "Nyelv",
     "themeLight": "Világos Mód",
@@ -46,15 +43,9 @@
     "english": "Angol",
     "hungarian": "Magyar"
   },
-  "landing": {
-    "welcome": "Üdvözöljük a Fenilalanin Kalkulátorban",
-    "description": "Kövesse és kezelje fenilalanin bevitelét egyszerűen és hatékonyan.",
-    "login": "Bejelentkezés",
-    "register": "Regisztráció"
-  },
   "register": {
     "title": "Fiók létrehozása",
-    "subtitle": "Csatlakozzon a Fenilalanin Kalkulátorhoz",
+    "subtitle": "Csatlakozzon a PheSimple-höz",
     "email": "E-mail cím",
     "emailPlaceholder": "Adja meg az e-mail címét",
     "username": "Felhasználónév",

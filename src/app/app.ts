@@ -7,10 +7,10 @@ import { Navigation } from './navigation/navigation';
   selector: 'app-root',
   imports: [RouterOutlet, Navigation],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  protected readonly title = signal('PhenylalanineCalculatorClient');
+  protected readonly title = signal('PheSimple');
 
   private readonly authService = inject(AuthService);
 

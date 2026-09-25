@@ -1,0 +1,31 @@
+<mat-nav-list [class.collapsed]="isCollapsed()">
+  @for (item of menuItems(); track item.label) {
+    <mat-list-item
+      [routerLink]="item.route"
+      routerLinkActive="active-item"
+      [routerLinkActiveOptions]="{exact: true}"
+      [matTooltip]="item.label | translate"
+      [matTooltipDisabled]="!isCollapsed()"
+      matTooltipPosition="right"
+      (click)="navigate(item.route)"
+    >
+      <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+      <span matListItemTitle class="item-title">{{ item.label | translate }}</span>
+    </mat-list-item>
+  }
+  @if (isLoggedIn()) {
+    <div class="bottom">
+      <mat-divider></mat-divider>
+      <mat-list-item
+        class="warn"
+        (click)="onLogout()"
+        [matTooltip]="'common.logout' | translate"
+        [matTooltipDisabled]="!isCollapsed()"
+        matTooltipPosition="right"
+      >
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle class="item-title">{{ 'common.logout' | translate }}</span>
+      </mat-list-item>
+    </div>
+  }
+</mat-nav-list>

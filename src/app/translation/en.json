@@ -1,11 +1,11 @@
 {
   "common": {
-    "appName": "Phenylalanine Calculator",
+    "appName": "PheSimple",
     "logout": "Logout"
   },
   "login": {
-    "title": "Phenylalanine Calculator",
-    "subtitle": "Authentication Portal",
+    "title": "PheSimple",
+    "subtitle": "Login",
     "username": "Username",
     "usernamePlaceholder": "Enter your username",
     "password": "Password",
@@ -16,9 +16,6 @@
     "errorRequired": "Please fill in both username and password.",
     "errorInvalid": "Login failed. Please check your credentials.",
     "loggedIn": "Logged In",
-    "tokenTruncated": "Access Token (Truncated):",
-    "fetchFoodType": "Fetch Food Type 1",
-    "forceRefresh": "Force Token Refresh",
     "userSettings": "User Settings",
     "language": "Language",
     "themeLight": "Light Mode",
@@ -46,15 +43,9 @@
     "english": "English",
     "hungarian": "Hungarian"
   },
-  "landing": {
-    "welcome": "Welcome to Phenylalanine Calculator",
-    "description": "Manage and track your phenylalanine intake easily and efficiently.",
-    "login": "Login",
-    "register": "Register"
-  },
   "register": {
     "title": "Create Account",
-    "subtitle": "Join Phenylalanine Calculator",
+    "subtitle": "Join PheSimple",
     "email": "Email Address",
     "emailPlaceholder": "Enter your email",
     "username": "Username",

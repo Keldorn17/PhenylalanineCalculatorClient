@@ -1,74 +1,76 @@
-<div class="dropdown dropdown-end">
-  <div tabindex="0" role="button" class="btn btn-ghost btn-circle btn-sm md:btn-md" aria-label="User settings">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-         class="w-5 h-5 md:w-6 md:h-6">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-    </svg>
-  </div>
-  <ul tabindex="0"
-      class="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow-lg bg-base-100 rounded-box w-56 border border-base-200 gap-1">
-    <li class="menu-title border-b border-base-200 pb-2 mb-1 pointer-events-none">
-      <span class="font-semibold text-base-content/85">{{ 'login.userSettings' | translate }}</span>
-    </li>
+@if (isLoggedIn()) {
+  <button
+    mat-icon-button
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+    (click)="toggleMenu()"
+    [attr.aria-label]="'login.userSettings' | translate"
+  >
+    <mat-icon>person</mat-icon>
+  </button>
 
-    <li>
-      <button type="button" (click)="changeUsername(); closeDropdown()" class="flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-             class="w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-        </svg>
-        <span>{{ 'settings.changeUsername' | translate }}</span>
-      </button>
-    </li>
-
-    <li>
-      <button type="button" (click)="changePassword(); closeDropdown()" class="flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-             class="w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
-        </svg>
-        <span>{{ 'settings.changePassword' | translate }}</span>
-      </button>
-    </li>
-
-    <div class="divider my-1"></div>
-
-    <li class="dropdown dropdown-left w-full">
-      <button tabindex="0" class="flex items-center justify-between w-full">
-        <span>{{ 'settings.language' | translate }}</span>
-        <span class="badge badge-sm badge-outline uppercase">{{ translationService.currentLang() }}</span>
-      </button>
-      <ul tabindex="0"
-          class="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-32 border border-base-200 z-[60] mr-2">
-        <li>
-          <button type="button" (click)="setLanguage('en'); closeDropdown()"
-                  [class.active]="translationService.currentLang() === 'en'">{{ 'language.english' | translate }}
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen()"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+    [cdkConnectedOverlayPositions]="positions"
+    (backdropClick)="closeMenu()"
+    (detach)="closeMenu()"
+    (overlayKeydown)="onOverlayKeydown($event)"
+  >
+    <div class="floating-panel mat-shadow-3">
+      @if (currentView() === 'main') {
+        <div class="menu-section">
+          <button class="menu-item" (click)="changeUsername()">
+            <mat-icon class="item-icon">manage_accounts</mat-icon>
+            <span class="item-label">{{ 'settings.changeUsername' | translate }}</span>
           </button>
-        </li>
-        <li>
-          <button type="button" (click)="setLanguage('hu'); closeDropdown()"
-                  [class.active]="translationService.currentLang() === 'hu'">{{ 'language.hungarian' | translate }}
+
+          <button class="menu-item" (click)="changePassword()">
+            <mat-icon class="item-icon">lock_reset</mat-icon>
+            <span class="item-label">{{ 'settings.changePassword' | translate }}</span>
           </button>
-        </li>
-      </ul>
-    </li>
+        </div>
 
-    <li>
-      <button type="button" (click)="myToggle.toggleTheme()" class="flex items-center justify-between w-full">
-        <span>{{ 'settings.theme' | translate }}</span>
-        <theme-toggle buttonClass="btn-circle btn-xs pointer-events-none" iconClass="w-4 h-4" #myToggle></theme-toggle>
-      </button>
-    </li>
+        <mat-divider></mat-divider>
 
-    <div class="divider my-1"></div>
+        <div class="menu-section">
+          <button class="menu-item" (click)="openLanguageView()">
+            <mat-icon class="item-icon">translate</mat-icon>
+            <span class="item-label">{{ 'settings.language' | translate }}</span>
+            <span class="item-value">{{ (currentLang() === 'en' ? 'language.english' : 'language.hungarian') | translate }}</span>
+            <mat-icon class="chevron-icon">chevron_right</mat-icon>
+          </button>
 
-    <li>
-      <button type="button" (click)="onLogout(); closeDropdown()"
-              class="text-error font-medium">{{ 'common.logout' | translate }}
-      </button>
-    </li>
-  </ul>
-</div>
+          <button class="menu-item" (click)="toggleTheme()">
+            <mat-icon class="item-icon">{{ isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+            <span class="item-label">{{ (isDark() ? 'settings.themeLight' : 'settings.themeDark') | translate }}</span>
+          </button>
+        </div>
+      } @else if (currentView() === 'language') {
+        <div class="menu-header">
+          <button mat-icon-button (click)="backToMainView()" [attr.aria-label]="'Back'">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <span class="header-title">{{ 'settings.language' | translate }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="menu-section">
+          @for (lang of languages; track lang.code) {
+            <button class="menu-item" (click)="setLanguage(lang.code)">
+              <mat-icon class="check-icon" [style.visibility]="currentLang() === lang.code ? 'visible' : 'hidden'">check</mat-icon>
+              <span class="item-label">{{ lang.label | translate }}</span>
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </ng-template>
+} @else {
+  <a mat-button routerLink="/login" class="sign-in-btn">
+    <mat-icon>login</mat-icon>
+    <span>{{ 'login.signIn' | translate }}</span>
+  </a>
+}

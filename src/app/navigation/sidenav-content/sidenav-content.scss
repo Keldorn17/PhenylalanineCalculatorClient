@@ -1,0 +1,113 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+mat-nav-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 0.25rem;
+
+  .bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+
+    mat-divider {
+      margin: 0.5rem 0.5rem 0.5rem 0;
+    }
+
+    mat-list-item {
+      cursor: pointer;
+
+      &.warn {
+        color: var(--mat-sys-error);
+
+        mat-icon {
+          color: var(--mat-sys-error);
+        }
+
+        &:hover {
+          background-color: color-mix(in srgb, var(--mat-sys-error) 8%, transparent);
+          border-left-color: color-mix(in srgb, var(--mat-sys-error) 50%, transparent);
+        }
+      }
+    }
+  }
+
+  ::ng-deep .mat-mdc-list-item {
+    position: relative;
+    width: calc(100% - 0.5rem) !important;
+    margin-right: 0.5rem;
+    border-radius: 0 8px 8px 0 !important;
+    border-left: 4px solid transparent;
+    --mat-list-active-indicator-shape: 0 8px 8px 0;
+    --mat-focus-indicator-border-radius: 0 8px 8px 0;
+    margin-bottom: 0.25rem;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none !important;
+    box-sizing: border-box;
+    transition:
+      padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-left-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:focus:not(:focus-visible)::before {
+      display: none !important;
+    }
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--mat-sys-primary) 8%, transparent);
+      border-left-color: color-mix(in srgb, var(--mat-sys-primary) 50%, transparent);
+    }
+
+    &.active-item {
+      background-color: color-mix(in srgb, var(--mat-sys-primary) 18%, transparent);
+      border-left-color: var(--mat-sys-primary);
+      color: var(--mat-sys-primary);
+
+      mat-icon {
+        color: var(--mat-sys-primary);
+      }
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--mat-sys-primary) 24%, transparent);
+        border-left-color: var(--mat-sys-primary);
+      }
+    }
+
+    .mdc-list-item__start {
+      transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mdc-list-item__content {
+      overflow: hidden;
+      white-space: nowrap;
+      transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 180px;
+      opacity: 1;
+    }
+  }
+
+  &.collapsed {
+    ::ng-deep .mat-mdc-list-item {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+
+      .mdc-list-item__start {
+        margin: 0 auto !important;
+      }
+
+      .mdc-list-item__content {
+        max-width: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+    }
+  }
+}
