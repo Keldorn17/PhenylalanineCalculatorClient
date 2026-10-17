@@ -49,6 +49,15 @@
             <span class="item-label">{{ (isDark() ? 'settings.themeLight' : 'settings.themeDark') | translate }}</span>
           </button>
         </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="menu-section">
+          <button class="menu-item warn" (click)="deactivate()">
+            <mat-icon class="item-icon warn">delete</mat-icon>
+            <span class="item-label">{{ 'settings.deactivate' | translate }}</span>
+          </button>
+        </div>
       } @else if (currentView() === 'language') {
         <div class="menu-header">
           <button mat-icon-button (click)="backToMainView()" [attr.aria-label]="'Back'">

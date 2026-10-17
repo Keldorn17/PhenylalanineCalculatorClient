@@ -1,0 +1,14 @@
+<h2 matDialogTitle>{{ data.titleTranslateKey | translate }}</h2>
+<mat-dialog-content>
+  {{ data.detailsTranslateKey | translate }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="cancel()">{{ 'dialog.cancel' | translate }}</button>
+  <button matButton="filled" (click)="accept()" [class]="data.confirmClass">
+    @if (data.confirmTranslateKey) {
+      {{ data.confirmTranslateKey | translate }}
+    } @else {
+      {{ 'dialog.confirm' | translate }}
+    }
+  </button>
+</mat-dialog-actions>

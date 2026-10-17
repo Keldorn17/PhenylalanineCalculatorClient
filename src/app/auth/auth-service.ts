@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, tap, catchError, throwError} from 'rxjs';
 import {ApiPath} from '../http/api-path';
 import {AuthRequest, AuthResponse, AuthRegisterRequest} from './auth-types';
+import {UserService} from '../user/user-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly accessTokenSignal = signal<string | null>(null);
   private refreshTimeout: ReturnType<typeof setTimeout> | null = null;
+  private readonly userService = inject(UserService);
 
   constructor() {
     this.accessToken = this.accessTokenSignal.asReadonly();
@@ -70,6 +72,20 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     return !!this.accessTokenSignal();
+  }
+
+  public deleteAccount(): Observable<void> {
+    return this.userService.deleteUser().pipe(
+      tap(() => {
+        this.accessTokenSignal.set(null);
+        this.clearRefreshTimeout();
+      }),
+      catchError(error => {
+        this.accessTokenSignal.set(null);
+        this.clearRefreshTimeout();
+        return throwError(() => error);
+      })
+    );
   }
 
   private scheduleTokenRefresh(expiresIn: number): void {

@@ -37,7 +37,8 @@
     "language": "Language",
     "theme": "Theme",
     "themeLight": "Light Mode",
-    "themeDark": "Dark Mode"
+    "themeDark": "Dark Mode",
+    "deactivate": "Delete account"
   },
   "language": {
     "english": "English",
@@ -64,5 +65,9 @@
     "errorPasswordStrength": "Password must be at least 8 characters, and contain uppercase, lowercase, number, and special character.",
     "errorPasswordMismatch": "Passwords do not match.",
     "errorFailed": "Registration failed. Username or email might be taken."
+  },
+  "dialog": {
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }
