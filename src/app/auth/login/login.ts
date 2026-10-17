@@ -8,7 +8,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../auth-service';
+import {UserService} from '../../user/user-service';
+import {DailyLimitDialog} from '../../daily-limit-dialog/daily-limit-dialog';
 import {TranslatePipe} from '../../translation/translation-pipe';
 import {filter} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -34,6 +37,8 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 export class Login {
   protected readonly formBuilder = inject(FormBuilder);
   protected readonly authService = inject(AuthService);
+  protected readonly userService = inject(UserService);
+  protected readonly dialog = inject(MatDialog);
   protected readonly router = inject(Router);
 
   protected readonly loginForm: FormGroup = this.formBuilder.group({
@@ -63,6 +68,19 @@ export class Login {
     this.authService.login({username, password}).subscribe({
       next: () => {
         this.router.navigate(['/']);
+        this.userService.getUser().subscribe({
+          next: (user) => {
+            if (!user.dailyLimit) {
+              this.dialog.open(DailyLimitDialog, {
+                width: '400px',
+                disableClose: true,
+              });
+            }
+          },
+          error: (err) => {
+            console.error('Failed to check user daily limit:', err);
+          },
+        });
       },
       error: (err) => {
         console.error('Login failed:', err);

@@ -69,7 +69,28 @@
     "errorPasswordRequired": "Password is required.",
     "errorPasswordStrength": "Password must be at least 8 characters, and contain uppercase, lowercase, number, and special character.",
     "errorPasswordMismatch": "Passwords do not match.",
-    "errorFailed": "Registration failed. Username or email might be taken."
+    "errorFailed": "Registration failed. Username or email might be taken.",
+    "step": "Step",
+    "step1Label": "Start",
+    "step2Label": "Account",
+    "step3Label": "Daily Limit",
+    "continue": "Continue",
+    "back": "Back",
+    "later": "Later",
+    "dailyLimitTitle": "Set Daily Limit",
+    "dailyLimitSubtitle": "Enter your daily phenylalanine allowance",
+    "dailyLimit": "Daily Limit (mg)",
+    "dailyLimitPlaceholder": "e.g. 500",
+    "saveDailyLimit": "Complete Registration",
+    "errorDailyLimitRequired": "Daily limit is required.",
+    "errorDailyLimitMin": "Daily limit must be greater than 0.",
+    "errorDailyLimitFailed": "Failed to save daily limit. Please try again."
+  },
+  "dailyLimitDialog": {
+    "title": "Set Your Daily Limit",
+    "description": "You haven't set your daily phenylalanine limit yet. Please enter your daily limit below to complete your profile.",
+    "save": "Save",
+    "later": "Later"
   },
   "dialog": {
     "confirm": "Confirm",

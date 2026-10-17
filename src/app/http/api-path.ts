@@ -16,7 +16,9 @@ export const ApiPath = {
   },
 
   user: {
-    delete: `${env}/users/me`
+    delete: `${env}/users/me`,
+    patch: `${env}/users/me`,
+    get: `${env}/users/me`
   },
 
   /**

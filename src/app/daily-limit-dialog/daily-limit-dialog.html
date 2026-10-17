@@ -1,0 +1,39 @@
+<h2 matDialogTitle>{{ 'dailyLimitDialog.title' | translate }}</h2>
+<mat-dialog-content>
+  <p class="dialog-description">{{ 'dailyLimitDialog.description' | translate }}</p>
+
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage()! | translate }}</span>
+    </div>
+  }
+
+  <form [formGroup]="dailyLimitForm" class="daily-limit-form">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'register.dailyLimit' | translate }}</mat-label>
+      <input
+        matInput
+        id="dialogDailyLimit"
+        type="number"
+        min="1"
+        formControlName="dailyLimit"
+        [placeholder]="'register.dailyLimitPlaceholder' | translate"
+      />
+      <mat-icon matPrefix>monitor_heart</mat-icon>
+      <span matTextSuffix>mg</span>
+      @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('required')) {
+        <mat-error>{{ 'register.errorDailyLimitRequired' | translate }}</mat-error>
+      }
+      @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('min')) {
+        <mat-error>{{ 'register.errorDailyLimitMin' | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="cancel()">{{ 'dailyLimitDialog.later' | translate }}</button>
+  <button matButton="filled" (click)="save()" [disabled]="!dailyLimitForm.valid">
+    {{ 'dailyLimitDialog.save' | translate }}
+  </button>
+</mat-dialog-actions>

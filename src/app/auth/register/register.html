@@ -1,8 +1,43 @@
 <div class="auth-container">
   <mat-card class="auth-card mat-shadow-2">
+    <div class="stepper-container">
+      <div class="step-badge">{{ 'register.step' | translate }} {{ currentStep() }}/3</div>
+
+      <div class="stepper" role="progressbar" [attr.aria-valuenow]="currentStep()" aria-valuemin="1" aria-valuemax="3">
+        <div class="step completed">
+          <div class="step-circle">
+            <mat-icon>check</mat-icon>
+          </div>
+          <span class="step-label">{{ 'register.step1Label' | translate }}</span>
+        </div>
+
+        <div class="step-line completed"></div>
+
+        <div class="step" [class.active]="currentStep() === 2" [class.completed]="currentStep() === 3">
+          <div class="step-circle">
+            @if (currentStep() === 3) {
+              <mat-icon>check</mat-icon>
+            } @else {
+              <span>2</span>
+            }
+          </div>
+          <span class="step-label">{{ 'register.step2Label' | translate }}</span>
+        </div>
+
+        <div class="step-line" [class.completed]="currentStep() === 3"></div>
+
+        <div class="step" [class.active]="currentStep() === 3">
+          <div class="step-circle">
+            <span>3</span>
+          </div>
+          <span class="step-label">{{ 'register.step3Label' | translate }}</span>
+        </div>
+      </div>
+    </div>
+
     <mat-card-header>
-      <mat-card-title>{{ 'register.title' | translate }}</mat-card-title>
-      <mat-card-subtitle>{{ 'register.subtitle' | translate }}</mat-card-subtitle>
+      <mat-card-title>{{ (currentStep() === 2 ? 'register.title' : 'register.dailyLimitTitle') | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ (currentStep() === 2 ? 'register.subtitle' : 'register.dailyLimitSubtitle') | translate }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -13,116 +48,172 @@
         </div>
       }
 
-      <form [formGroup]="registerForm" class="auth-form">
-        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-          <mat-label>{{ 'register.email' | translate }}</mat-label>
-          <input
-            matInput
-            id="email"
-            type="email"
-            formControlName="email"
-            [placeholder]="'register.emailPlaceholder' | translate"
-            autocomplete="email"
-          />
-          <mat-icon matPrefix>email</mat-icon>
-          @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')) {
-            <mat-error>{{ 'register.errorEmailRequired' | translate }}</mat-error>
-          }
-          @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')) {
-            <mat-error>{{ 'register.errorEmailInvalid' | translate }}</mat-error>
-          }
-        </mat-form-field>
+      @if (currentStep() === 2) {
+        <form [formGroup]="registerForm" class="auth-form">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ 'register.email' | translate }}</mat-label>
+            <input
+              matInput
+              id="email"
+              type="email"
+              formControlName="email"
+              [placeholder]="'register.emailPlaceholder' | translate"
+              autocomplete="email"
+            />
+            <mat-icon matPrefix>email</mat-icon>
+            @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')) {
+              <mat-error>{{ 'register.errorEmailRequired' | translate }}</mat-error>
+            }
+            @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')) {
+              <mat-error>{{ 'register.errorEmailInvalid' | translate }}</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-          <mat-label>{{ 'register.username' | translate }}</mat-label>
-          <input
-            matInput
-            id="username"
-            type="text"
-            formControlName="username"
-            [placeholder]="'register.usernamePlaceholder' | translate"
-            autocomplete="username"
-          />
-          <mat-icon matPrefix>person</mat-icon>
-          @if (registerForm.get('username')?.touched && registerForm.get('username')?.hasError('required')) {
-            <mat-error>{{ 'register.errorUsernameRequired' | translate }}</mat-error>
-          }
-        </mat-form-field>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ 'register.username' | translate }}</mat-label>
+            <input
+              matInput
+              id="username"
+              type="text"
+              formControlName="username"
+              [placeholder]="'register.usernamePlaceholder' | translate"
+              autocomplete="username"
+            />
+            <mat-icon matPrefix>person</mat-icon>
+            @if (registerForm.get('username')?.touched && registerForm.get('username')?.hasError('required')) {
+              <mat-error>{{ 'register.errorUsernameRequired' | translate }}</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-          <mat-label>{{ 'register.password' | translate }}</mat-label>
-          <input
-            matInput
-            id="password"
-            [type]="hidePassword() ? 'password' : 'text'"
-            formControlName="password"
-            [placeholder]="'register.passwordPlaceholder' | translate"
-            autocomplete="new-password"
-          />
-          <mat-icon matPrefix>lock</mat-icon>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ 'register.password' | translate }}</mat-label>
+            <input
+              matInput
+              id="password"
+              [type]="hidePassword() ? 'password' : 'text'"
+              formControlName="password"
+              [placeholder]="'register.passwordPlaceholder' | translate"
+              autocomplete="new-password"
+            />
+            <mat-icon matPrefix>lock</mat-icon>
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hidePassword.set(!hidePassword())"
+              [attr.aria-label]="'Toggle password visibility'"
+            >
+              <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')) {
+              <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
+            }
+            @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('pattern')) {
+              <mat-error>{{ 'register.errorPasswordStrength' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ 'register.confirmPassword' | translate }}</mat-label>
+            <input
+              matInput
+              id="confirmPassword"
+              [type]="hideConfirmPassword() ? 'password' : 'text'"
+              formControlName="confirmPassword"
+              [placeholder]="'register.confirmPasswordPlaceholder' | translate"
+              autocomplete="new-password"
+            />
+            <mat-icon matPrefix>lock_outline</mat-icon>
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hideConfirmPassword.set(!hideConfirmPassword())"
+              [attr.aria-label]="'Toggle confirm password visibility'"
+            >
+              <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('required')) {
+              <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
+            }
+            @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('passwordMismatch')) {
+              <mat-error>{{ 'register.errorPasswordMismatch' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
           <button
-            mat-icon-button
-            matSuffix
-            type="button"
-            (click)="hidePassword.set(!hidePassword())"
-            [attr.aria-label]="'Toggle password visibility'"
+            mat-flat-button
+            type="submit"
+            class="submit-btn"
+            (click)="nextStepClicked()"
+            [disabled]="!registerForm.valid"
           >
-            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            {{ 'register.continue' | translate }}
           </button>
-          @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')) {
-            <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
-          }
-          @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('pattern')) {
-            <mat-error>{{ 'register.errorPasswordStrength' | translate }}</mat-error>
-          }
-        </mat-form-field>
+        </form>
 
-        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-          <mat-label>{{ 'register.confirmPassword' | translate }}</mat-label>
-          <input
-            matInput
-            id="confirmPassword"
-            [type]="hideConfirmPassword() ? 'password' : 'text'"
-            formControlName="confirmPassword"
-            [placeholder]="'register.confirmPasswordPlaceholder' | translate"
-            autocomplete="new-password"
-          />
-          <mat-icon matPrefix>lock_outline</mat-icon>
+        <mat-divider></mat-divider>
+
+        <div class="auth-footer">
+          <a routerLink="/login">
+            {{ 'register.alreadyHaveAccount' | translate }}
+          </a>
+        </div>
+      } @else {
+        <form [formGroup]="dailyLimitForm" class="auth-form">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ 'register.dailyLimit' | translate }}</mat-label>
+            <input
+              matInput
+              id="dailyLimit"
+              type="number"
+              min="1"
+              formControlName="dailyLimit"
+              [placeholder]="'register.dailyLimitPlaceholder' | translate"
+            />
+            <mat-icon matPrefix>monitor_heart</mat-icon>
+            <span matTextSuffix>mg</span>
+            @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('required')) {
+              <mat-error>{{ 'register.errorDailyLimitRequired' | translate }}</mat-error>
+            }
+            @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('min')) {
+              <mat-error>{{ 'register.errorDailyLimitMin' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
           <button
-            mat-icon-button
-            matSuffix
-            type="button"
-            (click)="hideConfirmPassword.set(!hideConfirmPassword())"
-            [attr.aria-label]="'Toggle confirm password visibility'"
+            mat-flat-button
+            type="submit"
+            class="submit-btn"
+            (click)="saveDailyLimitClicked()"
+            [disabled]="!dailyLimitForm.valid"
           >
-            <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            {{ 'register.saveDailyLimit' | translate }}
           </button>
-          @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('required')) {
-            <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
-          }
-          @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('passwordMismatch')) {
-            <mat-error>{{ 'register.errorPasswordMismatch' | translate }}</mat-error>
-          }
-        </mat-form-field>
 
-        <button
-          mat-flat-button
-          type="submit"
-          class="submit-btn"
-          (click)="registerClicked()"
-          [disabled]="!registerForm.valid"
-        >
-          {{ 'register.signUp' | translate }}
-        </button>
-      </form>
+          <div class="step-actions">
+            <button
+              mat-stroked-button
+              type="button"
+              class="secondary-btn"
+              (click)="previousStepClicked()"
+              [disabled]="isRegistered()"
+            >
+              <mat-icon>arrow_back</mat-icon>
+              {{ 'register.back' | translate }}
+            </button>
 
-      <mat-divider></mat-divider>
-
-      <div class="auth-footer">
-        <a routerLink="/login">
-          {{ 'register.alreadyHaveAccount' | translate }}
-        </a>
-      </div>
+            <button
+              mat-stroked-button
+              type="button"
+              class="secondary-btn"
+              (click)="skipDailyLimitClicked()"
+            >
+              {{ 'register.later' | translate }}
+            </button>
+          </div>
+        </form>
+      }
     </mat-card-content>
   </mat-card>
 </div>
