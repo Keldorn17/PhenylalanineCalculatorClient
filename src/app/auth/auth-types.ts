@@ -13,3 +13,9 @@ export interface AuthRegisterRequest {
   username: string;
   password: string;
 }
+
+export type AuthBroadcastMessage =
+  | { type: 'REFRESH_SUCCESS'; accessToken: string; expiresIn: number; expiresAt: number }
+  | { type: 'REFRESH_FAILURE' }
+  | { type: 'LOGIN_SUCCESS'; accessToken: string; expiresIn: number; expiresAt: number }
+  | { type: 'LOGOUT' };
