@@ -1,0 +1,19 @@
+.dialog-description {
+  margin: 0 0 1rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.daily-limit-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 0.25rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  mat-error {
+    margin-top: 4px;
+  }
+}
