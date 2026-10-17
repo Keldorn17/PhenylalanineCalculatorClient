@@ -14,7 +14,7 @@
       }
 
       <form [formGroup]="registerForm" class="auth-form">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'register.email' | translate }}</mat-label>
           <input
             matInput
@@ -25,16 +25,15 @@
             autocomplete="email"
           />
           <mat-icon matPrefix>email</mat-icon>
-          @if (registerForm.get('email')?.touched) {
-            @if (registerForm.get('email')?.hasError('required')) {
-              <mat-error>{{ 'register.errorEmailRequired' | translate }}</mat-error>
-            } @else if (registerForm.get('email')?.hasError('email')) {
-              <mat-error>{{ 'register.errorEmailInvalid' | translate }}</mat-error>
-            }
+          @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')) {
+            <mat-error>{{ 'register.errorEmailRequired' | translate }}</mat-error>
+          }
+          @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')) {
+            <mat-error>{{ 'register.errorEmailInvalid' | translate }}</mat-error>
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'register.username' | translate }}</mat-label>
           <input
             matInput
@@ -50,7 +49,7 @@
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'register.password' | translate }}</mat-label>
           <input
             matInput
@@ -70,16 +69,15 @@
           >
             <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-          @if (registerForm.get('password')?.touched) {
-            @if (registerForm.get('password')?.hasError('required')) {
-              <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
-            } @else if (registerForm.get('password')?.hasError('pattern')) {
-              <mat-error>{{ 'register.errorPasswordStrength' | translate }}</mat-error>
-            }
+          @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')) {
+            <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
+          }
+          @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('pattern')) {
+            <mat-error>{{ 'register.errorPasswordStrength' | translate }}</mat-error>
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'register.confirmPassword' | translate }}</mat-label>
           <input
             matInput
@@ -99,18 +97,16 @@
           >
             <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-          @if (registerForm.get('confirmPassword')?.touched) {
-            @if (registerForm.get('confirmPassword')?.hasError('required')) {
-              <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
-            } @else if (registerForm.get('confirmPassword')?.hasError('passwordMismatch')) {
-              <mat-error>{{ 'register.errorPasswordMismatch' | translate }}</mat-error>
-            }
+          @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('required')) {
+            <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
+          }
+          @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('passwordMismatch')) {
+            <mat-error>{{ 'register.errorPasswordMismatch' | translate }}</mat-error>
           }
         </mat-form-field>
 
         <button
           mat-flat-button
-          color="primary"
           type="submit"
           class="submit-btn"
           (click)="registerClicked()"

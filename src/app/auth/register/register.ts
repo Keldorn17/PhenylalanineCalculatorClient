@@ -11,6 +11,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {AuthService} from '../auth-service';
 import {passwordMatchValidator, passwordValidator} from '../../validator/password-validator';
 import {TranslatePipe} from '../../translation/translation-pipe';
+import {filter} from 'rxjs/operators';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'register',
@@ -47,6 +49,17 @@ export class Register {
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly hidePassword = signal(true);
   protected readonly hideConfirmPassword = signal(true);
+
+  constructor() {
+    this.registerForm.valueChanges
+      .pipe(
+        filter(() => this.errorMessage() !== null),
+        takeUntilDestroyed()
+      )
+      .subscribe(() => {
+        this.errorMessage.set(null);
+      });
+  }
 
   protected registerClicked(): void {
     this.errorMessage.set(null);

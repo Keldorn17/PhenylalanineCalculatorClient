@@ -38,7 +38,12 @@
     "theme": "Theme",
     "themeLight": "Light Mode",
     "themeDark": "Dark Mode",
-    "deactivate": "Delete account"
+    "deactivate": "Delete account",
+    "user": {
+      "deactivateTitle": "Delete User Account",
+      "deactivateDetails": "You are about to delete your account. This action cannot be undone and everything you have created will be deleted.",
+      "delete": "Delete"
+    }
   },
   "language": {
     "english": "English",
