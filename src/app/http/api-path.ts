@@ -15,6 +15,10 @@ export const ApiPath = {
     getById: `${env}/food-types/{}`
   },
 
+  user: {
+    delete: `${env}/users/me`
+  },
+
   /**
    * Helper utility to resolve path placeholders like '{}' with IDs or values.
    * Example: ApiPath.resolve(ApiPath.foodTypes.get, 1) -> http://localhost:8080/api/v1/food-types/1

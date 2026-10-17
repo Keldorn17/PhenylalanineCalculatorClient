@@ -10,6 +10,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDividerModule} from '@angular/material/divider';
 import {AuthService} from '../auth-service';
 import {TranslatePipe} from '../../translation/translation-pipe';
+import {filter} from 'rxjs/operators';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'login',
@@ -41,6 +43,17 @@ export class Login {
 
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly hidePassword = signal(true);
+
+  constructor() {
+    this.loginForm.valueChanges
+      .pipe(
+        filter(() => this.errorMessage() !== null),
+        takeUntilDestroyed()
+      )
+      .subscribe(() => {
+        this.errorMessage.set(null);
+      });
+  }
 
   protected loginClicked(): void {
     this.errorMessage.set(null);

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {OverlayModule, ConnectedPosition} from '@angular/cdk/overlay';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -9,6 +9,8 @@ import {ThemeService} from '../theme/theme-service';
 import {TranslationService, Language} from '../translation/translation-service';
 import {TranslatePipe} from '../translation/translation-pipe';
 import {LanguageOption} from './user-settings-types';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'user-settings',
@@ -25,9 +27,11 @@ import {LanguageOption} from './user-settings-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSettings {
-  protected readonly authService = inject(AuthService);
-  protected readonly themeService = inject(ThemeService);
-  protected readonly translationService = inject(TranslationService);
+  private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
+  private readonly authService = inject(AuthService);
+  private readonly themeService = inject(ThemeService);
+  private readonly translationService = inject(TranslationService);
 
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
   protected readonly isDark = this.themeService.isDark;
@@ -98,5 +102,25 @@ export class UserSettings {
     if (event.key === 'Escape') {
       this.closeMenu();
     }
+  }
+
+  protected deactivate(): void {
+    this.closeMenu();
+
+    this.dialog.open(ConfirmDialog, {
+      data: {
+        titleTranslateKey: 'settings.user.deactivateTitle',
+        detailsTranslateKey: 'settings.user.deactivateDetails',
+        confirmTranslateKey: 'settings.user.delete',
+        confirmClass: 'warn'
+      }
+    }).afterClosed()
+      .subscribe(confirm => {
+        if (!confirm) {
+          return;
+        }
+
+        this.authService.deleteAccount().subscribe(() => this.router.navigate(['/']))
+      });
   }
 }

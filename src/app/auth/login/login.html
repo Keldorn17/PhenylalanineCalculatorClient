@@ -7,14 +7,14 @@
 
     <mat-card-content>
       @if (errorMessage()) {
-        <div class="error-banner">
+        <div class="error-banner warn">
           <mat-icon>error_outline</mat-icon>
           <span>{{ errorMessage()! | translate }}</span>
         </div>
       }
 
       <form [formGroup]="loginForm" class="auth-form">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'login.username' | translate }}</mat-label>
           <input
             matInput
@@ -29,7 +29,7 @@
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <mat-label>{{ 'login.password' | translate }}</mat-label>
           <input
             matInput
@@ -56,7 +56,6 @@
 
         <button
           mat-flat-button
-          color="primary"
           type="submit"
           class="submit-btn"
           (click)="loginClicked()"
