@@ -29,7 +29,6 @@ export class App implements OnInit {
             next: (user): void => {
               if (!user.dailyLimit) {
                 this.dialog.open(DailyLimitDialog, {
-                  width: '400px',
                   disableClose: true
                 });
               }

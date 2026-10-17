@@ -72,7 +72,6 @@ export class Login {
           next: (user) => {
             if (!user.dailyLimit) {
               this.dialog.open(DailyLimitDialog, {
-                width: '400px',
                 disableClose: true,
               });
             }
