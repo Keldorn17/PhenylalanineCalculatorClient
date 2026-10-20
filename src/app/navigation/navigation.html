@@ -11,7 +11,7 @@
   }
   <button matButton (click)="navigateHome()">{{ 'common.appName' | translate }}</button>
   <span class="spacer"></span>
-  <user-settings></user-settings>
+  <user-settings />
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
@@ -34,13 +34,13 @@
         </button>
       </div>
     }
-    <sidenav-content [isCollapsed]="!isMobile() && isCollapsed()"></sidenav-content>
+    <sidenav-content [isCollapsed]="!isMobile() && isCollapsed()" />
   </mat-sidenav>
 
   <mat-sidenav-content
     class="content"
     [style.margin-left.px]="isMobile() ? null : (isCollapsed() ? sideBarCollapsedWidth : sideBarMaxWidth)"
   >
-    <ng-content></ng-content>
+    <ng-content />
   </mat-sidenav-content>
 </mat-sidenav-container>

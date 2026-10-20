@@ -14,7 +14,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {AuthService} from '../auth-service';
 import {UserService} from '../../user/user-service';
 import {passwordMatchValidator, passwordValidator} from '../../validator/password-validator';
-import {TranslatePipe} from '../../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'register',
@@ -35,10 +35,10 @@ import {TranslatePipe} from '../../translation/translation-pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
-  protected readonly authService = inject(AuthService);
-  protected readonly userService = inject(UserService);
-  protected readonly formBuilder = inject(FormBuilder);
-  protected readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly router = inject(Router);
 
   protected readonly currentStep = signal<2 | 3>(2);
   protected readonly isRegistered = signal(false);

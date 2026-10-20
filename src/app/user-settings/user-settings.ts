@@ -4,11 +4,10 @@ import {OverlayModule, ConnectedPosition} from '@angular/cdk/overlay';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../auth/auth-service';
 import {ThemeService} from '../theme/theme-service';
-import {TranslationService, Language} from '../translation/translation-service';
-import {TranslatePipe} from '../translation/translation-pipe';
-import {LanguageOption} from './user-settings-types';
+import {Language, LanguageOption} from './user-settings-types';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
 
@@ -27,15 +26,15 @@ import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSettings {
-  private readonly router = inject(Router);
-  private readonly dialog = inject(MatDialog);
-  private readonly authService = inject(AuthService);
+  private readonly translateService = inject(TranslateService);
   private readonly themeService = inject(ThemeService);
-  private readonly translationService = inject(TranslationService);
+  private readonly authService = inject(AuthService);
+  private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
 
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
   protected readonly isDark = this.themeService.isDark;
-  protected readonly currentLang = this.translationService.currentLang;
+  protected readonly currentLang = this.translateService.currentLang;
 
   protected readonly isOpen = signal(false);
   protected readonly currentView = signal<'main' | 'language'>('main');
@@ -87,7 +86,10 @@ export class UserSettings {
   }
 
   protected setLanguage(lang: Language): void {
-    this.translationService.setLanguage(lang);
+    this.translateService.use(lang);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('lang', lang);
+    }
   }
 
   protected changeUsername(): void {
@@ -120,7 +122,7 @@ export class UserSettings {
           return;
         }
 
-        this.authService.deleteAccount().subscribe(() => this.router.navigate(['/']))
+        this.authService.deleteAccount().subscribe(() => this.router.navigate(['/']));
       });
   }
 }

@@ -12,7 +12,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../auth-service';
 import {UserService} from '../../user/user-service';
 import {DailyLimitDialog} from '../../daily-limit-dialog/daily-limit-dialog';
-import {TranslatePipe} from '../../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 import {filter} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
@@ -35,11 +35,11 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
-  protected readonly formBuilder = inject(FormBuilder);
-  protected readonly authService = inject(AuthService);
-  protected readonly userService = inject(UserService);
-  protected readonly dialog = inject(MatDialog);
-  protected readonly router = inject(Router);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
+  private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
 
   protected readonly loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required]],

@@ -8,7 +8,7 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {SidenavContent} from './sidenav-content/sidenav-content';
-import {TranslatePipe} from '../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 import {UserSettings} from '../user-settings/user-settings';
 
 @Component({
@@ -30,13 +30,13 @@ import {UserSettings} from '../user-settings/user-settings';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Navigation {
-  protected readonly breakpointObserver = inject(BreakpointObserver);
-  protected readonly router = inject(Router);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly router = inject(Router);
 
-  protected readonly isCollapsed = signal(false);
+  protected readonly isCollapsed = signal(true);
   protected readonly mobileOpened = signal(false);
 
-  private readonly mobileWidth: number = 768;
+  protected readonly mobileWidth: number = 768;
   protected readonly sideBarMaxWidth: number = 250;
   protected readonly sideBarCollapsedWidth: number = 68;
 

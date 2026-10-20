@@ -13,7 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {filter} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {UserService} from '../user/user-service';
-import {TranslatePipe} from '../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-daily-limit-dialog',
@@ -33,16 +33,15 @@ import {TranslatePipe} from '../translation/translation-pipe';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DailyLimitDialog {
-  protected readonly formBuilder = inject(FormBuilder);
-  protected readonly userService = inject(UserService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly userService = inject(UserService);
+  private readonly dialogRef = inject(MatDialogRef<DailyLimitDialog>);
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
     dailyLimit: [null, [Validators.required, Validators.min(1)]],
   });
 
   protected readonly errorMessage = signal<string | null>(null);
-
-  private readonly dialogRef = inject(MatDialogRef<DailyLimitDialog>);
 
   constructor() {
     this.dailyLimitForm.valueChanges

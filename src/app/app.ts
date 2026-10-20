@@ -1,10 +1,11 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from './auth/auth-service';
-import { UserService } from './user/user-service';
-import { DailyLimitDialog } from './daily-limit-dialog/daily-limit-dialog';
-import { Navigation } from './navigation/navigation';
+import {Component, OnInit, inject, signal} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
+import {AuthService} from './auth/auth-service';
+import {UserService} from './user/user-service';
+import {Navigation} from './navigation/navigation';
+import {DailyLimitDialog} from './daily-limit-dialog/daily-limit-dialog';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,28 @@ import { Navigation } from './navigation/navigation';
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  protected readonly title = signal('PheSimple');
-
+  private readonly translateService = inject(TranslateService);
   private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
+
+  protected readonly title = signal('PheSimple');
+
+  constructor() {
+    this.translateService.addLangs(['en', 'hu']);
+
+    const savedLang = localStorage.getItem('lang');
+    const browserLang = this.translateService.getBrowserLang();
+    const initialLang =
+      savedLang && ['en', 'hu'].includes(savedLang)
+        ? savedLang
+        : browserLang && ['en', 'hu'].includes(browserLang)
+          ? browserLang
+          : 'en';
+
+    this.translateService.use(initialLang);
+  }
 
   public ngOnInit(): void {
     this.authService.refresh().subscribe({
