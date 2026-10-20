@@ -10,6 +10,13 @@ import {ThemeService} from '../theme/theme-service';
 import {Language, LanguageOption} from './user-settings-types';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
+import {UserService} from '../user/user-service';
+import {toObservable, toSignal} from '@angular/core/rxjs-interop';
+import {switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {ChangeUsernameDialog} from './change-username-dialog/change-username-dialog';
+import {ChangePasswordDialog} from './change-password-dialog/change-password-dialog';
+import {DailyLimitDialog} from '../daily-limit-dialog/daily-limit-dialog';
 
 @Component({
   selector: 'user-settings',
@@ -29,10 +36,23 @@ export class UserSettings {
   private readonly translateService = inject(TranslateService);
   private readonly themeService = inject(ThemeService);
   private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
 
+  private readonly refreshUserTrigger = signal(0);
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
+  protected readonly userResponse = toSignal(
+    toObservable(computed(() => (this.isLoggedIn() ? this.refreshUserTrigger() : null))).pipe(
+      switchMap((trigger) => {
+        if (trigger === null) {
+          return of(null);
+        }
+        return this.userService.getUser();
+      })
+    ),
+    { initialValue: null }
+  );
   protected readonly isDark = this.themeService.isDark;
   protected readonly currentLang = this.translateService.currentLang;
 
@@ -94,10 +114,39 @@ export class UserSettings {
 
   protected changeUsername(): void {
     this.closeMenu();
+    this.dialog
+      .open(ChangeUsernameDialog, {
+        width: '90%',
+        maxWidth: '420px',
+        data: {currentUsername: this.userResponse()?.username},
+      })
+      .afterClosed()
+      .subscribe((changed: boolean) => {
+        if (changed) {
+          this.refreshUserTrigger.update((v) => v + 1);
+        }
+      });
   }
 
   protected changePassword(): void {
     this.closeMenu();
+    this.dialog.open(ChangePasswordDialog, {
+      width: '90%',
+      maxWidth: '420px',
+    });
+  }
+
+  protected changeDailyLimit(): void {
+    this.closeMenu();
+    this.userService.getUser().subscribe(response => {
+      const dailyLimit = response.dailyLimit;
+      this.dialog.open(DailyLimitDialog, {
+        data: {
+          dailyLimit: dailyLimit,
+          descriptionTranslationKey: 'dailyLimitDialog.changeDescription'
+        }
+      })
+    });
   }
 
   protected onOverlayKeydown(event: KeyboardEvent): void {

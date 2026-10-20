@@ -1,6 +1,12 @@
 <h2 matDialogTitle>{{ 'dailyLimitDialog.title' | translate }}</h2>
 <mat-dialog-content>
-  <p class="dialog-description">{{ 'dailyLimitDialog.description' | translate }}</p>
+  <p class="dialog-description">
+    @if (data) {
+      {{ data.descriptionTranslationKey | translate }}
+    } @else {
+      {{ 'dailyLimitDialog.description' | translate }}
+    }
+  </p>
 
   @if (errorMessage()) {
     <div class="error-banner">

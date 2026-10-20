@@ -2,7 +2,13 @@ import {Injectable, NgZone, OnDestroy, Signal, inject, signal} from '@angular/co
 import {HttpClient} from '@angular/common/http';
 import {Observable, catchError, finalize, firstValueFrom, from, shareReplay, tap, throwError} from 'rxjs';
 import {ApiPath} from '../http/api-path';
-import {AuthBroadcastMessage, AuthRegisterRequest, AuthRequest, AuthResponse} from './auth-types';
+import {
+  AuthBroadcastMessage, AuthPasswordChangeRequest,
+  AuthRegisterRequest,
+  AuthRequest,
+  AuthResponse,
+  AuthUsernameChangeRequest
+} from './auth-types';
 import {UserService} from '../user/user-service';
 
 @Injectable({
@@ -92,6 +98,24 @@ export class AuthService implements OnDestroy {
         return throwError(() => error);
       })
     );
+  }
+
+  public changeUsername(authUsernameChangeRequest: AuthUsernameChangeRequest): Observable<AuthResponse> {
+    return this.http.put<AuthResponse>(ApiPath.auth.changeUsername, authUsernameChangeRequest).pipe(
+      tap(response => {
+        const expiresAt = Date.now() + response.expiresIn * 1000;
+        this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'LOGIN_SUCCESS');
+      })
+    );
+  }
+
+  public changePassword(authPasswordChangeRequest: AuthPasswordChangeRequest): Observable<AuthResponse> {
+    return this.http.put<AuthResponse>(ApiPath.auth.changePassword, authPasswordChangeRequest).pipe(
+      tap(response => {
+        const expiresAt = Date.now() + response.expiresIn * 1000;
+        this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'LOGIN_SUCCESS');
+      })
+    )
   }
 
   public ngOnDestroy(): void {

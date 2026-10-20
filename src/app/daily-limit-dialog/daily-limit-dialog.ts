@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
@@ -14,9 +15,10 @@ import {filter} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {UserService} from '../user/user-service';
 import {TranslatePipe} from '@ngx-translate/core';
+import {DailyLimitDialogData} from './daily-limit-dialog-types';
 
 @Component({
-  selector: 'app-daily-limit-dialog',
+  selector: 'daily-limit-dialog',
   imports: [
     ReactiveFormsModule,
     MatDialogTitle,
@@ -33,12 +35,13 @@ import {TranslatePipe} from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DailyLimitDialog {
+  public readonly data = inject<DailyLimitDialogData>(MAT_DIALOG_DATA);
+  private readonly dialogRef = inject(MatDialogRef<DailyLimitDialog>);
   private readonly formBuilder = inject(FormBuilder);
   private readonly userService = inject(UserService);
-  private readonly dialogRef = inject(MatDialogRef<DailyLimitDialog>);
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
-    dailyLimit: [null, [Validators.required, Validators.min(1)]],
+    dailyLimit: [null, [Validators.min(1)]],
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -52,6 +55,12 @@ export class DailyLimitDialog {
       .subscribe(() => {
         this.errorMessage.set(null);
       });
+
+    if (this.data) {
+      this.dailyLimitForm.patchValue({
+        dailyLimit: this.data.dailyLimit
+      }, {emitEvent: false});
+    }
   }
 
   protected cancel(): void {

@@ -32,18 +32,42 @@
     "addFoodType": "Étel típus hozzáadása"
   },
   "settings": {
-    "changeUsername": "Felhasználónév módosítása",
-    "changePassword": "Jelszó módosítása",
+    "username": "Felhasználónév módosítása",
+    "password": "Jelszó módosítása",
+    "changeUsername": "Felhasználónév Módosítása",
+    "changePassword": "Jelszó Módosítása",
     "language": "Nyelv",
     "theme": "Téma",
     "themeLight": "Világos Mód",
     "themeDark": "Sötét Mód",
-    "deactivate": "Fiók törlése",
+    "deactivate": "Fiók Törlése",
     "user": {
       "deactivateTitle": "Felhasználói fiók törlése",
       "deactivateDetails": "Ön a fiók törlésére készül. Ez a művelet visszavonhatatlan és ezzel együtt az ön minden, amit ön létrehozott törlésre kerül.",
       "delete": "Törlés"
-    }
+    },
+    "changeUsernameDialog": {
+      "title": "Felhasználónév módosítása",
+      "newUsername": "Új felhasználónév",
+      "newUsernamePlaceholder": "Adja meg az új felhasználónevet",
+      "currentPassword": "Jelenlegi jelszó",
+      "currentPasswordPlaceholder": "Adja meg a jelenlegi jelszavát",
+      "errorUsernameRequired": "Az új felhasználónév megadása kötelező.",
+      "errorPasswordRequired": "A jelenlegi jelszó megadása kötelező.",
+      "errorFailed": "A felhasználónév módosítása nem sikerült. Ellenőrizze a jelszót, vagy próbáljon másik felhasználónevet."
+    },
+    "changePasswordDialog": {
+      "title": "Jelszó módosítása",
+      "currentPassword": "Jelenlegi jelszó",
+      "currentPasswordPlaceholder": "Adja meg a jelenlegi jelszavát",
+      "newPassword": "Új jelszó",
+      "newPasswordPlaceholder": "Adja meg az új jelszót",
+      "confirmNewPassword": "Új jelszó megerősítése",
+      "confirmNewPasswordPlaceholder": "Adja meg az új jelszót újra",
+      "errorOldPasswordRequired": "A jelenlegi jelszó megadása kötelező.",
+      "errorFailed": "A jelszó módosítása nem sikerült. Ellenőrizze a jelenlegi jelszót, és próbálja újra."
+    },
+    "dailyIntake": "Napi Bevitel Módosítása"
   },
   "language": {
     "english": "Angol",
@@ -89,6 +113,7 @@
   "dailyLimitDialog": {
     "title": "Napi limit beállítása",
     "description": "Még nem állította be a napi fenilalanin limitjét. Kérjük, adja meg a napi limitet a profilja befejezéséhez.",
+    "changeDescription": "Napi fenilalanin limit módosítása. Módosítások azonnal meg fog jelenni a felületen.",
     "save": "Mentés",
     "later": "Később"
   },

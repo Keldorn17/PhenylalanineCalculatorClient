@@ -23,24 +23,42 @@
     <div class="floating-panel mat-shadow-3">
       @if (currentView() === 'main') {
         <div class="menu-section">
+          <div class="username">
+            {{ userResponse()?.username }}
+          </div>
+        </div>
+
+        <mat-divider/>
+
+        <div class="menu-section">
+          <button class="menu-item" (click)="changeDailyLimit()">
+            <mat-icon class="item-icon">monitor_heart</mat-icon>
+            <span class="item-label">{{ 'settings.dailyIntake' | translate }}</span>
+          </button>
+        </div>
+
+        <mat-divider/>
+
+        <div class="menu-section">
           <button class="menu-item" (click)="changeUsername()">
             <mat-icon class="item-icon">manage_accounts</mat-icon>
             <span class="item-label">{{ 'settings.changeUsername' | translate }}</span>
           </button>
 
           <button class="menu-item" (click)="changePassword()">
-            <mat-icon class="item-icon">lock_reset</mat-icon>
+            <mat-icon class="item-icon">password</mat-icon>
             <span class="item-label">{{ 'settings.changePassword' | translate }}</span>
           </button>
         </div>
 
-        <mat-divider />
+        <mat-divider/>
 
         <div class="menu-section">
           <button class="menu-item" (click)="openLanguageView()">
             <mat-icon class="item-icon">translate</mat-icon>
             <span class="item-label">{{ 'settings.language' | translate }}</span>
-            <span class="item-value">{{ (currentLang() === 'en' ? 'language.english' : 'language.hungarian') | translate }}</span>
+            <span
+              class="item-value">{{ (currentLang() === 'en' ? 'language.english' : 'language.hungarian') | translate }}</span>
             <mat-icon class="chevron-icon">chevron_right</mat-icon>
           </button>
 
@@ -50,7 +68,7 @@
           </button>
         </div>
 
-        <mat-divider />
+        <mat-divider/>
 
         <div class="menu-section">
           <button class="menu-item warn" (click)="deactivate()">
@@ -65,11 +83,13 @@
           </button>
           <span class="header-title">{{ 'settings.language' | translate }}</span>
         </div>
-        <mat-divider />
+        <mat-divider/>
         <div class="menu-section">
           @for (lang of languages; track lang.code) {
             <button class="menu-item" (click)="setLanguage(lang.code)">
-              <mat-icon class="check-icon" [style.visibility]="currentLang() === lang.code ? 'visible' : 'hidden'">check</mat-icon>
+              <mat-icon class="check-icon" [style.visibility]="currentLang() === lang.code ? 'visible' : 'hidden'">
+                check
+              </mat-icon>
               <span class="item-label">{{ lang.label | translate }}</span>
             </button>
           }

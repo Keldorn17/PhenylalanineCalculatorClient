@@ -11,7 +11,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 
 @Component({
-  selector: 'app-confirm-dialog',
+  selector: 'confirm-dialog',
   imports: [
     MatDialogTitle,
     TranslatePipe,
