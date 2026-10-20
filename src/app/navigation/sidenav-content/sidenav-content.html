@@ -7,7 +7,6 @@
       [matTooltip]="item.label | translate"
       [matTooltipDisabled]="!isCollapsed()"
       matTooltipPosition="right"
-      (click)="navigate(item.route)"
     >
       <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
       <span matListItemTitle class="item-title">{{ item.label | translate }}</span>

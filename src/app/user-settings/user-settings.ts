@@ -26,11 +26,11 @@ import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSettings {
-  private readonly router = inject(Router);
-  private readonly dialog = inject(MatDialog);
-  private readonly authService = inject(AuthService);
-  private readonly themeService = inject(ThemeService);
-  private readonly translateService = inject(TranslateService);
+  protected readonly router = inject(Router);
+  protected readonly dialog = inject(MatDialog);
+  protected readonly authService = inject(AuthService);
+  protected readonly themeService = inject(ThemeService);
+  protected readonly translateService = inject(TranslateService);
 
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
   protected readonly isDark = this.themeService.isDark;
@@ -87,7 +87,9 @@ export class UserSettings {
 
   protected setLanguage(lang: Language): void {
     this.translateService.use(lang);
-    localStorage.setItem('lang', lang);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('lang', lang);
+    }
   }
 
   protected changeUsername(): void {
@@ -120,7 +122,7 @@ export class UserSettings {
           return;
         }
 
-        this.authService.deleteAccount().subscribe(() => this.router.navigate(['/']))
+        this.authService.deleteAccount().subscribe(() => this.router.navigate(['/']));
       });
   }
 }

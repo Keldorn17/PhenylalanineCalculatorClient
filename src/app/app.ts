@@ -1,11 +1,11 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from './auth/auth-service';
-import { UserService } from './user/user-service';
-import { DailyLimitDialog } from './daily-limit-dialog/daily-limit-dialog';
-import { Navigation } from './navigation/navigation';
+import {Component, OnInit, inject, signal} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
+import {AuthService} from './auth/auth-service';
+import {UserService} from './user/user-service';
+import {Navigation} from './navigation/navigation';
+import {DailyLimitDialog} from './daily-limit-dialog/daily-limit-dialog';
 
 @Component({
   selector: 'app-root',

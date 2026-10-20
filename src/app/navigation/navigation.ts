@@ -36,7 +36,7 @@ export class Navigation {
   protected readonly isCollapsed = signal(false);
   protected readonly mobileOpened = signal(false);
 
-  private readonly mobileWidth: number = 768;
+  protected readonly mobileWidth: number = 768;
   protected readonly sideBarMaxWidth: number = 250;
   protected readonly sideBarCollapsedWidth: number = 68;
 

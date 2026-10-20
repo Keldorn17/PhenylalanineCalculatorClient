@@ -21,25 +21,15 @@ export class SidenavContent {
 
   protected readonly menuItems = signal<MenuItem[]>([
     {
-      icon: 'favorite',
-      label: 'item 1',
-      route: '/login'
+      icon: 'home',
+      label: 'nav.home',
+      route: '/'
     },
     {
-      icon: 'favorite',
-      label: 'item 2',
-      route: '/register'
-    },
-    {
-      icon: 'favorite',
-      label: 'item 3',
-      route: '/item3'
-    },
-    {
-      icon: 'favorite',
-      label: 'item 4',
-      route: '/item4'
-    },
+      icon: 'restaurant_menu',
+      label: 'nav.foodTypes',
+      route: '/food-types'
+    }
   ]);
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
 
@@ -51,12 +41,5 @@ export class SidenavContent {
       document.activeElement.blur();
     }
     this.authService.logout().subscribe(() => this.router.navigate(['/']));
-  }
-
-  protected navigate(route: string): void {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-    this.router.navigate([route]);
   }
 }
