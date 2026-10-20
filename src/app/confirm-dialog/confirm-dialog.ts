@@ -7,7 +7,7 @@ import {
   MatDialogTitle
 } from '@angular/material/dialog';
 import {ConfirmDialogData} from './confirm-dialog-types';
-import {TranslatePipe} from '../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 
 @Component({

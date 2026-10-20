@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
-import {TranslatePipe} from '../../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AuthService} from '../../auth/auth-service';

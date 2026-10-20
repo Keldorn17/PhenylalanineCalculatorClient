@@ -12,7 +12,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../auth-service';
 import {UserService} from '../../user/user-service';
 import {DailyLimitDialog} from '../../daily-limit-dialog/daily-limit-dialog';
-import {TranslatePipe} from '../../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 import {filter} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 

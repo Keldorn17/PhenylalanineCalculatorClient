@@ -14,7 +14,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {AuthService} from '../auth-service';
 import {UserService} from '../../user/user-service';
 import {passwordMatchValidator, passwordValidator} from '../../validator/password-validator';
-import {TranslatePipe} from '../../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'register',

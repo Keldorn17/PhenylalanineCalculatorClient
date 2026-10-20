@@ -13,7 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {filter} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {UserService} from '../user/user-service';
-import {TranslatePipe} from '../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-daily-limit-dialog',

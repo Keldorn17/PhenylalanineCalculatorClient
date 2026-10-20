@@ -1,4 +1,4 @@
-import {Language} from '../translation/translation-service';
+export type Language = 'en' | 'hu';
 
 export interface LanguageOption {
   code: Language;

@@ -8,7 +8,7 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {SidenavContent} from './sidenav-content/sidenav-content';
-import {TranslatePipe} from '../translation/translation-pipe';
+import {TranslatePipe} from '@ngx-translate/core';
 import {UserSettings} from '../user-settings/user-settings';
 
 @Component({
