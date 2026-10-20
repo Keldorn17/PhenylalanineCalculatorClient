@@ -19,3 +19,14 @@ export type AuthBroadcastMessage =
   | { type: 'REFRESH_FAILURE' }
   | { type: 'LOGIN_SUCCESS'; accessToken: string; expiresIn: number; expiresAt: number }
   | { type: 'LOGOUT' };
+
+
+export interface AuthUsernameChangeRequest {
+  username: string;
+  password: string;
+}
+
+export interface AuthPasswordChangeRequest {
+  oldPassword: string;
+  password: string;
+}

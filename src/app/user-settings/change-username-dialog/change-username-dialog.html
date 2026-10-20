@@ -1,0 +1,62 @@
+<h2 matDialogTitle>{{ 'settings.changeUsernameDialog.title' | translate }}</h2>
+
+<mat-dialog-content>
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage()! | translate }}</span>
+    </div>
+  }
+
+  <form [formGroup]="form" class="dialog-form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'settings.changeUsernameDialog.newUsername' | translate }}</mat-label>
+      <input
+        matInput
+        id="username"
+        type="text"
+        formControlName="username"
+        [placeholder]="'settings.changeUsernameDialog.newUsernamePlaceholder' | translate"
+        autocomplete="username"
+      />
+      <mat-icon matPrefix>person</mat-icon>
+      @if (form.get('username')?.touched && form.get('username')?.hasError('required')) {
+        <mat-error>{{ 'settings.changeUsernameDialog.errorUsernameRequired' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'settings.changeUsernameDialog.currentPassword' | translate }}</mat-label>
+      <input
+        matInput
+        id="password"
+        [type]="hidePassword() ? 'password' : 'text'"
+        formControlName="password"
+        [placeholder]="'settings.changeUsernameDialog.currentPasswordPlaceholder' | translate"
+        autocomplete="current-password"
+      />
+      <mat-icon matPrefix>lock</mat-icon>
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword.set(!hidePassword())"
+        [attr.aria-label]="'Toggle password visibility'"
+      >
+        <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      @if (form.get('password')?.touched && form.get('password')?.hasError('required')) {
+        <mat-error>{{ 'settings.changeUsernameDialog.errorPasswordRequired' | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button matButton type="button" (click)="cancel()" [disabled]="isLoading()">
+    {{ 'dialog.cancel' | translate }}
+  </button>
+  <button matButton="filled" type="button" (click)="submit()" [disabled]="!form.valid || isLoading()">
+    {{ 'dialog.confirm' | translate }}
+  </button>
+</mat-dialog-actions>

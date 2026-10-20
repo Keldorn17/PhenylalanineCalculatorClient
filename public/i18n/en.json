@@ -32,18 +32,42 @@
     "addFoodType": "Add Food Type"
   },
   "settings": {
+    "username": "Change Username",
+    "password": "Change Password",
     "changeUsername": "Change Username",
     "changePassword": "Change Password",
     "language": "Language",
     "theme": "Theme",
     "themeLight": "Light Mode",
     "themeDark": "Dark Mode",
-    "deactivate": "Delete account",
+    "deactivate": "Delete Account",
     "user": {
       "deactivateTitle": "Delete User Account",
       "deactivateDetails": "You are about to delete your account. This action cannot be undone and everything you have created will be deleted.",
       "delete": "Delete"
-    }
+    },
+    "changeUsernameDialog": {
+      "title": "Change Username",
+      "newUsername": "New Username",
+      "newUsernamePlaceholder": "Enter new username",
+      "currentPassword": "Current Password",
+      "currentPasswordPlaceholder": "Enter current password",
+      "errorUsernameRequired": "New username is required.",
+      "errorPasswordRequired": "Current password is required.",
+      "errorFailed": "Failed to change username. Please check your password or try a different username."
+    },
+    "changePasswordDialog": {
+      "title": "Change Password",
+      "currentPassword": "Current Password",
+      "currentPasswordPlaceholder": "Enter current password",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Enter new password",
+      "confirmNewPassword": "Confirm New Password",
+      "confirmNewPasswordPlaceholder": "Re-type new password",
+      "errorOldPasswordRequired": "Current password is required.",
+      "errorFailed": "Failed to change password. Please verify your current password and try again."
+    },
+    "dailyIntake": "Change Daily Intake"
   },
   "language": {
     "english": "English",
@@ -89,6 +113,7 @@
   "dailyLimitDialog": {
     "title": "Set Your Daily Limit",
     "description": "You haven't set your daily phenylalanine limit yet. Please enter your daily limit below to complete your profile.",
+    "changeDescription": "Edit daily phenylalanine limit. Changes take effect immediately on the interface.",
     "save": "Save",
     "later": "Later"
   },
