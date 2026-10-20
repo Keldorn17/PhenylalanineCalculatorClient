@@ -14,13 +14,13 @@ import {DailyLimitDialog} from './daily-limit-dialog/daily-limit-dialog';
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  protected readonly title = signal('PheSimple');
-
+  private readonly translateService = inject(TranslateService);
   private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
-  private readonly translateService = inject(TranslateService);
+
+  protected readonly title = signal('PheSimple');
 
   constructor() {
     this.translateService.addLangs(['en', 'hu']);

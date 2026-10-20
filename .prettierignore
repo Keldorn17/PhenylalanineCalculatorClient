@@ -1,0 +1,6 @@
+# Build outputs and dependencies
+/dist
+/node_modules
+/.angular
+/coverage
+package-lock.json

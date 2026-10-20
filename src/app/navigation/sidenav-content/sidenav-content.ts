@@ -17,6 +17,9 @@ import {MenuItem} from '../navigation-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavContent {
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   public readonly isCollapsed = input(false);
 
   protected readonly menuItems = signal<MenuItem[]>([
@@ -32,9 +35,6 @@ export class SidenavContent {
     }
   ]);
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
-
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
 
   protected onLogout(): void {
     if (document.activeElement instanceof HTMLElement) {

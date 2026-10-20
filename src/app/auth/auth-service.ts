@@ -9,23 +9,23 @@ import {UserService} from '../user/user-service';
   providedIn: 'root'
 })
 export class AuthService implements OnDestroy {
-  public readonly accessToken: Signal<string | null>;
-
-  private readonly http = inject(HttpClient);
   private readonly userService = inject(UserService);
+  private readonly http = inject(HttpClient);
   private readonly ngZone = inject(NgZone);
 
+  public readonly accessToken: Signal<string | null>;
+
   private readonly accessTokenSignal = signal<string | null>(null);
-  private tokenExpiresAt: number | null = null;
+  private readonly lockName = 'phe_auth_refresh_lock';
+  private readonly channelName = 'phe_auth_channel';
+  private readonly refreshBufferSeconds = 30;
   private refreshTimeout: ReturnType<typeof setTimeout> | null = null;
   private inFlightRefresh: Observable<AuthResponse> | null = null;
-  private broadcastChannel: BroadcastChannel | null = null;
-  private lastRefreshFailureTime = 0;
-  private readonly refreshBufferSeconds = 30;
-  private readonly channelName = 'phe_auth_channel';
-  private readonly lockName = 'phe_auth_refresh_lock';
   private boundVisibilityHandler: (() => void) | null = null;
+  private broadcastChannel: BroadcastChannel | null = null;
   private boundFocusHandler: (() => void) | null = null;
+  private tokenExpiresAt: number | null = null;
+  private lastRefreshFailureTime = 0;
 
   constructor() {
     this.accessToken = this.accessTokenSignal.asReadonly();

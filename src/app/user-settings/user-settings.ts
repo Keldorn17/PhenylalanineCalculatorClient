@@ -26,11 +26,11 @@ import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSettings {
-  protected readonly router = inject(Router);
-  protected readonly dialog = inject(MatDialog);
-  protected readonly authService = inject(AuthService);
-  protected readonly themeService = inject(ThemeService);
-  protected readonly translateService = inject(TranslateService);
+  private readonly translateService = inject(TranslateService);
+  private readonly themeService = inject(ThemeService);
+  private readonly authService = inject(AuthService);
+  private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
 
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
   protected readonly isDark = this.themeService.isDark;

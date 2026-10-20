@@ -34,7 +34,7 @@
           </button>
         </div>
 
-        <mat-divider></mat-divider>
+        <mat-divider />
 
         <div class="menu-section">
           <button class="menu-item" (click)="openLanguageView()">
@@ -50,7 +50,7 @@
           </button>
         </div>
 
-        <mat-divider></mat-divider>
+        <mat-divider />
 
         <div class="menu-section">
           <button class="menu-item warn" (click)="deactivate()">
@@ -65,7 +65,7 @@
           </button>
           <span class="header-title">{{ 'settings.language' | translate }}</span>
         </div>
-        <mat-divider></mat-divider>
+        <mat-divider />
         <div class="menu-section">
           @for (lang of languages; track lang.code) {
             <button class="menu-item" (click)="setLanguage(lang.code)">

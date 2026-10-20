@@ -35,10 +35,10 @@ import {TranslatePipe} from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
-  protected readonly authService = inject(AuthService);
-  protected readonly userService = inject(UserService);
-  protected readonly formBuilder = inject(FormBuilder);
-  protected readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly router = inject(Router);
 
   protected readonly currentStep = signal<2 | 3>(2);
   protected readonly isRegistered = signal(false);
