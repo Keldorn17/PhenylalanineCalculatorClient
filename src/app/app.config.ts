@@ -3,16 +3,18 @@ import {provideRouter, withComponentInputBinding} from '@angular/router';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideTranslateService} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 import {routes} from './app.routes';
 import {authInterceptor} from './auth/auth-interceptor';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withInterceptors([authInterceptor])),
+    provideNativeDateAdapter(),
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './i18n/',

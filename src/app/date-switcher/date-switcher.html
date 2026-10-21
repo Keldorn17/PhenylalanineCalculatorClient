@@ -1,0 +1,63 @@
+<mat-card appearance="outlined" class="date-switcher-card">
+  <mat-card-content class="date-switcher-content">
+    <button
+      matButton="outlined"
+      type="button"
+      class="today-btn"
+      [class.is-today-selected]="isToday(activeDate())"
+      (click)="selectToday()"
+    >
+      {{ 'home.today' | translate }}
+    </button>
+
+    <div
+      #daysScrollContainer
+      class="days-scroll-container"
+      [class.dragging]="isDragging()"
+      (mousedown)="onMouseDown($event)"
+      (mousemove)="onMouseMove($event)"
+      (mouseup)="onMouseUp()"
+      (mouseleave)="onMouseUp()"
+      (wheel)="onDaysWheel($event)"
+    >
+      @for (item of visibleDayItems(); track item.key) {
+        <button
+          type="button"
+          class="day-chip"
+          [class.selected]="isSelected(item.date)"
+          [class.today]="isToday(item.date)"
+          (click)="onDayChipClick(item.date, $event)"
+        >
+          <span class="day-weekday">{{ item.weekday }}</span>
+          <span class="day-number">{{ item.dayNumber }}</span>
+          <span class="day-month">{{ item.month }}</span>
+          @if (isToday(item.date)) {
+            <span class="today-dot"></span>
+          }
+        </button>
+      }
+    </div>
+
+    <div class="calendar-picker-wrapper">
+      <input
+        class="hidden-date-input"
+        [matDatepicker]="picker"
+        [value]="activeDate()"
+        (dateChange)="onCalendarDateChange($event)"
+        aria-hidden="true"
+        tabindex="-1"
+      />
+      <mat-datepicker #picker />
+      <button
+        matIconButton
+        type="button"
+        class="calendar-btn"
+        (click)="picker.open()"
+        [matTooltip]="'home.selectDate' | translate"
+        [attr.aria-label]="'home.selectDate' | translate"
+      >
+        <mat-icon>calendar_month</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

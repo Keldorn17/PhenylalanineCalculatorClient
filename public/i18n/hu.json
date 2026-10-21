@@ -123,6 +123,38 @@
     "exceeded": "{{amount}} {{unit}} a napi limit felett",
     "limitReached": "Napi limit elérve"
   },
+  "home": {
+    "today": "Ma",
+    "selectDate": "Nap kiválasztása a naptárból",
+    "previousDays": "Előző napok",
+    "nextDays": "Következő napok",
+    "consumptionsTitle": "Elfogyasztott ételek",
+    "itemsCount": "{{count}} tétel",
+    "emptyTitle": "Nincs rögzített ételfogyasztás",
+    "emptyDescription": "A kiválasztott napon nem található ételfogyasztási bejegyzés.",
+    "loading": "Napi fogyasztás betöltése..."
+  },
+  "consumption": {
+    "amount": "Mennyiség",
+    "phenylalanine": "Fenilalanin",
+    "edit": "Fogyasztás szerkesztése",
+    "delete": "Fogyasztás törlése",
+    "editDialog": {
+      "title": "Ételfogyasztás szerkesztése",
+      "description": "{{foodName}} elfogyasztott mennyiségének módosítása.",
+      "errorAmountRequired": "A mennyiség megadása kötelező.",
+      "errorAmountMin": "A mennyiségnek 0-nál nagyobbnak kell lennie.",
+      "errorFailed": "Nem sikerült frissíteni az ételfogyasztást. Kérjük, próbálja újra."
+    },
+    "deleteDialog": {
+      "title": "Ételfogyasztás törlése",
+      "details": "Biztosan törölni szeretné ezt az ételfogyasztási bejegyzést? Ez a művelet nem vonható vissza.",
+      "delete": "Törlés"
+    }
+  },
+  "footer": {
+    "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért."
+  },
   "dialog": {
     "confirm": "Elfogad",
     "cancel": "Mégse"

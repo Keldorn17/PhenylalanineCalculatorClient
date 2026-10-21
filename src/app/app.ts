@@ -6,10 +6,11 @@ import {AuthService} from './auth/auth-service';
 import {UserService} from './user/user-service';
 import {Navigation} from './navigation/navigation';
 import {DailyLimitDialog} from './daily-limit-dialog/daily-limit-dialog';
+import {Footer} from './footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navigation],
+  imports: [RouterOutlet, Navigation, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

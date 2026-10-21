@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {filter} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {UserService} from '../user/user-service';
+import {ProgressBarService} from '../progress-bar/progress-bar-service';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DailyLimitDialogData} from './daily-limit-dialog-types';
 
@@ -39,6 +40,7 @@ export class DailyLimitDialog {
   private readonly dialogRef = inject(MatDialogRef<DailyLimitDialog>);
   private readonly formBuilder = inject(FormBuilder);
   private readonly userService = inject(UserService);
+  private readonly progressBarService = inject(ProgressBarService);
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
     dailyLimit: [null, [Validators.min(1)]],
@@ -77,6 +79,7 @@ export class DailyLimitDialog {
 
     this.userService.patchUser({dailyLimit}).subscribe({
       next: () => {
+        this.progressBarService.triggerRefresh();
         this.dialogRef.close(true);
       },
       error: (err) => {

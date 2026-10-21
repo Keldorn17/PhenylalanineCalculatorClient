@@ -1,0 +1,40 @@
+<h2 matDialogTitle>{{ 'consumption.editDialog.title' | translate }}</h2>
+<mat-dialog-content>
+  <p class="dialog-description">
+    {{ 'consumption.editDialog.description' | translate: { foodName: data.consumption.foodName } }}
+  </p>
+
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage()! | translate }}</span>
+    </div>
+  }
+
+  <form [formGroup]="form" class="edit-consumption-form">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'consumption.amount' | translate }} (g)</mat-label>
+      <input
+        matInput
+        type="number"
+        min="0.1"
+        step="any"
+        formControlName="amount"
+      />
+      <mat-icon matPrefix>scale</mat-icon>
+      <span matTextSuffix>g</span>
+      @if (form.get('amount')?.touched && form.get('amount')?.hasError('required')) {
+        <mat-error>{{ 'consumption.editDialog.errorAmountRequired' | translate }}</mat-error>
+      }
+      @if (form.get('amount')?.touched && form.get('amount')?.hasError('min')) {
+        <mat-error>{{ 'consumption.editDialog.errorAmountMin' | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton type="button" (click)="cancel()">{{ 'dialog.cancel' | translate }}</button>
+  <button matButton="filled" type="button" (click)="save()" [disabled]="form.invalid">
+    {{ 'dailyLimitDialog.save' | translate }}
+  </button>
+</mat-dialog-actions>

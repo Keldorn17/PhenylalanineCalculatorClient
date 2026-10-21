@@ -4,6 +4,7 @@ import {ApiQueryParams, PagedResponse} from '../http/api-types';
 import {Observable} from 'rxjs';
 import {FoodConsumptionCreateRequest, FoodConsumptionRequest, FoodConsumptionResponse} from './food-consumption-types';
 import {ApiPath} from '../http/api-path';
+import {buildQueryParams, formatIsoDate} from '../http/api-utils';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class FoodConsumptionService {
   private readonly httpClient = inject(HttpClient);
 
   public getFoodConsumption(params: ApiQueryParams, date: Date): Observable<PagedResponse<FoodConsumptionResponse>> {
-    return this.httpClient.get<PagedResponse<FoodConsumptionResponse>>('TODO');
+    const queryParams = buildQueryParams(params).set('date', formatIsoDate(date));
+    return this.httpClient.get<PagedResponse<FoodConsumptionResponse>>(ApiPath.foodConsumption.get, {
+      params: queryParams
+    });
   }
 
   public postFoodConsumption(foodConsumptionCreateRequest: FoodConsumptionCreateRequest): Observable<FoodConsumptionResponse> {

@@ -12,24 +12,31 @@
 
       <div class="header-stats">
         <span class="current-amount" [class.over-limit]="isOverLimit()">
-          {{ current() }}
+          {{ displayCurrent() }}
         </span>
-        <span class="total-amount">/ {{ total() }} {{ unit() }}</span>
+        <span class="total-amount">/ {{ displayTotal() }} {{ unit() }}</span>
         <span class="percentage-badge" [class.over-limit]="isOverLimit()">
           {{ percentage() }}%
         </span>
       </div>
     </div>
 
-    <div class="progress-bar-track-area">
+    <div class="progress-bar-track-area" [style.height.px]="height()">
       <mat-progress-bar
         mode="determinate"
-        [value]="progressValue()"
-        [class.over-limit]="isOverLimit()"
+        [value]="baseAllowanceWidth()"
         [style.--mat-progress-bar-track-height.px]="height()"
         [style.--mat-progress-bar-active-indicator-height.px]="height()"
         [style.height.px]="height()"
       />
+      @if (isOverLimit()) {
+        <div
+          class="overflow-segment"
+          [style.left.%]="baseAllowanceWidth()"
+          [style.width.%]="overflowWidth()"
+          [style.height.px]="height()"
+        ></div>
+      }
     </div>
 
     <div class="progress-footer">

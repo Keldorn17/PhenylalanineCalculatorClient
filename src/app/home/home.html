@@ -1,1 +1,64 @@
-<progress-bar [total]="dailyIntake().dailyLimit" [current]="dailyIntake().consumedPhenylalanine" />
+<div class="home-container">
+  <progress-bar
+    [total]="dailyIntake().dailyLimit"
+    [current]="dailyIntake().consumedPhenylalanine"
+  />
+
+  <date-switcher
+    [selectedDate]="selectedDate()"
+    (dateChange)="selectDate($event)"
+  />
+
+  <section class="consumptions-section">
+    <div class="section-header">
+      <div class="section-title-group">
+        <h2 class="section-title">{{ 'home.consumptionsTitle' | translate }}</h2>
+        <span class="selected-date-label">{{ selectedDate() | date: 'yyyy. MM. dd.' }}</span>
+      </div>
+      <span class="items-count-badge">
+        {{ 'home.itemsCount' | translate: { count: totalElements() } }}
+      </span>
+    </div>
+
+    @if (isLoading()) {
+      <div class="loading-container">
+        <mat-spinner diameter="40" />
+        <span>{{ 'home.loading' | translate }}</span>
+      </div>
+    } @else if (consumptions().length === 0) {
+      <mat-card appearance="outlined" class="empty-state-card">
+        <mat-card-content class="empty-state-content">
+          <div class="empty-icon-wrapper">
+            <mat-icon>no_meals</mat-icon>
+          </div>
+          <h3 class="empty-title">{{ 'home.emptyTitle' | translate }}</h3>
+          <p class="empty-description">{{ 'home.emptyDescription' | translate }}</p>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <div class="consumptions-grid">
+        @for (item of consumptions(); track item.id) {
+          <div class="consumption-grid-item">
+            <food-consumption-card
+              [consumption]="item"
+              (changed)="onConsumptionChanged()"
+            />
+          </div>
+        }
+      </div>
+    }
+
+    @if (totalElements() > 0) {
+      <div class="paginator-wrapper">
+        <mat-paginator
+          [length]="totalElements()"
+          [pageIndex]="pageIndex()"
+          [pageSize]="pageSize()"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="onPageChange($event)"
+          showFirstLastButtons
+        />
+      </div>
+    }
+  </section>
+</div>

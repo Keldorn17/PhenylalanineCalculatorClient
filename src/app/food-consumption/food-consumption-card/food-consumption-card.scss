@@ -1,0 +1,168 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.consumption-card {
+  height: 100%;
+  border-radius: var(--mat-sys-corner-medium, 12px);
+  background: var(--mat-sys-surface-container-low);
+  border: 1px solid var(--mat-sys-outline-variant);
+  box-shadow: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--mat-sys-primary) 40%, var(--mat-sys-outline-variant));
+    background: var(--mat-sys-surface-container);
+    transform: translateY(-2px);
+  }
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 0.85rem 1rem !important;
+  box-sizing: border-box;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.food-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  flex: 1;
+
+  .food-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
+    color: var(--mat-sys-primary);
+
+    mat-icon {
+      font-size: 1.15rem;
+      width: 1.15rem;
+      height: 1.15rem;
+    }
+  }
+
+  .food-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+
+    .food-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--mat-sys-on-surface);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .consumed-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.75rem;
+      color: var(--mat-sys-on-surface-variant);
+
+      mat-icon {
+        font-size: 0.875rem;
+        width: 0.875rem;
+        height: 0.875rem;
+      }
+    }
+  }
+}
+
+.phe-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--mat-sys-primary) 14%, transparent);
+  color: var(--mat-sys-primary);
+  flex-shrink: 0;
+
+  .phe-value {
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  .phe-unit {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--mat-sys-on-surface-variant);
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .stat-value {
+    font-weight: 600;
+    color: var(--mat-sys-on-surface);
+  }
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+
+  .action-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+  }
+
+  .edit-btn {
+    color: var(--mat-sys-primary);
+  }
+
+  .delete-btn {
+    color: var(--mat-sys-error);
+  }
+}
