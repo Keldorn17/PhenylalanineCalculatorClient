@@ -23,6 +23,17 @@ export const ApiPath = {
     get: `${env}/users/me`
   },
 
+  dailyIntake: {
+    get: `${env}/daily-intakes?date={}`
+  },
+
+  foodConsumption: {
+    get: `${env}/food-consumptions`,
+    post: `${env}/food-consumptions`,
+    put: `${env}/food-consumptions/{}`,
+    delete: `${env}/food-consumptions/{}`
+  },
+
   /**
    * Helper utility to resolve path placeholders like '{}' with IDs or values.
    * Example: ApiPath.resolve(ApiPath.foodTypes.get, 1) -> http://localhost:8080/api/v1/food-types/1

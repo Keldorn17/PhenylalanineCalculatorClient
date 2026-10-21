@@ -117,6 +117,12 @@
     "save": "Mentés",
     "later": "Később"
   },
+  "progressBar": {
+    "title": "Napi bevitel",
+    "remaining": "{{amount}} {{unit}} maradt",
+    "exceeded": "{{amount}} {{unit}} a napi limit felett",
+    "limitReached": "Napi limit elérve"
+  },
   "dialog": {
     "confirm": "Elfogad",
     "cancel": "Mégse"

@@ -117,6 +117,12 @@
     "save": "Save",
     "later": "Later"
   },
+  "progressBar": {
+    "title": "Daily Intake",
+    "remaining": "{{amount}} {{unit}} remaining",
+    "exceeded": "{{amount}} {{unit}} over daily limit",
+    "limitReached": "Daily limit reached"
+  },
   "dialog": {
     "confirm": "Confirm",
     "cancel": "Cancel"

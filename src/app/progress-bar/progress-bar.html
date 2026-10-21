@@ -1,0 +1,53 @@
+<mat-card appearance="outlined" class="progress-card" [class.is-over-limit]="isOverLimit()">
+  <mat-card-content class="card-content">
+    <div class="progress-header">
+      <div class="header-title-group">
+        <div class="header-icon-container" [class.over-limit]="isOverLimit()">
+          <mat-icon>{{ isOverLimit() ? 'warning' : 'monitor_heart' }}</mat-icon>
+        </div>
+        <span class="header-title">
+          {{ title() ? title() : ('progressBar.title' | translate) }}
+        </span>
+      </div>
+
+      <div class="header-stats">
+        <span class="current-amount" [class.over-limit]="isOverLimit()">
+          {{ current() }}
+        </span>
+        <span class="total-amount">/ {{ total() }} {{ unit() }}</span>
+        <span class="percentage-badge" [class.over-limit]="isOverLimit()">
+          {{ percentage() }}%
+        </span>
+      </div>
+    </div>
+
+    <div class="progress-bar-track-area">
+      <mat-progress-bar
+        mode="determinate"
+        [value]="progressValue()"
+        [class.over-limit]="isOverLimit()"
+        [style.--mat-progress-bar-track-height.px]="height()"
+        [style.--mat-progress-bar-active-indicator-height.px]="height()"
+        [style.height.px]="height()"
+      />
+    </div>
+
+    <div class="progress-footer">
+      @if (isOverLimit()) {
+        <span class="status-info over-limit">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ 'progressBar.exceeded' | translate: { amount: exceeded(), unit: unit() } }}</span>
+        </span>
+      } @else if (isAtLimit()) {
+        <span class="status-info at-limit">
+          <mat-icon>check_circle</mat-icon>
+          <span>{{ 'progressBar.limitReached' | translate }}</span>
+        </span>
+      } @else {
+        <span class="status-info in-progress">
+          <span>{{ 'progressBar.remaining' | translate: { amount: remaining(), unit: unit() } }}</span>
+        </span>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>
