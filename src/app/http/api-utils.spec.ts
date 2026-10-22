@@ -1,5 +1,5 @@
 import {describe, it, expect} from 'vitest';
-import {buildQueryParams, RsqlBuilder} from './api-utils';
+import {buildQueryParams, formatIsoDate, RsqlBuilder} from './api-utils';
 
 describe('ApiUtils', () => {
   describe('buildQueryParams', () => {
@@ -19,7 +19,14 @@ describe('ApiUtils', () => {
 
     it('should ignore undefined values', () => {
       const params = buildQueryParams({});
-      expect(params.keys().length).toBe(0);
+      expect(params.keys()).toHaveLength(0);
+    });
+  });
+
+  describe('formatIsoDate', () => {
+    it('should format a local date into YYYY-MM-DD', () => {
+      const date = new Date(2026, 0, 5);
+      expect(formatIsoDate(date)).toBe('2026-01-05');
     });
   });
 

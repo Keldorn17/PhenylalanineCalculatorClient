@@ -1,0 +1,58 @@
+<mat-card appearance="outlined" class="consumption-card">
+  <mat-card-content class="card-body">
+    <div class="card-header">
+      <div class="food-title-group">
+        <div class="food-icon">
+          <mat-icon>restaurant</mat-icon>
+        </div>
+        <div class="food-meta">
+          <span class="food-name" [title]="consumption().foodName">
+            {{ consumption().foodName }}
+          </span>
+          <span class="consumed-time">
+            <mat-icon>schedule</mat-icon>
+            <span>{{ consumption().consumedAt | date: 'HH:mm' }}</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="phe-badge">
+        <span class="phe-value">{{ consumption().phenylalanineAmount | number: '1.0-2' }}</span>
+        <span class="phe-unit">mg</span>
+      </div>
+    </div>
+
+    <mat-divider/>
+
+    <div class="card-footer">
+      <div class="stat-item">
+        <mat-icon>scale</mat-icon>
+        <span class="stat-label">{{ 'consumption.amount' | translate }}:</span>
+        <span class="stat-value">{{ consumption().amount | number: '1.0-2' }} g</span>
+      </div>
+
+      <div class="card-actions">
+        <button
+          matIconButton
+          type="button"
+          class="action-btn edit-btn"
+          (click)="openEditDialog()"
+          [matTooltip]="'consumption.edit' | translate"
+          [attr.aria-label]="'consumption.edit' | translate"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          matIconButton
+          type="button"
+          class="action-btn delete-btn"
+          (click)="openDeleteDialog()"
+          [matTooltip]="'consumption.delete' | translate"
+          [attr.aria-label]="'consumption.delete' | translate"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

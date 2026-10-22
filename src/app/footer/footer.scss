@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.page-footer {
+  width: 100%;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  padding: 1.25rem 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.footer-description {
+  margin: 0;
+  font-size: .9rem;
+  line-height: 1.5;
+}
