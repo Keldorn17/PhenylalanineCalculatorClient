@@ -141,10 +141,18 @@
     "delete": "Delete consumption",
     "editDialog": {
       "title": "Edit Food Consumption",
-      "description": "Update the consumed amount for {{foodName}}.",
+      "description": "Update the consumed amount and time for {{foodName}}.",
       "errorAmountRequired": "Amount is required.",
       "errorAmountMin": "Amount must be greater than 0.",
-      "errorFailed": "Failed to update food consumption. Please try again."
+      "errorFailed": "Failed to update food consumption. Please try again.",
+      "date": "Date",
+      "datePlaceholder": "Select date",
+      "time": "Time",
+      "timePlaceholder": "Select time",
+      "errorDateRequired": "Date is required.",
+      "errorDateInvalid": "Invalid date.",
+      "errorTimeRequired": "Time is required.",
+      "errorTimeInvalid": "Invalid time."
     },
     "deleteDialog": {
       "title": "Delete Food Consumption",

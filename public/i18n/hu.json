@@ -141,10 +141,18 @@
     "delete": "Fogyasztás törlése",
     "editDialog": {
       "title": "Ételfogyasztás szerkesztése",
-      "description": "{{foodName}} elfogyasztott mennyiségének módosítása.",
+      "description": "{{foodName}} elfogyasztott mennyiségének és idejének módosítása.",
       "errorAmountRequired": "A mennyiség megadása kötelező.",
       "errorAmountMin": "A mennyiségnek 0-nál nagyobbnak kell lennie.",
-      "errorFailed": "Nem sikerült frissíteni az ételfogyasztást. Kérjük, próbálja újra."
+      "errorFailed": "Nem sikerült frissíteni az ételfogyasztást. Kérjük, próbálja újra.",
+      "date": "Dátum",
+      "datePlaceholder": "Dátum kiválasztása",
+      "time": "Időpont",
+      "timePlaceholder": "Időpont kiválasztása",
+      "errorDateRequired": "A dátum megadása kötelező.",
+      "errorDateInvalid": "Érvénytelen dátum.",
+      "errorTimeRequired": "Az időpont megadása kötelező.",
+      "errorTimeInvalid": "Érvénytelen időpont."
     },
     "deleteDialog": {
       "title": "Ételfogyasztás törlése",
