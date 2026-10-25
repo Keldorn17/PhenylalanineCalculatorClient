@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ApiQueryParams, PagedResponse} from '../http/api-types';
 import {Observable} from 'rxjs';
-import {FoodRequest, FoodResponse, FoodUpdateRequest} from './food-types';
+import {FoodRequest, FoodResponse} from './food-types';
 import {ApiPath} from '../http/api-path';
 import {buildQueryParams} from '../http/api-utils';
 
@@ -25,8 +25,8 @@ export class FoodService {
     return this.httpClient.post<FoodResponse>(ApiPath.food.post, foodRequest);
   }
 
-  public putFood(id: number, foodUpdateRequest: FoodUpdateRequest): Observable<FoodResponse> {
-    return this.httpClient.patch<FoodResponse>(ApiPath.resolve(ApiPath.food.patch, id), foodUpdateRequest);
+  public putFood(id: number, foodRequest: FoodRequest): Observable<FoodResponse> {
+    return this.httpClient.put<FoodResponse>(ApiPath.resolve(ApiPath.food.patch, id), foodRequest);
   }
 
   public deleteFood(id: number): Observable<void> {

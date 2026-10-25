@@ -65,6 +65,7 @@
     flex-direction: column;
     gap: 0.1rem;
     min-width: 0;
+    flex: 1;
 
     .food-type-name {
       font-size: 0.95rem;
@@ -73,6 +74,13 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      @media (max-width: 768px) {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        overflow-wrap: anywhere;
+      }
     }
   }
 }

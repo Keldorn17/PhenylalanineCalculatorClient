@@ -35,10 +35,12 @@ describe('ApiUtils', () => {
       const query = RsqlBuilder.create()
         .eq('status', 'ACTIVE')
         .and()
+        .eq('own', true)
+        .and()
         .gt('amount', 50)
         .build();
 
-      expect(query).toBe("status=='ACTIVE' and amount=gt=50");
+      expect(query).toBe("status=='ACTIVE' and own==true and amount=gt=50");
     });
 
     it('should support ilike and or', () => {
@@ -49,6 +51,20 @@ describe('ApiUtils', () => {
         .build();
 
       expect(query).toBe("name=ilike='apple' or phenylalanine=lt=10");
+    });
+
+    it('should support group, ge, and le', () => {
+      const query = RsqlBuilder.create()
+        .group((b) => b.ilike('name', 'apple').or().ilike('foodTypeName', 'apple'))
+        .and()
+        .ge('protein', 1)
+        .and()
+        .le('protein', 10)
+        .build();
+
+      expect(query).toBe(
+        "(name=ilike='apple' or foodTypeName=ilike='apple') and protein=ge=1 and protein=le=10",
+      );
     });
   });
 });

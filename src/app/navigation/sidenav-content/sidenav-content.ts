@@ -29,6 +29,11 @@ export class SidenavContent {
       route: '/'
     },
     {
+      icon: 'restaurant',
+      label: 'nav.foods',
+      route: '/foods'
+    },
+    {
       icon: 'restaurant_menu',
       label: 'nav.foodTypes',
       route: '/food-types'

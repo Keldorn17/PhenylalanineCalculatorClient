@@ -1,0 +1,70 @@
+.dialog-description {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.food-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.25rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.nutrition-row {
+  display: flex;
+  gap: 1rem;
+
+  mat-form-field {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (max-width: 599px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.phe-mode-toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  .phe-mode-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .phe-mode-toggle {
+    width: 100%;
+
+    mat-button-toggle {
+      flex: 1;
+    }
+  }
+}
+
+.food-type-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+
+  .option-name {
+    font-weight: 500;
+  }
+
+  .option-multiplier {
+    font-size: 0.8125rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
