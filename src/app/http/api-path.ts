@@ -14,7 +14,10 @@ export const ApiPath = {
 
   foodTypes: {
     get: `${env}/food-types`,
-    getById: `${env}/food-types/{}`
+    getById: `${env}/food-types/{}`,
+    delete: `${env}/food-types/{}`,
+    put: `${env}/food-types/{}`,
+    post: `${env}/food-types`
   },
 
   user: {
@@ -34,13 +37,14 @@ export const ApiPath = {
     delete: `${env}/food-consumptions/{}`
   },
 
-  /**
-   * Helper utility to resolve path placeholders like '{}' with IDs or values.
-   * Example: ApiPath.resolve(ApiPath.foodTypes.get, 1) -> http://localhost:8080/api/v1/food-types/1
-   *
-   * @param path The templated path string containing '{}'
-   * @param args The arguments to replace each '{}' placeholder in order
-   */
+  food: {
+    get: `${env}/foods`,
+    getById: `${env}/foods/{}`,
+    post: `${env}/foods`,
+    patch: `${env}/foods/{}`,
+    delete: `${env}/foods/{}`
+  },
+
   resolve(path: string, ...args: (string | number)[]): string {
     let resolved = path;
     for (const arg of args) {
