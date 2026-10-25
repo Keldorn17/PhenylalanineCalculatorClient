@@ -4,3 +4,8 @@ export interface FoodTypeResponse {
   multiplier: number;
   canEdit: boolean;
 }
+
+export interface FoodTypeRequest {
+  name: string;
+  multiplier: number;
+}
