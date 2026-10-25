@@ -1,0 +1,75 @@
+<h2 matDialogTitle>
+  {{ (isEditMode ? 'foodType.dialog.editTitle' : 'foodType.dialog.createTitle') | translate }}
+</h2>
+<mat-dialog-content>
+  <p class="dialog-description">
+    @if (isEditMode) {
+      {{
+        'foodType.dialog.editDescription'
+          | translate: { foodTypeName: data?.foodType?.name }
+      }}
+    } @else {
+      {{ 'foodType.dialog.createDescription' | translate }}
+    }
+  </p>
+
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage()! | translate }}</span>
+    </div>
+  }
+
+  <form [formGroup]="form" class="food-type-form" (ngSubmit)="save()">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'foodType.name' | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="name"
+        [placeholder]="'foodType.dialog.namePlaceholder' | translate"
+      />
+      <mat-icon matPrefix>restaurant_menu</mat-icon>
+      @if (
+        form.get('name')?.touched &&
+        (form.get('name')?.hasError('required') || form.get('name')?.hasError('pattern'))
+      ) {
+        <mat-error>{{ 'foodType.dialog.errorNameRequired' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'foodType.multiplier' | translate }} (mg / g)</mat-label>
+      <input
+        matInput
+        type="number"
+        min="1"
+        step="1"
+        formControlName="multiplier"
+        [placeholder]="'foodType.dialog.multiplierPlaceholder' | translate"
+      />
+      <mat-icon matPrefix>calculate</mat-icon>
+      <span matTextSuffix>mg/g</span>
+      @if (form.get('multiplier')?.touched && form.get('multiplier')?.hasError('required')) {
+        <mat-error>{{ 'foodType.dialog.errorMultiplierRequired' | translate }}</mat-error>
+      } @else if (form.get('multiplier')?.touched && form.get('multiplier')?.hasError('min')) {
+        <mat-error>{{ 'foodType.dialog.errorMultiplierMin' | translate }}</mat-error>
+      } @else if (form.get('multiplier')?.touched && form.get('multiplier')?.hasError('pattern')) {
+        <mat-error>{{ 'foodType.dialog.errorMultiplierInteger' | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton type="button" (click)="cancel()" [disabled]="isLoading()">
+    {{ 'dialog.cancel' | translate }}
+  </button>
+  <button
+    matButton="filled"
+    type="button"
+    (click)="save()"
+    [disabled]="form.invalid || isLoading()"
+  >
+    {{ 'dailyLimitDialog.save' | translate }}
+  </button>
+</mat-dialog-actions>

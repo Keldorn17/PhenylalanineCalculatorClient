@@ -1,0 +1,18 @@
+.dialog-description {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.food-type-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.25rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+}

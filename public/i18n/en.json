@@ -160,6 +160,38 @@
       "delete": "Delete"
     }
   },
+  "foodType": {
+    "title": "Food Types",
+    "addFoodType": "Add Food Type",
+    "name": "Name",
+    "multiplier": "Multiplier",
+    "edit": "Edit food type",
+    "delete": "Delete food type",
+    "readOnly": "Read-only",
+    "readOnlyTooltip": "You can only view this food type because it was created by another user.",
+    "emptyTitle": "No food types found",
+    "emptyDescription": "There are no food types available yet. Create one to get started.",
+    "loading": "Loading food types...",
+    "dialog": {
+      "createTitle": "Add Food Type",
+      "createDescription": "Create a new food type with its phenylalanine multiplier.",
+      "editTitle": "Edit Food Type",
+      "editDescription": "Update the name and multiplier for {{foodTypeName}}.",
+      "namePlaceholder": "Enter food type name",
+      "multiplierPlaceholder": "e.g. 50",
+      "errorNameRequired": "Name is required.",
+      "errorMultiplierRequired": "Multiplier is required.",
+      "errorMultiplierMin": "Multiplier must be at least 1.",
+      "errorMultiplierInteger": "Multiplier must be a whole number.",
+      "errorCreateFailed": "Failed to create food type. Please try again.",
+      "errorEditFailed": "Failed to update food type. Please try again."
+    },
+    "deleteDialog": {
+      "title": "Delete Food Type",
+      "details": "Are you sure you want to delete this food type? This action cannot be undone.",
+      "delete": "Delete"
+    }
+  },
   "footer": {
     "description": "Disclaimer: This application does not provide professional medical or nutritional advice. Please consult a registered dietitian or healthcare provider regarding your diet. The data provided may contain inaccuracies, and we accept no liability for incorrect daily intake calculations (including phenylalanine tracking)."
   },

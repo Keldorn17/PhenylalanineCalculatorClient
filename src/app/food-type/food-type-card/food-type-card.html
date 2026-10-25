@@ -1,0 +1,65 @@
+<mat-card appearance="outlined" class="food-type-card">
+  <mat-card-content class="card-body">
+    <div class="card-header">
+      <div class="food-type-title-group">
+        <div class="food-type-icon">
+          <mat-icon>restaurant_menu</mat-icon>
+        </div>
+        <div class="food-type-meta">
+          <span class="food-type-name" [title]="foodType().name">
+            {{ foodType().name }}
+          </span>
+        </div>
+      </div>
+
+      <div class="multiplier-badge">
+        <span class="multiplier-value">{{ foodType().multiplier | number: '1.0-0' }}</span>
+        <span class="multiplier-unit">mg/g</span>
+      </div>
+    </div>
+
+    <mat-divider />
+
+    <div class="card-footer">
+      <div class="stat-item">
+        <mat-icon>calculate</mat-icon>
+        <span class="stat-label">{{ 'foodType.multiplier' | translate }}:</span>
+        <span class="stat-value">{{ foodType().multiplier | number: '1.0-0' }} mg/g</span>
+      </div>
+
+      @if (foodType().canEdit) {
+        <div class="card-actions">
+          <button
+            matIconButton
+            type="button"
+            class="action-btn edit-btn"
+            (click)="openEditDialog()"
+            [matTooltip]="'foodType.edit' | translate"
+            [attr.aria-label]="'foodType.edit' | translate"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            matIconButton
+            type="button"
+            class="action-btn delete-btn"
+            (click)="openDeleteDialog()"
+            [matTooltip]="'foodType.delete' | translate"
+            [attr.aria-label]="'foodType.delete' | translate"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      } @else {
+        <div
+          class="readonly-indicator"
+          [matTooltip]="'foodType.readOnlyTooltip' | translate"
+          [attr.aria-label]="'foodType.readOnlyTooltip' | translate"
+        >
+          <mat-icon>lock_outline</mat-icon>
+          <span>{{ 'foodType.readOnly' | translate }}</span>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

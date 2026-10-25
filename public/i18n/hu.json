@@ -160,6 +160,38 @@
       "delete": "Törlés"
     }
   },
+  "foodType": {
+    "title": "Étel típusok",
+    "addFoodType": "Étel típus hozzáadása",
+    "name": "Név",
+    "multiplier": "Szorzó",
+    "edit": "Étel típus szerkesztése",
+    "delete": "Étel típus törlése",
+    "readOnly": "Csak olvasható",
+    "readOnlyTooltip": "Ezt az étel típust csak megtekintheti, mivel egy másik felhasználó hozta létre.",
+    "emptyTitle": "Nem található étel típus",
+    "emptyDescription": "Még nincsenek elérhető étel típusok. Hozzon létre egyet a kezdéshez.",
+    "loading": "Étel típusok betöltése...",
+    "dialog": {
+      "createTitle": "Étel típus hozzáadása",
+      "createDescription": "Hozzon létre egy új étel típust a hozzá tartozó fenilalanin szorzóval.",
+      "editTitle": "Étel típus szerkesztése",
+      "editDescription": "{{foodTypeName}} nevének és szorzójának módosítása.",
+      "namePlaceholder": "Adja meg az étel típus nevét",
+      "multiplierPlaceholder": "pl. 50",
+      "errorNameRequired": "A név megadása kötelező.",
+      "errorMultiplierRequired": "A szorzó megadása kötelező.",
+      "errorMultiplierMin": "A szorzónak legalább 1-nek kell lennie.",
+      "errorMultiplierInteger": "A szorzónak egész számnak kell lennie.",
+      "errorCreateFailed": "Nem sikerült létrehozni az étel típust. Kérjük, próbálja újra.",
+      "errorEditFailed": "Nem sikerült frissíteni az étel típust. Kérjük, próbálja újra."
+    },
+    "deleteDialog": {
+      "title": "Étel típus törlése",
+      "details": "Biztosan törölni szeretné ezt az étel típust? Ez a művelet nem vonható vissza.",
+      "delete": "Törlés"
+    }
+  },
   "footer": {
     "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért."
   },
