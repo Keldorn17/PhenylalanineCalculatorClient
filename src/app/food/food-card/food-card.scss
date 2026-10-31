@@ -9,6 +9,7 @@
   background: var(--mat-sys-surface-container-low);
   border: 1px solid var(--mat-sys-outline-variant);
   box-shadow: none;
+  cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
@@ -174,7 +175,7 @@
 .card-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 0.5rem;
   min-height: 32px;
 }
@@ -192,10 +193,6 @@
     width: 1.15rem;
     height: 1.15rem;
   }
-}
-
-.consume-btn {
-  color: var(--mat-sys-primary);
 }
 
 .card-actions {

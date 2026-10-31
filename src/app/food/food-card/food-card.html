@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="food-card">
+<mat-card appearance="outlined" class="food-card" (click)="openConsumeDialog()">
   <mat-card-content class="card-body">
     <div class="card-header">
       <div class="food-title-group">
@@ -47,24 +47,13 @@
     <mat-divider />
 
     <div class="card-footer">
-      <button
-        matIconButton
-        type="button"
-        class="action-btn consume-btn"
-        (click)="openConsumeDialog()"
-        [matTooltip]="'food.logConsumption' | translate"
-        [attr.aria-label]="'food.logConsumption' | translate"
-      >
-        <mat-icon>add_circle_outline</mat-icon>
-      </button>
-
       @if (food().canEdit) {
         <div class="card-actions">
           <button
             matIconButton
             type="button"
             class="action-btn edit-btn"
-            (click)="openEditDialog()"
+            (click)="openEditDialog($event)"
             [matTooltip]="'food.edit' | translate"
             [attr.aria-label]="'food.edit' | translate"
           >
@@ -74,7 +63,7 @@
             matIconButton
             type="button"
             class="action-btn delete-btn"
-            (click)="openDeleteDialog()"
+            (click)="openDeleteDialog($event)"
             [matTooltip]="'food.delete' | translate"
             [attr.aria-label]="'food.delete' | translate"
           >

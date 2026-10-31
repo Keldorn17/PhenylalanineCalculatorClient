@@ -44,7 +44,9 @@ export class FoodCard {
     });
   }
 
-  public openEditDialog(): void {
+  public openEditDialog(event: Event): void {
+    event.stopPropagation();
+
     const item = this.food();
     if (!item.canEdit) {
       return;
@@ -64,7 +66,9 @@ export class FoodCard {
       });
   }
 
-  public openDeleteDialog(): void {
+  public openDeleteDialog(event: Event): void {
+    event.stopPropagation();
+
     const item = this.food();
     if (!item.canEdit) {
       return;
