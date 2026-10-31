@@ -1,0 +1,55 @@
+<div class="food-type-container">
+  <section class="food-types-section">
+    <div class="section-header">
+      <div class="section-title-group">
+        <h2 class="section-title">{{ 'foodType.title' | translate }}</h2>
+        <span class="items-count-badge">
+          {{ 'home.itemsCount' | translate: { count: totalElements() } }}
+        </span>
+      </div>
+
+      <button matButton="filled" type="button" (click)="openCreateDialog()">
+        <mat-icon>add</mat-icon>
+        <span>{{ 'foodType.addFoodType' | translate }}</span>
+      </button>
+    </div>
+
+    @if (isLoading()) {
+      <div class="loading-container">
+        <mat-spinner diameter="40" />
+        <span>{{ 'foodType.loading' | translate }}</span>
+      </div>
+    } @else if (foodTypes().length === 0) {
+      <mat-card appearance="outlined" class="empty-state-card">
+        <mat-card-content class="empty-state-content">
+          <div class="empty-icon-wrapper">
+            <mat-icon>restaurant_menu</mat-icon>
+          </div>
+          <h3 class="empty-title">{{ 'foodType.emptyTitle' | translate }}</h3>
+          <p class="empty-description">{{ 'foodType.emptyDescription' | translate }}</p>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <div class="food-types-grid">
+        @for (item of foodTypes(); track item.id) {
+          <div class="food-type-grid-item">
+            <food-type-card [foodType]="item" (changed)="onFoodTypeChanged()" />
+          </div>
+        }
+      </div>
+    }
+
+    @if (totalElements() > 0) {
+      <div class="paginator-wrapper">
+        <mat-paginator
+          [length]="totalElements()"
+          [pageIndex]="pageIndex()"
+          [pageSize]="pageSize()"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="onPageChange($event)"
+          showFirstLastButtons
+        />
+      </div>
+    }
+  </section>
+</div>

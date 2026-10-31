@@ -1,0 +1,170 @@
+<h2 matDialogTitle>
+  {{ (isEditMode ? 'food.dialog.editTitle' : 'food.dialog.createTitle') | translate }}
+</h2>
+<mat-dialog-content>
+  <p class="dialog-description">
+    @if (isEditMode) {
+      {{ 'food.dialog.editDescription' | translate: { foodName: data?.food?.name } }}
+    } @else {
+      {{ 'food.dialog.createDescription' | translate }}
+    }
+  </p>
+
+  @if (errorMessage()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage()! | translate }}</span>
+    </div>
+  }
+
+  <form [formGroup]="form" class="food-form" (ngSubmit)="save()">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'food.name' | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="name"
+        [placeholder]="'food.dialog.namePlaceholder' | translate"
+      />
+      <mat-icon matPrefix>restaurant</mat-icon>
+      @if (
+        form.get('name')?.touched &&
+        (form.get('name')?.hasError('required') || form.get('name')?.hasError('pattern'))
+      ) {
+        <mat-error>{{ 'food.dialog.errorNameRequired' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="nutrition-row">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'food.protein' | translate }} (g / 100g)</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          step="any"
+          formControlName="protein"
+          [placeholder]="'food.dialog.proteinPlaceholder' | translate"
+        />
+        <mat-icon matPrefix>egg_alt</mat-icon>
+        <span matTextSuffix>g</span>
+        @if (form.get('protein')?.touched && form.get('protein')?.hasError('required')) {
+          <mat-error>{{ 'food.dialog.errorProteinRequired' | translate }}</mat-error>
+        } @else if (form.get('protein')?.touched && form.get('protein')?.hasError('min')) {
+          <mat-error>{{ 'food.dialog.errorProteinMin' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'food.calories' | translate }} (kcal / 100g)</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          step="any"
+          formControlName="calories"
+          [placeholder]="'food.dialog.caloriesPlaceholder' | translate"
+        />
+        <mat-icon matPrefix>local_fire_department</mat-icon>
+        <span matTextSuffix>kcal</span>
+        @if (form.get('calories')?.touched && form.get('calories')?.hasError('required')) {
+          <mat-error>{{ 'food.dialog.errorCaloriesRequired' | translate }}</mat-error>
+        } @else if (form.get('calories')?.touched && form.get('calories')?.hasError('min')) {
+          <mat-error>{{ 'food.dialog.errorCaloriesMin' | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'food.foodType' | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="foodTypeSearch"
+        [matAutocomplete]="foodTypeAuto"
+        [placeholder]="'food.dialog.foodTypePlaceholder' | translate"
+      />
+      <mat-icon matPrefix>restaurant_menu</mat-icon>
+      @if (foodTypeSearchText()) {
+        <button
+          matIconButton
+          matSuffix
+          type="button"
+          (click)="clearFoodTypeSelection()"
+          [attr.aria-label]="'food.clearSearch' | translate"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      <mat-autocomplete
+        #foodTypeAuto="matAutocomplete"
+        (optionSelected)="onFoodTypeSelected($event)"
+      >
+        @for (type of filteredFoodTypes(); track type.id) {
+          <mat-option [value]="type">
+            <div class="food-type-option">
+              <span class="option-name">{{ type.name }}</span>
+              <span class="option-multiplier">({{ type.multiplier }} mg/g)</span>
+            </div>
+          </mat-option>
+        }
+      </mat-autocomplete>
+      @if (
+        form.get('foodTypeSearch')?.touched &&
+        (form.get('foodTypeSearch')?.hasError('required') ||
+          (foodTypeSearchText().trim().length > 0 && !selectedFoodType()))
+      ) {
+        <mat-error>{{ 'food.dialog.errorFoodTypeRequired' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="phe-mode-toggle-wrapper">
+      <span class="phe-mode-label">{{ 'food.dialog.pheCalculationMethod' | translate }}</span>
+      <mat-button-toggle-group
+        [value]="pheMode()"
+        (change)="onPheModeChange($event.value)"
+        class="phe-mode-toggle"
+      >
+        <mat-button-toggle value="foodType">
+          {{ 'food.dialog.byFoodType' | translate }}
+        </mat-button-toggle>
+        <mat-button-toggle value="direct">
+          {{ 'food.dialog.directPhe' | translate }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    @if (pheMode() === 'direct') {
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'food.phenylalanine' | translate }} (mg / 100g)</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          step="any"
+          formControlName="phenylalanine"
+          [placeholder]="'food.dialog.phePlaceholder' | translate"
+        />
+        <mat-icon matPrefix>science</mat-icon>
+        <span matTextSuffix>mg</span>
+        @if (
+          form.get('phenylalanine')?.touched && form.get('phenylalanine')?.hasError('required')
+        ) {
+          <mat-error>{{ 'food.dialog.errorPheRequired' | translate }}</mat-error>
+        } @else if (
+          form.get('phenylalanine')?.touched && form.get('phenylalanine')?.hasError('min')
+        ) {
+          <mat-error>{{ 'food.dialog.errorPheMin' | translate }}</mat-error>
+        }
+      </mat-form-field>
+    }
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton type="button" (click)="cancel()" [disabled]="isLoading()">
+    {{ 'dialog.cancel' | translate }}
+  </button>
+  <button matButton="filled" type="button" (click)="save()" [disabled]="!canSubmit()">
+    {{ 'dailyLimitDialog.save' | translate }}
+  </button>
+</mat-dialog-actions>

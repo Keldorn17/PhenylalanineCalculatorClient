@@ -6,6 +6,7 @@ import {
   input,
   linkedSignal
 } from '@angular/core';
+import {DecimalPipe} from '@angular/common';
 import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatProgressBar} from '@angular/material/progress-bar';
@@ -19,6 +20,7 @@ import {UserService} from '../user/user-service';
 @Component({
   selector: 'progress-bar',
   imports: [
+    DecimalPipe,
     MatCard,
     MatCardContent,
     MatProgressBar,
@@ -56,11 +58,11 @@ export class ProgressBar {
   });
 
   public readonly remaining = computed((): number => {
-    return Math.max(0, this.displayTotal() - this.displayCurrent());
+    return Math.round(Math.max(0, this.displayTotal() - this.displayCurrent()) * 100) / 100;
   });
 
   public readonly exceeded = computed((): number => {
-    return Math.max(0, this.displayCurrent() - this.displayTotal());
+    return Math.round(Math.max(0, this.displayCurrent() - this.displayTotal()) * 100) / 100;
   });
 
   public readonly isOverLimit = computed((): boolean => {

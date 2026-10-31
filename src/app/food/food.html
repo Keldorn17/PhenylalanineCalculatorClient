@@ -1,0 +1,204 @@
+<div class="food-container">
+  <section class="foods-section">
+    <div class="section-header">
+      <div class="section-title-group">
+        <h2 class="section-title">{{ 'food.title' | translate }}</h2>
+        <span class="items-count-badge">
+          {{ 'home.itemsCount' | translate: { count: totalElements() } }}
+        </span>
+      </div>
+
+      <button matButton="filled" type="button" (click)="openCreateDialog()">
+        <mat-icon>add</mat-icon>
+        <span>{{ 'food.addFood' | translate }}</span>
+      </button>
+    </div>
+
+    <div [formGroup]="filterForm" class="search-and-filters-wrapper">
+      <div class="search-bar-row">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search-field">
+          <mat-icon matPrefix>search</mat-icon>
+          <input
+            matInput
+            type="text"
+            formControlName="search"
+            [placeholder]="'food.searchPlaceholder' | translate"
+          />
+          @if (filterForm.get('search')?.value) {
+            <button
+              matIconButton
+              matSuffix
+              type="button"
+              (click)="clearSearch()"
+              [attr.aria-label]="'food.clearSearch' | translate"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <button
+          matButton="outlined"
+          type="button"
+          class="filter-toggle-btn"
+          [class.active]="showFilters() || activeExtraFiltersCount() > 0"
+          (click)="toggleFilters()"
+        >
+          <mat-icon
+            [matBadge]="activeExtraFiltersCount() > 0 ? activeExtraFiltersCount() : null"
+            matBadgeSize="small"
+          >
+            tune
+          </mat-icon>
+          <span>{{ 'food.filters.button' | translate }}</span>
+        </button>
+      </div>
+
+      @if (showFilters()) {
+        <mat-card appearance="outlined" class="filters-panel">
+          <mat-card-content class="filters-panel-content">
+            <div class="filters-top-row">
+              <mat-slide-toggle formControlName="onlyOwn" (change)="applyFilters()">
+                {{ 'food.filters.onlyOwn' | translate }}
+              </mat-slide-toggle>
+
+              <mat-form-field appearance="outline" subscriptSizing="dynamic" class="sort-field">
+                <mat-label>{{ 'food.filters.sortBy' | translate }}</mat-label>
+                <mat-select formControlName="sort" (selectionChange)="applyFilters()">
+                  @for (opt of sortOptions; track opt.value) {
+                    <mat-option [value]="opt.value">{{ opt.labelKey | translate }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="filters-grid">
+              <div class="filter-slider-card">
+                <div class="slider-header">
+                  <span class="slider-label">{{ 'food.protein' | translate }}</span>
+                  <span class="slider-value-badge">
+                    {{ filterForm.get('proteinMin')?.value }} –
+                    {{ filterForm.get('proteinMax')?.value }} g
+                  </span>
+                </div>
+                <mat-slider
+                  [min]="sliderBounds.protein.min"
+                  [max]="sliderBounds.protein.max"
+                  [step]="sliderBounds.protein.step"
+                  discrete
+                >
+                  <input matSliderStartThumb formControlName="proteinMin" />
+                  <input matSliderEndThumb formControlName="proteinMax" />
+                </mat-slider>
+              </div>
+
+              <div class="filter-slider-card">
+                <div class="slider-header">
+                  <span class="slider-label">{{ 'food.calories' | translate }}</span>
+                  <span class="slider-value-badge">
+                    {{ filterForm.get('caloriesMin')?.value }} –
+                    {{ filterForm.get('caloriesMax')?.value }} kcal
+                  </span>
+                </div>
+                <mat-slider
+                  [min]="sliderBounds.calories.min"
+                  [max]="sliderBounds.calories.max"
+                  [step]="sliderBounds.calories.step"
+                  discrete
+                >
+                  <input matSliderStartThumb formControlName="caloriesMin" />
+                  <input matSliderEndThumb formControlName="caloriesMax" />
+                </mat-slider>
+              </div>
+
+              <div class="filter-slider-card">
+                <div class="slider-header">
+                  <span class="slider-label">{{ 'food.phenylalanine' | translate }}</span>
+                  <span class="slider-value-badge">
+                    {{ filterForm.get('pheMin')?.value }} –
+                    {{ filterForm.get('pheMax')?.value }} mg
+                  </span>
+                </div>
+                <mat-slider
+                  [min]="sliderBounds.phe.min"
+                  [max]="sliderBounds.phe.max"
+                  [step]="sliderBounds.phe.step"
+                  discrete
+                >
+                  <input matSliderStartThumb formControlName="pheMin" />
+                  <input matSliderEndThumb formControlName="pheMax" />
+                </mat-slider>
+              </div>
+
+              <div class="filter-slider-card">
+                <div class="slider-header">
+                  <span class="slider-label">{{ 'foodType.multiplier' | translate }}</span>
+                  <span class="slider-value-badge">
+                    {{ filterForm.get('multiplierMin')?.value }} –
+                    {{ filterForm.get('multiplierMax')?.value }} mg/g
+                  </span>
+                </div>
+                <mat-slider
+                  [min]="sliderBounds.multiplier.min"
+                  [max]="sliderBounds.multiplier.max"
+                  [step]="sliderBounds.multiplier.step"
+                  discrete
+                >
+                  <input matSliderStartThumb formControlName="multiplierMin" />
+                  <input matSliderEndThumb formControlName="multiplierMax" />
+                </mat-slider>
+              </div>
+            </div>
+
+            <div class="filters-actions">
+              <button matButton type="button" (click)="resetFilters()">
+                {{ 'food.filters.reset' | translate }}
+              </button>
+              <button matButton="filled" type="button" (click)="applyFilters()">
+                {{ 'food.filters.apply' | translate }}
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+
+    @if (isLoading()) {
+      <div class="loading-container">
+        <mat-spinner diameter="40" />
+        <span>{{ 'food.loading' | translate }}</span>
+      </div>
+    } @else if (foods().length === 0) {
+      <mat-card appearance="outlined" class="empty-state-card">
+        <mat-card-content class="empty-state-content">
+          <div class="empty-icon-wrapper">
+            <mat-icon>restaurant</mat-icon>
+          </div>
+          <h3 class="empty-title">{{ 'food.emptyTitle' | translate }}</h3>
+          <p class="empty-description">{{ 'food.emptyDescription' | translate }}</p>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <div class="foods-grid">
+        @for (item of foods(); track item.id) {
+          <div class="food-grid-item">
+            <food-card [food]="item" (changed)="onFoodChanged()" />
+          </div>
+        }
+      </div>
+    }
+
+    @if (totalElements() > 0) {
+      <div class="paginator-wrapper">
+        <mat-paginator
+          [length]="totalElements()"
+          [pageIndex]="pageIndex()"
+          [pageSize]="pageSize()"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="onPageChange($event)"
+          showFirstLastButtons
+        />
+      </div>
+    }
+  </section>
+</div>

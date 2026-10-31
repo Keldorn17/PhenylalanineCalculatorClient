@@ -1,0 +1,85 @@
+<mat-card appearance="outlined" class="food-card" (click)="openConsumeDialog()">
+  <mat-card-content class="card-body">
+    <div class="card-header">
+      <div class="food-title-group">
+        <div class="food-icon">
+          <mat-icon>restaurant</mat-icon>
+        </div>
+        <div class="food-meta">
+          <span class="food-name" [title]="food().name">
+            {{ food().name }}
+          </span>
+          @if (food().foodTypeName) {
+            <span
+              class="food-type-subtitle"
+              [title]="
+                food().foodTypeName + ' (' + (food().multiplier | number: '1.0-0') + ' mg/g)'
+              "
+            >
+              <mat-icon>restaurant_menu</mat-icon>
+              <span class="food-type-text">
+                {{ food().foodTypeName }} ({{ food().multiplier | number: '1.0-0' }} mg/g)
+              </span>
+            </span>
+          }
+        </div>
+      </div>
+
+      <div class="phe-badge" [matTooltip]="'food.phePer100g' | translate">
+        <span class="phe-value">{{ food().phenylalanine | number: '1.0-2' }}</span>
+        <span class="phe-unit">mg</span>
+      </div>
+    </div>
+
+    <div class="nutrition-stats">
+      <div class="stat-pill">
+        <mat-icon>egg_alt</mat-icon>
+        <span class="stat-label">{{ 'food.protein' | translate }}:</span>
+        <span class="stat-value">{{ food().protein | number: '1.0-2' }} g</span>
+      </div>
+      <div class="stat-pill">
+        <mat-icon>local_fire_department</mat-icon>
+        <span class="stat-label">{{ 'food.calories' | translate }}:</span>
+        <span class="stat-value">{{ food().calories | number: '1.0-2' }} kcal</span>
+      </div>
+    </div>
+
+    <mat-divider />
+
+    <div class="card-footer">
+      @if (food().canEdit) {
+        <div class="card-actions">
+          <button
+            matIconButton
+            type="button"
+            class="action-btn edit-btn"
+            (click)="openEditDialog($event)"
+            [matTooltip]="'food.edit' | translate"
+            [attr.aria-label]="'food.edit' | translate"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            matIconButton
+            type="button"
+            class="action-btn delete-btn"
+            (click)="openDeleteDialog($event)"
+            [matTooltip]="'food.delete' | translate"
+            [attr.aria-label]="'food.delete' | translate"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      } @else {
+        <div
+          class="readonly-indicator"
+          [matTooltip]="'food.readOnlyTooltip' | translate"
+          [attr.aria-label]="'food.readOnlyTooltip' | translate"
+        >
+          <mat-icon>lock_outline</mat-icon>
+          <span>{{ 'foodType.readOnly' | translate }}</span>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

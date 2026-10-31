@@ -13,6 +13,16 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'foods',
+    loadComponent: () => import('./food/food').then(m => m.Food),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'food-types',
+    loadComponent: () => import('./food-type/food-type').then(m => m.FoodType),
+    canActivate: [authGuard]
+  },
+  {
     path: 'login',
     loadComponent: () => import('./auth/login/login').then(m => m.Login),
     canActivate: [guestGuard]

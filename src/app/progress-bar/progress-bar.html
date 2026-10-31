@@ -12,9 +12,9 @@
 
       <div class="header-stats">
         <span class="current-amount" [class.over-limit]="isOverLimit()">
-          {{ displayCurrent() }}
+          {{ displayCurrent() | number: '1.0-2' }}
         </span>
-        <span class="total-amount">/ {{ displayTotal() }} {{ unit() }}</span>
+        <span class="total-amount">/ {{ displayTotal() | number: '1.0-2' }} {{ unit() }}</span>
         <span class="percentage-badge" [class.over-limit]="isOverLimit()">
           {{ percentage() }}%
         </span>
@@ -43,16 +43,16 @@
       @if (isOverLimit()) {
         <span class="status-info over-limit">
           <mat-icon>error_outline</mat-icon>
-          <span>{{ 'progressBar.exceeded' | translate: { amount: exceeded(), unit: unit() } }}</span>
+          <span>{{ 'progressBar.exceeded' | translate: { amount: (exceeded() | number: '1.0-2'), unit: unit() } }}</span>
         </span>
       } @else if (isAtLimit()) {
         <span class="status-info at-limit">
-          <mat-icon>check_circle</mat-icon>
+          <mat-icon>lock</mat-icon>
           <span>{{ 'progressBar.limitReached' | translate }}</span>
         </span>
       } @else {
         <span class="status-info in-progress">
-          <span>{{ 'progressBar.remaining' | translate: { amount: remaining(), unit: unit() } }}</span>
+          <span>{{ 'progressBar.remaining' | translate: { amount: (remaining() | number: '1.0-2'), unit: unit() } }}</span>
         </span>
       }
     </div>

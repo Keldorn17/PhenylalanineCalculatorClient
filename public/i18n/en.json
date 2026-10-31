@@ -27,6 +27,7 @@
   },
   "nav": {
     "home": "Home",
+    "foods": "Foods",
     "foodTypes": "Food Types",
     "viewList": "View List",
     "addFoodType": "Add Food Type"
@@ -139,6 +140,12 @@
     "phenylalanine": "Phenylalanine",
     "edit": "Edit consumption",
     "delete": "Delete consumption",
+    "createDialog": {
+      "title": "Log Food Consumption",
+      "description": "Record consumed amount and time for {{foodName}}.",
+      "amountPlaceholder": "e.g. 150",
+      "errorFailed": "Failed to record food consumption. Please try again."
+    },
     "editDialog": {
       "title": "Edit Food Consumption",
       "description": "Update the consumed amount and time for {{foodName}}.",
@@ -157,6 +164,104 @@
     "deleteDialog": {
       "title": "Delete Food Consumption",
       "details": "Are you sure you want to delete this food consumption entry? This action cannot be undone.",
+      "delete": "Delete"
+    }
+  },
+  "foodType": {
+    "title": "Food Types",
+    "addFoodType": "Add Food Type",
+    "name": "Name",
+    "multiplier": "Multiplier",
+    "edit": "Edit food type",
+    "delete": "Delete food type",
+    "readOnly": "Read-only",
+    "readOnlyTooltip": "You can only view this food type because it was created by another user.",
+    "emptyTitle": "No food types found",
+    "emptyDescription": "There are no food types available yet. Create one to get started.",
+    "loading": "Loading food types...",
+    "dialog": {
+      "createTitle": "Add Food Type",
+      "createDescription": "Create a new food type with its phenylalanine multiplier.",
+      "editTitle": "Edit Food Type",
+      "editDescription": "Update the name and multiplier for {{foodTypeName}}.",
+      "namePlaceholder": "Enter food type name",
+      "multiplierPlaceholder": "e.g. 50",
+      "errorNameRequired": "Name is required.",
+      "errorMultiplierRequired": "Multiplier is required.",
+      "errorMultiplierMin": "Multiplier must be at least 1.",
+      "errorMultiplierInteger": "Multiplier must be a whole number.",
+      "errorCreateFailed": "Failed to create food type. Please try again.",
+      "errorEditFailed": "Failed to update food type. Please try again."
+    },
+    "deleteDialog": {
+      "title": "Delete Food Type",
+      "details": "Are you sure you want to delete this food type? This action cannot be undone.",
+      "delete": "Delete"
+    }
+  },
+  "food": {
+    "title": "Foods",
+    "addFood": "Add Food",
+    "name": "Name",
+    "protein": "Protein",
+    "calories": "Calories",
+    "phenylalanine": "Phenylalanine",
+    "foodType": "Food Type",
+    "phePer100g": "Phenylalanine per 100g",
+    "logConsumption": "Log consumption",
+    "edit": "Edit food",
+    "delete": "Delete food",
+    "readOnlyTooltip": "You can only view this food because it was created by another user.",
+    "searchPlaceholder": "Search by food name or food type...",
+    "clearSearch": "Clear search",
+    "emptyTitle": "No foods found",
+    "emptyDescription": "No foods match your current search or filter criteria.",
+    "loading": "Loading foods...",
+    "filters": {
+      "button": "Filters",
+      "onlyOwn": "My foods only",
+      "sortBy": "Sort by",
+      "sortDefault": "Default",
+      "sortNameAsc": "Name (A–Z)",
+      "sortNameDesc": "Name (Z–A)",
+      "sortPheAsc": "Phenylalanine (Low to High)",
+      "sortPheDesc": "Phenylalanine (High to Low)",
+      "sortProteinAsc": "Protein (Low to High)",
+      "sortProteinDesc": "Protein (High to Low)",
+      "sortCaloriesAsc": "Calories (Low to High)",
+      "sortCaloriesDesc": "Calories (High to Low)",
+      "min": "Min",
+      "max": "Max",
+      "reset": "Reset",
+      "apply": "Apply"
+    },
+    "dialog": {
+      "createTitle": "Add Food",
+      "createDescription": "Create a new food entry with nutritional values per 100g.",
+      "editTitle": "Edit Food",
+      "editDescription": "Update nutritional values and food type for {{foodName}}.",
+      "namePlaceholder": "Enter food name",
+      "proteinPlaceholder": "e.g. 2.5",
+      "caloriesPlaceholder": "e.g. 120",
+      "pheCalculationMethod": "Phenylalanine input method",
+      "byFoodType": "By Food Type",
+      "directPhe": "Direct Phenylalanine",
+      "foodTypePlaceholder": "Search and select a food type",
+      "phePlaceholder": "e.g. 75",
+      "errorNameRequired": "Name is required.",
+      "errorProteinRequired": "Protein is required.",
+      "errorProteinMin": "Protein cannot be negative.",
+      "errorCaloriesRequired": "Calories are required.",
+      "errorCaloriesMin": "Calories cannot be negative.",
+      "errorFoodTypeRequired": "Please select a valid food type from the list.",
+      "errorPheRequired": "Phenylalanine amount is required.",
+      "errorPheMin": "Phenylalanine cannot be negative.",
+      "errorCreateFailed": "Failed to create food. Please try again.",
+      "errorEditFailed": "Failed to update food. Please try again."
+    },
+    "deleteDialog": {
+      "title": "Delete Food",
+      "details": "Are you sure you want to delete this food? This action cannot be undone.",
       "delete": "Delete"
     }
   },

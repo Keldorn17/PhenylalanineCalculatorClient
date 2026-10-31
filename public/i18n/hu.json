@@ -27,6 +27,7 @@
   },
   "nav": {
     "home": "Főoldal",
+    "foods": "Ételek",
     "foodTypes": "Étel típusok",
     "viewList": "Lista megtekintése",
     "addFoodType": "Étel típus hozzáadása"
@@ -139,6 +140,12 @@
     "phenylalanine": "Fenilalanin",
     "edit": "Fogyasztás szerkesztése",
     "delete": "Fogyasztás törlése",
+    "createDialog": {
+      "title": "Ételfogyasztás rögzítése",
+      "description": "{{foodName}} elfogyasztott mennyiségének és idejének rögzítése.",
+      "amountPlaceholder": "pl. 150",
+      "errorFailed": "Nem sikerült rögzíteni az ételfogyasztást. Kérjük, próbálja újra."
+    },
     "editDialog": {
       "title": "Ételfogyasztás szerkesztése",
       "description": "{{foodName}} elfogyasztott mennyiségének és idejének módosítása.",
@@ -157,6 +164,104 @@
     "deleteDialog": {
       "title": "Ételfogyasztás törlése",
       "details": "Biztosan törölni szeretné ezt az ételfogyasztási bejegyzést? Ez a művelet nem vonható vissza.",
+      "delete": "Törlés"
+    }
+  },
+  "foodType": {
+    "title": "Étel típusok",
+    "addFoodType": "Étel típus hozzáadása",
+    "name": "Név",
+    "multiplier": "Szorzó",
+    "edit": "Étel típus szerkesztése",
+    "delete": "Étel típus törlése",
+    "readOnly": "Csak olvasható",
+    "readOnlyTooltip": "Ezt az étel típust csak megtekintheti, mivel egy másik felhasználó hozta létre.",
+    "emptyTitle": "Nem található étel típus",
+    "emptyDescription": "Még nincsenek elérhető étel típusok. Hozzon létre egyet a kezdéshez.",
+    "loading": "Étel típusok betöltése...",
+    "dialog": {
+      "createTitle": "Étel típus hozzáadása",
+      "createDescription": "Hozzon létre egy új étel típust a hozzá tartozó fenilalanin szorzóval.",
+      "editTitle": "Étel típus szerkesztése",
+      "editDescription": "{{foodTypeName}} nevének és szorzójának módosítása.",
+      "namePlaceholder": "Adja meg az étel típus nevét",
+      "multiplierPlaceholder": "pl. 50",
+      "errorNameRequired": "A név megadása kötelező.",
+      "errorMultiplierRequired": "A szorzó megadása kötelező.",
+      "errorMultiplierMin": "A szorzónak legalább 1-nek kell lennie.",
+      "errorMultiplierInteger": "A szorzónak egész számnak kell lennie.",
+      "errorCreateFailed": "Nem sikerült létrehozni az étel típust. Kérjük, próbálja újra.",
+      "errorEditFailed": "Nem sikerült frissíteni az étel típust. Kérjük, próbálja újra."
+    },
+    "deleteDialog": {
+      "title": "Étel típus törlése",
+      "details": "Biztosan törölni szeretné ezt az étel típust? Ez a művelet nem vonható vissza.",
+      "delete": "Törlés"
+    }
+  },
+  "food": {
+    "title": "Ételek",
+    "addFood": "Étel hozzáadása",
+    "name": "Név",
+    "protein": "Fehérje",
+    "calories": "Kalória",
+    "phenylalanine": "Fenilalanin",
+    "foodType": "Étel típus",
+    "phePer100g": "Fenilalanin 100g-ban",
+    "logConsumption": "Fogyasztás rögzítése",
+    "edit": "Étel szerkesztése",
+    "delete": "Étel törlése",
+    "readOnlyTooltip": "Ezt az ételt csak megtekintheti, mivel egy másik felhasználó hozta létre.",
+    "searchPlaceholder": "Keresés étel neve vagy étel típus alapján...",
+    "clearSearch": "Keresés törlése",
+    "emptyTitle": "Nem található étel",
+    "emptyDescription": "Nincs a keresési vagy szűrési feltételeknek megfelelő étel.",
+    "loading": "Ételek betöltése...",
+    "filters": {
+      "button": "Szűrők",
+      "onlyOwn": "Csak saját ételek",
+      "sortBy": "Rendezés",
+      "sortDefault": "Alapértelmezett",
+      "sortNameAsc": "Név (A–Z)",
+      "sortNameDesc": "Név (Z–A)",
+      "sortPheAsc": "Fenilalanin (növekvő)",
+      "sortPheDesc": "Fenilalanin (csökkenő)",
+      "sortProteinAsc": "Fehérje (növekvő)",
+      "sortProteinDesc": "Fehérje (csökkenő)",
+      "sortCaloriesAsc": "Kalória (növekvő)",
+      "sortCaloriesDesc": "Kalória (csökkenő)",
+      "min": "Min",
+      "max": "Max",
+      "reset": "Alaphelyzet",
+      "apply": "Alkalmaz"
+    },
+    "dialog": {
+      "createTitle": "Étel hozzáadása",
+      "createDescription": "Hozzon létre egy új ételt a 100g-ra vetített tápértékekkel.",
+      "editTitle": "Étel szerkesztése",
+      "editDescription": "{{foodName}} tápértékeinek és étel típusának módosítása.",
+      "namePlaceholder": "Adja meg az étel nevét",
+      "proteinPlaceholder": "pl. 2.5",
+      "caloriesPlaceholder": "pl. 120",
+      "pheCalculationMethod": "Fenilalanin megadásának módja",
+      "byFoodType": "Étel típus alapján",
+      "directPhe": "Közvetlen fenilalanin",
+      "foodTypePlaceholder": "Keressen és válasszon étel típust",
+      "phePlaceholder": "pl. 75",
+      "errorNameRequired": "A név megadása kötelező.",
+      "errorProteinRequired": "A fehérje megadása kötelező.",
+      "errorProteinMin": "A fehérje nem lehet negatív.",
+      "errorCaloriesRequired": "A kalória megadása kötelező.",
+      "errorCaloriesMin": "A kalória nem lehet negatív.",
+      "errorFoodTypeRequired": "Kérjük, válasszon egy érvényes étel típust a listából.",
+      "errorPheRequired": "A fenilalanin mennyiség megadása kötelező.",
+      "errorPheMin": "A fenilalanin nem lehet negatív.",
+      "errorCreateFailed": "Nem sikerült létrehozni az ételt. Kérjük, próbálja újra.",
+      "errorEditFailed": "Nem sikerült frissíteni az ételt. Kérjük, próbálja újra."
+    },
+    "deleteDialog": {
+      "title": "Étel törlése",
+      "details": "Biztosan törölni szeretné ezt az ételt? Ez a művelet nem vonható vissza.",
       "delete": "Törlés"
     }
   },

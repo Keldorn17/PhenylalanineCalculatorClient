@@ -51,7 +51,7 @@ export class RsqlBuilder {
   /**
    * Field equals value (==)
    */
-  public eq(field: string, value: string | number): this {
+  public eq(field: string, value: string | number | boolean): this {
     const formatted = typeof value === 'string' ? `'${value}'` : value;
     this.parts.push(`${field}==${formatted}`);
     return this;
@@ -60,7 +60,7 @@ export class RsqlBuilder {
   /**
    * Field not equals value (!=)
    */
-  public ne(field: string, value: string | number): this {
+  public ne(field: string, value: string | number | boolean): this {
     const formatted = typeof value === 'string' ? `'${value}'` : value;
     this.parts.push(`${field}!=${formatted}`);
     return this;
@@ -75,6 +75,14 @@ export class RsqlBuilder {
   }
 
   /**
+   * Field less than or equal to value (=le=)
+   */
+  public le(field: string, value: number): this {
+    this.parts.push(`${field}=le=${value}`);
+    return this;
+  }
+
+  /**
    * Field greater than value (=gt=)
    */
   public gt(field: string, value: number): this {
@@ -83,10 +91,31 @@ export class RsqlBuilder {
   }
 
   /**
+   * Field greater than or equal to value (=ge=)
+   */
+  public ge(field: string, value: number): this {
+    this.parts.push(`${field}=ge=${value}`);
+    return this;
+  }
+
+  /**
    * Field contains case-insensitive string (=ilike=)
    */
   public ilike(field: string, value: string): this {
     this.parts.push(`${field}=ilike='${value}'`);
+    return this;
+  }
+
+  /**
+   * Wraps a sub-query in parentheses: (subQuery)
+   */
+  public group(builderFn: (builder: RsqlBuilder) => void): this {
+    const subBuilder = RsqlBuilder.create();
+    builderFn(subBuilder);
+    const subQuery = subBuilder.build();
+    if (subQuery) {
+      this.parts.push(`(${subQuery})`);
+    }
     return this;
   }
 
@@ -104,6 +133,13 @@ export class RsqlBuilder {
   public or(): this {
     this.parts.push('or');
     return this;
+  }
+
+  /**
+   * Returns true if no conditions have been added yet.
+   */
+  public isEmpty(): boolean {
+    return this.parts.length === 0;
   }
 
   /**

@@ -2,8 +2,8 @@ export interface FoodRequest {
   name: string;
   protein: number;
   calories: number;
-  phenylalanine: number;
-  foodTypeId: number;
+  phenylalanine?: number;
+  foodTypeId?: number;
 }
 
 export interface FoodResponse {
@@ -15,11 +15,4 @@ export interface FoodResponse {
   foodTypeName: string;
   multiplier: number;
   canEdit: boolean;
-}
-
-export interface FoodUpdateRequest {
-  name: string;
-  protein: number;
-  calories: number;
-  foodTypeId: number;
 }

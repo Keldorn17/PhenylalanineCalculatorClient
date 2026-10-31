@@ -1,12 +1,13 @@
 @use '@angular/material' as mat;
+@use 'color-theme' as color-theme;
 @include mat.core();
 @include mat.system-classes();
 
 $light-theme-config: (
   color: (
     theme-type: light,
-    primary: mat.$violet-palette,
-    tertiary: mat.$azure-palette,
+    primary: color-theme.$light-primary-palette,
+    tertiary: color-theme.$light-tertiary-palette
   ),
   typography: Roboto,
   density: 0,
@@ -15,8 +16,8 @@ $light-theme-config: (
 $dark-theme-config: (
   color: (
     theme-type: dark,
-    primary: mat.$violet-palette,
-    tertiary: mat.$azure-palette,
+    primary: color-theme.$dark-primary-palette,
+    tertiary: color-theme.$dark-tertiary-palette
   ),
 );
 

@@ -1,0 +1,115 @@
+:host {
+  display: block;
+}
+
+.food-type-container,
+.food-types-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.25rem;
+}
+
+.food-type-container {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.empty-state-card,
+.paginator-wrapper {
+  border-radius: 16px;
+  background: var(--mat-sys-surface-container-low);
+  border: 1px solid var(--mat-sys-outline-variant);
+  box-shadow: none;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .section-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .section-title {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .items-count-badge {
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      background: var(--mat-sys-surface-container-high);
+      color: var(--mat-sys-on-surface-variant);
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.food-types-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+
+  .food-type-grid-item {
+    flex: 0 0 calc((100% - 3rem) / 4);
+    min-width: 0;
+
+    @media (max-width: 1200px) {
+      flex: 0 0 calc((100% - 2rem) / 3);
+    }
+
+    @media (max-width: 820px) {
+      flex: 0 0 calc((100% - 1rem) / 2);
+    }
+
+    @media (max-width: 600px) {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+.loading-container,
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.5rem 1rem !important;
+  gap: 0.5rem;
+}
+
+.empty-state-card {
+  border-style: dashed;
+
+  .empty-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
+    color: var(--mat-sys-primary);
+  }
+
+  .empty-title,
+  .empty-description {
+    margin: 0;
+  }
+
+  .empty-description {
+    font-size: 0.875rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.paginator-wrapper mat-paginator {
+  background: transparent;
+}
