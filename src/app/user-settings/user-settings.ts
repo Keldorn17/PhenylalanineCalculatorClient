@@ -44,14 +44,14 @@ export class UserSettings {
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
   protected readonly userResponse = toSignal(
     toObservable(computed(() => (this.isLoggedIn() ? this.refreshUserTrigger() : null))).pipe(
-      switchMap((trigger) => {
+      switchMap(trigger => {
         if (trigger === null) {
           return of(null);
         }
         return this.userService.getUser();
-      })
+      }),
     ),
-    { initialValue: null }
+    {initialValue: null},
   );
   protected readonly isDark = this.themeService.isDark;
   protected readonly currentLang = this.translateService.currentLang;
@@ -123,7 +123,7 @@ export class UserSettings {
       .afterClosed()
       .subscribe((changed: boolean) => {
         if (changed) {
-          this.refreshUserTrigger.update((v) => v + 1);
+          this.refreshUserTrigger.update(v => v + 1);
         }
       });
   }
@@ -143,9 +143,9 @@ export class UserSettings {
       this.dialog.open(DailyLimitDialog, {
         data: {
           dailyLimit: dailyLimit,
-          descriptionTranslationKey: 'dailyLimitDialog.changeDescription'
-        }
-      })
+          descriptionTranslationKey: 'dailyLimitDialog.changeDescription',
+        },
+      });
     });
   }
 
@@ -158,20 +158,24 @@ export class UserSettings {
   protected deactivate(): void {
     this.closeMenu();
 
-    this.dialog.open(ConfirmDialog, {
-      data: {
-        titleTranslateKey: 'settings.user.deactivateTitle',
-        detailsTranslateKey: 'settings.user.deactivateDetails',
-        confirmTranslateKey: 'settings.user.delete',
-        confirmClass: 'warn'
-      }
-    }).afterClosed()
+    this.dialog
+      .open(ConfirmDialog, {
+        data: {
+          titleTranslateKey: 'settings.user.deactivateTitle',
+          detailsTranslateKey: 'settings.user.deactivateDetails',
+          confirmTranslateKey: 'settings.user.delete',
+          confirmClass: 'warn',
+        },
+      })
+      .afterClosed()
       .subscribe(confirm => {
         if (!confirm) {
           return;
         }
 
-        this.authService.deleteAccount().subscribe(() => this.router.navigate(['/']));
+        this.authService
+          .deleteAccount()
+          .subscribe(() => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'}));
       });
   }
 }

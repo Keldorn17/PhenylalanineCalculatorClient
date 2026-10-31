@@ -271,5 +271,32 @@
   "dialog": {
     "confirm": "Elfogad",
     "cancel": "Mégse"
+  },
+  "landing": {
+    "badge": "Napi Fenilalanin Követő",
+    "heroTitle": "Kövesse nyomon napi fenilalanin bevitelét egyszerűen",
+    "heroSubtitle": "Tartsa szemmel napi keretét, rögzítse étkezéseit másodpercek alatt, és kezelje saját ételeit és étel típusait egyetlen átlátható felületen.",
+    "getStarted": "Kezdés",
+    "previewBadge": "Felület előnézete",
+    "preview": {
+      "remainingSuffix": "maradt",
+      "itemsSuffix": "tétel",
+      "month": "okt.",
+      "days": {
+        "mon": "H",
+        "tue": "K",
+        "wed": "Sze",
+        "thu": "Cs",
+        "fri": "P",
+        "sat": "Szo",
+        "sun": "V"
+      },
+      "foods": {
+        "apple": "Friss alma",
+        "bread": "Fehérjeszegény kenyér",
+        "rice": "Párolt jázmin rizs",
+        "salad": "Kerti zöldségsaláta"
+      }
+    }
   }
 }

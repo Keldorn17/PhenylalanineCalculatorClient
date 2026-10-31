@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 import {NavigationEnd, Router} from '@angular/router';
@@ -10,6 +10,7 @@ import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/mater
 import {SidenavContent} from './sidenav-content/sidenav-content';
 import {TranslatePipe} from '@ngx-translate/core';
 import {UserSettings} from '../user-settings/user-settings';
+import {AuthService} from '../auth/auth-service';
 
 @Component({
   selector: 'navigation',
@@ -27,34 +28,39 @@ import {UserSettings} from '../user-settings/user-settings';
   ],
   templateUrl: './navigation.html',
   styleUrl: './navigation.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navigation {
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
 
+  protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
   protected readonly isCollapsed = signal(true);
   protected readonly mobileOpened = signal(false);
 
-  protected readonly mobileWidth: number = 768;
-  protected readonly sideBarMaxWidth: number = 250;
-  protected readonly sideBarCollapsedWidth: number = 68;
+  protected readonly mobileWidth = 768;
+  protected readonly sideBarMaxWidth = 250;
+  protected readonly sideBarCollapsedWidth = 68;
 
   protected readonly isMobile = toSignal(
-    this.breakpointObserver.observe(`(max-width: ${this.mobileWidth}px)`).pipe(map(result => result.matches)),
-    {initialValue: typeof window !== 'undefined' ? window.innerWidth <= this.mobileWidth : false}
+    this.breakpointObserver
+      .observe(`(max-width: ${this.mobileWidth}px)`)
+      .pipe(map(result => result.matches)),
+    {initialValue: typeof window !== 'undefined' ? window.innerWidth <= this.mobileWidth : false},
   );
 
-
   constructor() {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      takeUntilDestroyed()
-    ).subscribe(() => {
-      if (this.isMobile()) {
-        this.mobileOpened.set(false);
-      }
-    });
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => {
+        if (this.isMobile()) {
+          this.mobileOpened.set(false);
+        }
+      });
   }
 
   protected toggleCollapse(): void {

@@ -1,0 +1,59 @@
+<div class="landing-container">
+  <section class="hero-section">
+    <div class="hero-badge">
+      <mat-icon>monitor_heart</mat-icon>
+      <span>{{ 'landing.badge' | translate }}</span>
+    </div>
+
+    <h1 class="hero-title">{{ 'landing.heroTitle' | translate }}</h1>
+    <p class="hero-subtitle">{{ 'landing.heroSubtitle' | translate }}</p>
+
+    <div class="hero-actions">
+      <a matButton="filled" routerLink="/register" class="cta-primary">
+        <mat-icon>person_add</mat-icon>
+        <span>{{ 'landing.getStarted' | translate }}</span>
+      </a>
+      <a matButton="outlined" routerLink="/login" class="cta-secondary">
+        <mat-icon>login</mat-icon>
+        <span>{{ 'login.signIn' | translate }}</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="preview-wrapper" aria-hidden="true" inert>
+    <div class="preview-label-bar">
+      <span class="preview-pill">
+        <mat-icon>visibility</mat-icon>
+        <span>{{ 'landing.previewBadge' | translate }}</span>
+      </span>
+    </div>
+
+    <div class="preview-frame">
+      <div class="home-container">
+        <progress-bar [total]="500" [current]="320" />
+
+        <date-switcher [selectedDate]="today" />
+
+        <div class="consumptions-section">
+          <div class="section-header">
+            <div class="section-title-group">
+              <h2 class="section-title">{{ 'home.consumptionsTitle' | translate }}</h2>
+              <span class="selected-date-label">{{ today | date: 'yyyy. MM. dd.' }}</span>
+            </div>
+            <span class="items-count-badge">
+              {{ 'home.itemsCount' | translate: {count: previewConsumptions().length} }}
+            </span>
+          </div>
+
+          <div class="consumptions-grid">
+            @for (item of previewConsumptions(); track item.id) {
+              <div class="consumption-grid-item">
+                <food-consumption-card [consumption]="item" />
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

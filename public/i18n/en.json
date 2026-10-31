@@ -271,5 +271,32 @@
   "dialog": {
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "landing": {
+    "badge": "Daily Phenylalanine Tracker",
+    "heroTitle": "Track Your Daily Phenylalanine Intake with Ease",
+    "heroSubtitle": "Monitor your daily allowance, log meals in seconds, and manage custom foods and food types in one clean, intuitive dashboard.",
+    "getStarted": "Get Started",
+    "previewBadge": "Dashboard Preview",
+    "preview": {
+      "remainingSuffix": "remaining",
+      "itemsSuffix": "items",
+      "month": "Oct",
+      "days": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+      },
+      "foods": {
+        "apple": "Fresh Apple",
+        "bread": "Low-Protein Bread",
+        "rice": "Steamed Jasmine Rice",
+        "salad": "Garden Vegetable Salad"
+      }
+    }
   }
 }

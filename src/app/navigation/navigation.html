@@ -1,5 +1,5 @@
 <mat-toolbar class="mat-shadow-2">
-  @if (isMobile()) {
+  @if (isMobile() && isLoggedIn()) {
     <button
       matIconButton
       (click)="toggleMobileSidenav()"
@@ -16,7 +16,7 @@
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    [opened]="isMobile() ? mobileOpened() : true"
+    [opened]="isLoggedIn() && (isMobile() ? mobileOpened() : true)"
     [mode]="isMobile() ? 'over' : 'side'"
     [class.collapsed]="!isMobile() && isCollapsed()"
     [style.width.px]="isMobile() ? sideBarMaxWidth : (isCollapsed() ? sideBarCollapsedWidth : sideBarMaxWidth)"
@@ -39,7 +39,7 @@
 
   <mat-sidenav-content
     class="content"
-    [style.margin-left.px]="isMobile() ? null : (isCollapsed() ? sideBarCollapsedWidth : sideBarMaxWidth)"
+    [style.margin-left.px]="!isLoggedIn() || isMobile() ? 0 : (isCollapsed() ? sideBarCollapsedWidth : sideBarMaxWidth)"
   >
     <ng-content />
   </mat-sidenav-content>
