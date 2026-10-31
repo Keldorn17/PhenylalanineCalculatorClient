@@ -11,7 +11,16 @@ import {MenuItem} from '../navigation-types';
 
 @Component({
   selector: 'sidenav-content',
-  imports: [CommonModule, RouterLink, RouterLinkActive, MatListModule, MatDividerModule, TranslatePipe, MatIconModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    MatListModule,
+    MatDividerModule,
+    TranslatePipe,
+    MatIconModule,
+    MatTooltipModule,
+  ],
   templateUrl: './sidenav-content.html',
   styleUrl: './sidenav-content.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,18 +35,18 @@ export class SidenavContent {
     {
       icon: 'home',
       label: 'nav.home',
-      route: '/'
+      route: '/',
     },
     {
       icon: 'restaurant',
       label: 'nav.foods',
-      route: '/foods'
+      route: '/foods',
     },
     {
       icon: 'restaurant_menu',
       label: 'nav.foodTypes',
-      route: '/food-types'
-    }
+      route: '/food-types',
+    },
   ]);
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
 
@@ -45,6 +54,9 @@ export class SidenavContent {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-    this.authService.logout().subscribe(() => this.router.navigate(['/']));
+    this.authService.logout().subscribe({
+      next: () => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'}),
+      error: () => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'}),
+    });
   }
 }
