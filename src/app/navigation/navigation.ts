@@ -1,16 +1,16 @@
-import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter, map} from 'rxjs';
-import {MatToolbar} from '@angular/material/toolbar';
-import {MatButton, MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
-import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
-import {SidenavContent} from './sidenav-content/sidenav-content';
-import {TranslatePipe} from '@ngx-translate/core';
-import {UserSettings} from '../user-settings/user-settings';
-import {AuthService} from '../auth/auth-service';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
+import { SidenavContent } from './sidenav-content/sidenav-content';
+import { TranslatePipe } from '@ngx-translate/core';
+import { UserSettings } from '../user-settings/user-settings';
+import { AuthService } from '../auth/auth-service';
 
 @Component({
   selector: 'navigation',
@@ -24,11 +24,11 @@ import {AuthService} from '../auth/auth-service';
     SidenavContent,
     TranslatePipe,
     UserSettings,
-    MatButton,
+    MatButton
   ],
   templateUrl: './navigation.html',
   styleUrl: './navigation.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Navigation {
   private readonly breakpointObserver = inject(BreakpointObserver);
@@ -45,16 +45,16 @@ export class Navigation {
 
   protected readonly isMobile = toSignal(
     this.breakpointObserver
-      .observe(`(max-width: ${this.mobileWidth}px)`)
+      .observe(`(max-width: ${ this.mobileWidth }px)`)
       .pipe(map(result => result.matches)),
-    {initialValue: typeof window !== 'undefined' ? window.innerWidth <= this.mobileWidth : false},
+    {initialValue: typeof window !== 'undefined' ? window.innerWidth <= this.mobileWidth : false}
   );
 
   constructor() {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        takeUntilDestroyed(),
+        takeUntilDestroyed()
       )
       .subscribe(() => {
         if (this.isMobile()) {

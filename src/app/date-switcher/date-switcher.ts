@@ -12,14 +12,14 @@ import {
   signal,
   viewChild
 } from '@angular/core';
-import {MatButton, MatIconButton} from '@angular/material/button';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent} from '@angular/material/datepicker';
-import {MatIcon} from '@angular/material/icon';
-import {MatTooltip} from '@angular/material/tooltip';
-import {DateAdapter, provideNativeDateAdapter} from '@angular/material/core';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {formatIsoDate} from '../http/api-utils';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { formatIsoDate } from '../http/api-utils';
 
 export interface DayChipItem {
   date: Date;

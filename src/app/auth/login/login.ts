@@ -1,20 +1,20 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatDialog} from '@angular/material/dialog';
-import {AuthService} from '../auth-service';
-import {UserService} from '../../user/user-service';
-import {DailyLimitDialog} from '../../daily-limit-dialog/daily-limit-dialog';
-import {TranslatePipe} from '@ngx-translate/core';
-import {filter} from 'rxjs/operators';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../auth-service';
+import { UserService } from '../../user/user-service';
+import { DailyLimitDialog } from '../../daily-limit-dialog/daily-limit-dialog';
+import { TranslatePipe } from '@ngx-translate/core';
+import { filter } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'login',
@@ -28,11 +28,11 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatDividerModule,
+    MatDividerModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login {
   private readonly formBuilder = inject(FormBuilder);
@@ -43,7 +43,7 @@ export class Login {
 
   protected readonly loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required]]
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -72,19 +72,19 @@ export class Login {
           next: (user) => {
             if (!user.dailyLimit) {
               this.dialog.open(DailyLimitDialog, {
-                disableClose: true,
+                disableClose: true
               });
             }
           },
           error: (err) => {
             console.error('Failed to check user daily limit:', err);
-          },
+          }
         });
       },
       error: (err) => {
         console.error('Login failed:', err);
         this.errorMessage.set('login.errorInvalid');
-      },
+      }
     });
   }
 }

@@ -1,9 +1,9 @@
-import {HttpInterceptorFn, HttpErrorResponse, HttpRequest, HttpHandlerFn, HttpEvent} from '@angular/common/http';
-import {inject} from '@angular/core';
-import {AuthService} from './auth-service';
-import {Observable, throwError} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
-import {ApiPath} from '../http/api-path';
+import { HttpInterceptorFn, HttpErrorResponse, HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { AuthService } from './auth-service';
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { ApiPath } from '../http/api-path';
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
@@ -25,7 +25,7 @@ export const authInterceptor: HttpInterceptorFn = (
 
   let headers = req.headers;
   if (token && !isAuthRequest) {
-    headers = headers.set('Authorization', `Bearer ${token}`);
+    headers = headers.set('Authorization', `Bearer ${ token }`);
   }
 
   const authReq = req.clone({
@@ -41,7 +41,7 @@ export const authInterceptor: HttpInterceptorFn = (
             const retriedReq = req.clone({
               withCredentials: true,
               setHeaders: {
-                Authorization: `Bearer ${response.accessToken}`
+                Authorization: `Bearer ${ response.accessToken }`
               }
             });
             return next(retriedReq);

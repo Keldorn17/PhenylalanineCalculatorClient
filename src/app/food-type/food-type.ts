@@ -21,11 +21,11 @@ import { FoodTypeDialog } from './food-type-dialog/food-type-dialog';
     MatPaginator,
     MatProgressSpinner,
     TranslatePipe,
-    FoodTypeCard,
+    FoodTypeCard
   ],
   templateUrl: './food-type.html',
   styleUrl: './food-type.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodType implements OnInit {
   private readonly foodTypeService = inject(FoodTypeService);
@@ -68,7 +68,7 @@ export class FoodType implements OnInit {
     this.foodTypeService
       .getFoodTypes({
         page: this.pageIndex(),
-        size: this.pageSize(),
+        size: this.pageSize()
       })
       .subscribe({
         next: (response) => {
@@ -89,7 +89,7 @@ export class FoodType implements OnInit {
           this.foodTypes.set([]);
           this.totalElements.set(0);
           this.isLoading.set(false);
-        },
+        }
       });
   }
 }

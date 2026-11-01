@@ -5,7 +5,7 @@ import {
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle,
+  MatDialogTitle
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -34,12 +34,12 @@ import { CreateFoodConsumptionDialogData } from './create-food-consumption-dialo
     MatIconModule,
     MatDatepickerModule,
     MatTimepickerModule,
-    TranslatePipe,
+    TranslatePipe
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './create-food-consumption-dialog.html',
   styleUrl: './create-food-consumption-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateFoodConsumptionDialog {
   public readonly data = inject<CreateFoodConsumptionDialogData>(MAT_DIALOG_DATA);
@@ -57,7 +57,7 @@ export class CreateFoodConsumptionDialog {
   protected readonly form: FormGroup = this.formBuilder.group({
     amount: [null, [Validators.required, Validators.min(0.1)]],
     date: [new Date(this.now), [Validators.required]],
-    time: [new Date(this.now), [Validators.required]],
+    time: [new Date(this.now), [Validators.required]]
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -72,7 +72,7 @@ export class CreateFoodConsumptionDialog {
     this.form.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed(),
+        takeUntilDestroyed()
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -95,14 +95,14 @@ export class CreateFoodConsumptionDialog {
     const amount = Number(this.form.value.amount);
     const consumedAt = this.getConsumedAt(
       new Date(this.form.value.date as Date),
-      this.form.value.time as Date,
+      this.form.value.time as Date
     );
 
     this.foodConsumptionService
       .postFoodConsumption({
         foodId: this.data.food.id,
         amount,
-        consumedAt,
+        consumedAt
       })
       .subscribe({
         next: (created) => {
@@ -113,7 +113,7 @@ export class CreateFoodConsumptionDialog {
         error: () => {
           this.isLoading.set(false);
           this.errorMessage.set('consumption.createDialog.errorFailed');
-        },
+        }
       });
   }
 

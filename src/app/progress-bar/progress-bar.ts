@@ -6,16 +6,16 @@ import {
   input,
   linkedSignal
 } from '@angular/core';
-import {DecimalPipe} from '@angular/common';
-import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {MatProgressBar} from '@angular/material/progress-bar';
-import {MatIcon} from '@angular/material/icon';
-import {TranslatePipe} from '@ngx-translate/core';
-import {catchError, filter, map, of, switchMap} from 'rxjs';
-import {ProgressBarService} from './progress-bar-service';
-import {DailyIntakeService} from '../daily-intake/daily-intake-service';
-import {UserService} from '../user/user-service';
+import { DecimalPipe } from '@angular/common';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { ProgressBarService } from './progress-bar-service';
+import { DailyIntakeService } from '../daily-intake/daily-intake-service';
+import { UserService } from '../user/user-service';
 
 @Component({
   selector: 'progress-bar',

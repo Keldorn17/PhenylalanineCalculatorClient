@@ -11,7 +11,9 @@ import { FoodResponse } from '../food-types';
 import { FoodService } from '../food-service';
 import { ConfirmDialog } from '../../confirm-dialog/confirm-dialog';
 import { FoodDialog } from '../food-dialog/food-dialog';
-import { CreateFoodConsumptionDialog } from '../../food-consumption/create-food-consumption-dialog/create-food-consumption-dialog';
+import {
+  CreateFoodConsumptionDialog
+} from '../../food-consumption/create-food-consumption-dialog/create-food-consumption-dialog';
 
 @Component({
   selector: 'food-card',
@@ -23,11 +25,11 @@ import { CreateFoodConsumptionDialog } from '../../food-consumption/create-food-
     MatIcon,
     MatTooltip,
     TranslatePipe,
-    MatDivider,
+    MatDivider
   ],
   templateUrl: './food-card.html',
   styleUrl: './food-card.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodCard {
   private readonly dialog = inject(MatDialog);
@@ -39,8 +41,8 @@ export class FoodCard {
   public openConsumeDialog(): void {
     this.dialog.open(CreateFoodConsumptionDialog, {
       data: {
-        food: this.food(),
-      },
+        food: this.food()
+      }
     });
   }
 
@@ -55,8 +57,8 @@ export class FoodCard {
     this.dialog
       .open(FoodDialog, {
         data: {
-          food: item,
-        },
+          food: item
+        }
       })
       .afterClosed()
       .subscribe((result) => {
@@ -80,8 +82,8 @@ export class FoodCard {
           titleTranslateKey: 'food.deleteDialog.title',
           detailsTranslateKey: 'food.deleteDialog.details',
           confirmTranslateKey: 'food.deleteDialog.delete',
-          confirmClass: 'warn',
-        },
+          confirmClass: 'warn'
+        }
       })
       .afterClosed()
       .subscribe((confirmed) => {

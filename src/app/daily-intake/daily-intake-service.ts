@@ -1,9 +1,9 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {DailyIntakeResponse} from './daily-intake-types';
-import {ApiPath} from '../http/api-path';
-import {formatIsoDate} from '../http/api-utils';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { DailyIntakeResponse } from './daily-intake-types';
+import { ApiPath } from '../http/api-path';
+import { formatIsoDate } from '../http/api-utils';
 
 @Injectable({
   providedIn: 'root'

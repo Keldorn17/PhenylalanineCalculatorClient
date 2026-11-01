@@ -4,7 +4,7 @@
       <div class="section-title-group">
         <h2 class="section-title">{{ 'foodType.title' | translate }}</h2>
         <span class="items-count-badge">
-          {{ 'home.itemsCount' | translate: { count: totalElements() } }}
+          {{ 'home.itemsCount' | translate: {count: totalElements()} }}
         </span>
       </div>
 
@@ -16,7 +16,7 @@
 
     @if (isLoading()) {
       <div class="loading-container">
-        <mat-spinner diameter="40" />
+        <mat-spinner diameter="40"/>
         <span>{{ 'foodType.loading' | translate }}</span>
       </div>
     } @else if (foodTypes().length === 0) {
@@ -33,7 +33,7 @@
       <div class="food-types-grid">
         @for (item of foodTypes(); track item.id) {
           <div class="food-type-grid-item">
-            <food-type-card [foodType]="item" (changed)="onFoodTypeChanged()" />
+            <food-type-card [foodType]="item" (changed)="onFoodTypeChanged()"/>
           </div>
         }
       </div>

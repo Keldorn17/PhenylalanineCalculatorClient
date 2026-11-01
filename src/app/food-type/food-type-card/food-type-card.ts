@@ -22,11 +22,11 @@ import { FoodTypeDialog } from '../food-type-dialog/food-type-dialog';
     MatIcon,
     MatTooltip,
     TranslatePipe,
-    MatDivider,
+    MatDivider
   ],
   templateUrl: './food-type-card.html',
   styleUrl: './food-type-card.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodTypeCard {
   private readonly foodTypeService = inject(FoodTypeService);
@@ -44,8 +44,8 @@ export class FoodTypeCard {
     this.dialog
       .open(FoodTypeDialog, {
         data: {
-          foodType: item,
-        },
+          foodType: item
+        }
       })
       .afterClosed()
       .subscribe((result) => {
@@ -67,8 +67,8 @@ export class FoodTypeCard {
           titleTranslateKey: 'foodType.deleteDialog.title',
           detailsTranslateKey: 'foodType.deleteDialog.details',
           confirmTranslateKey: 'foodType.deleteDialog.delete',
-          confirmClass: 'warn',
-        },
+          confirmClass: 'warn'
+        }
       })
       .afterClosed()
       .subscribe((confirmed) => {

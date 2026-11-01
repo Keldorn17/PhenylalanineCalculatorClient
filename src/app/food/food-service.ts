@@ -1,10 +1,10 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {ApiQueryParams, PagedResponse} from '../http/api-types';
-import {Observable} from 'rxjs';
-import {FoodRequest, FoodResponse} from './food-types';
-import {ApiPath} from '../http/api-path';
-import {buildQueryParams} from '../http/api-utils';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ApiQueryParams, PagedResponse } from '../http/api-types';
+import { Observable } from 'rxjs';
+import { FoodRequest, FoodResponse } from './food-types';
+import { ApiPath } from '../http/api-path';
+import { buildQueryParams } from '../http/api-utils';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class FoodService {
 
   public getFoods(params: ApiQueryParams): Observable<PagedResponse<FoodResponse>> {
     const queryParams = buildQueryParams(params);
-    return this.httpClient.get<PagedResponse<FoodResponse>>(ApiPath.food.get, { params: queryParams })
+    return this.httpClient.get<PagedResponse<FoodResponse>>(ApiPath.food.get, {params: queryParams});
   }
 
   public getByIdFood(id: number): Observable<FoodResponse> {

@@ -1,20 +1,20 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle,
+  MatDialogTitle
 } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {TranslatePipe} from '@ngx-translate/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {filter} from 'rxjs/operators';
-import {AuthService} from '../../auth/auth-service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs/operators';
+import { AuthService } from '../../auth/auth-service';
 
 export interface ChangeUsernameDialogData {
   currentUsername?: string;
@@ -31,11 +31,11 @@ export interface ChangeUsernameDialogData {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    TranslatePipe,
+    TranslatePipe
   ],
   templateUrl: './change-username-dialog.html',
   styleUrl: './change-username-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangeUsernameDialog {
   private readonly formBuilder = inject(FormBuilder);
@@ -45,7 +45,7 @@ export class ChangeUsernameDialog {
 
   protected readonly form: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required]]
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -86,7 +86,7 @@ export class ChangeUsernameDialog {
         console.error('Failed to change username:', err);
         this.isLoading.set(false);
         this.errorMessage.set('settings.changeUsernameDialog.errorFailed');
-      },
+      }
     });
   }
 }

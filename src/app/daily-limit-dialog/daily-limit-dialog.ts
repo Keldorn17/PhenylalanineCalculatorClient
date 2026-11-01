@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -7,16 +7,16 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {filter} from 'rxjs/operators';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {UserService} from '../user/user-service';
-import {ProgressBarService} from '../progress-bar/progress-bar-service';
-import {TranslatePipe} from '@ngx-translate/core';
-import {DailyLimitDialogData} from './daily-limit-dialog-types';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { filter } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UserService } from '../user/user-service';
+import { ProgressBarService } from '../progress-bar/progress-bar-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { DailyLimitDialogData } from './daily-limit-dialog-types';
 
 @Component({
   selector: 'daily-limit-dialog',
@@ -29,7 +29,7 @@ import {DailyLimitDialogData} from './daily-limit-dialog-types';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    TranslatePipe,
+    TranslatePipe
   ],
   templateUrl: './daily-limit-dialog.html',
   styleUrl: './daily-limit-dialog.scss',
@@ -43,7 +43,7 @@ export class DailyLimitDialog {
   private readonly progressBarService = inject(ProgressBarService);
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
-    dailyLimit: [null, [Validators.min(1)]],
+    dailyLimit: [null, [Validators.min(1)]]
   });
 
   protected readonly errorMessage = signal<string | null>(null);

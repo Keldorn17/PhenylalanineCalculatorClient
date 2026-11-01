@@ -6,7 +6,7 @@
     @if (isEditMode) {
       {{
         'foodType.dialog.editDescription'
-          | translate: { foodTypeName: data?.foodType?.name }
+          | translate: {foodTypeName: data?.foodType?.name}
       }}
     } @else {
       {{ 'foodType.dialog.createDescription' | translate }}
@@ -30,10 +30,8 @@
         [placeholder]="'foodType.dialog.namePlaceholder' | translate"
       />
       <mat-icon matPrefix>restaurant_menu</mat-icon>
-      @if (
-        form.get('name')?.touched &&
-        (form.get('name')?.hasError('required') || form.get('name')?.hasError('pattern'))
-      ) {
+      @if (form.get('name')?.touched &&
+      (form.get('name')?.hasError('required') || form.get('name')?.hasError('pattern'))) {
         <mat-error>{{ 'foodType.dialog.errorNameRequired' | translate }}</mat-error>
       }
     </mat-form-field>

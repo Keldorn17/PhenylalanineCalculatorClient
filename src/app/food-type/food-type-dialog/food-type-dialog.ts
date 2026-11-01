@@ -5,7 +5,7 @@ import {
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle,
+  MatDialogTitle
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -28,14 +28,14 @@ import { FoodTypeDialogData } from './food-type-dialog-types';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    TranslatePipe,
+    TranslatePipe
   ],
   templateUrl: './food-type-dialog.html',
   styleUrl: './food-type-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodTypeDialog {
-  public readonly data = inject<FoodTypeDialogData | null>(MAT_DIALOG_DATA, { optional: true });
+  public readonly data = inject<FoodTypeDialogData | null>(MAT_DIALOG_DATA, {optional: true});
   private readonly dialogRef = inject(MatDialogRef<FoodTypeDialog>);
   private readonly foodTypeService = inject(FoodTypeService);
   private readonly formBuilder = inject(FormBuilder);
@@ -48,15 +48,15 @@ export class FoodTypeDialog {
     name: [this.data?.foodType?.name ?? '', [Validators.required, Validators.pattern(/\S+/)]],
     multiplier: [
       this.data?.foodType?.multiplier ?? null,
-      [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)],
-    ],
+      [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]
+    ]
   });
 
   constructor() {
     this.form.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed(),
+        takeUntilDestroyed()
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -78,7 +78,7 @@ export class FoodTypeDialog {
 
     const payload = {
       name: String(this.form.value.name).trim(),
-      multiplier: Number(this.form.value.multiplier),
+      multiplier: Number(this.form.value.multiplier)
     };
 
     const request$ =
@@ -96,9 +96,9 @@ export class FoodTypeDialog {
         this.errorMessage.set(
           this.isEditMode
             ? 'foodType.dialog.errorEditFailed'
-            : 'foodType.dialog.errorCreateFailed',
+            : 'foodType.dialog.errorCreateFailed'
         );
-      },
+      }
     });
   }
 }

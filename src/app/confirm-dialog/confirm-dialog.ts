@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -6,9 +6,9 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
-import {ConfirmDialogData} from './confirm-dialog-types';
-import {TranslatePipe} from '@ngx-translate/core';
-import {MatButton} from '@angular/material/button';
+import { ConfirmDialogData } from './confirm-dialog-types';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'confirm-dialog',
