@@ -1,10 +1,14 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {ApiQueryParams, PagedResponse} from '../http/api-types';
-import {Observable} from 'rxjs';
-import {FoodConsumptionCreateRequest, FoodConsumptionRequest, FoodConsumptionResponse} from './food-consumption-types';
-import {ApiPath} from '../http/api-path';
-import {buildQueryParams, formatIsoDate} from '../http/api-utils';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ApiQueryParams, PagedResponse } from '../http/api-types';
+import { Observable } from 'rxjs';
+import {
+  FoodConsumptionCreateRequest,
+  FoodConsumptionRequest,
+  FoodConsumptionResponse
+} from './food-consumption-types';
+import { ApiPath } from '../http/api-path';
+import { buildQueryParams, formatIsoDate } from '../http/api-utils';
 
 @Injectable({
   providedIn: 'root'

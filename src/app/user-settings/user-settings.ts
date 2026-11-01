@@ -1,22 +1,22 @@
-import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {OverlayModule, ConnectedPosition} from '@angular/cdk/overlay';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {AuthService} from '../auth/auth-service';
-import {ThemeService} from '../theme/theme-service';
-import {Language, LanguageOption} from './user-settings-types';
-import {MatDialog} from '@angular/material/dialog';
-import {ConfirmDialog} from '../confirm-dialog/confirm-dialog';
-import {UserService} from '../user/user-service';
-import {toObservable, toSignal} from '@angular/core/rxjs-interop';
-import {switchMap} from 'rxjs/operators';
-import {of} from 'rxjs';
-import {ChangeUsernameDialog} from './change-username-dialog/change-username-dialog';
-import {ChangePasswordDialog} from './change-password-dialog/change-password-dialog';
-import {DailyLimitDialog} from '../daily-limit-dialog/daily-limit-dialog';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { OverlayModule, ConnectedPosition } from '@angular/cdk/overlay';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../auth/auth-service';
+import { ThemeService } from '../theme/theme-service';
+import { Language, LanguageOption } from './user-settings-types';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
+import { UserService } from '../user/user-service';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ChangeUsernameDialog } from './change-username-dialog/change-username-dialog';
+import { ChangePasswordDialog } from './change-password-dialog/change-password-dialog';
+import { DailyLimitDialog } from '../daily-limit-dialog/daily-limit-dialog';
 
 @Component({
   selector: 'user-settings',
@@ -26,11 +26,11 @@ import {DailyLimitDialog} from '../daily-limit-dialog/daily-limit-dialog';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    TranslatePipe,
+    TranslatePipe
   ],
   templateUrl: './user-settings.html',
   styleUrl: './user-settings.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserSettings {
   private readonly translateService = inject(TranslateService);
@@ -49,9 +49,9 @@ export class UserSettings {
           return of(null);
         }
         return this.userService.getUser();
-      }),
+      })
     ),
-    {initialValue: null},
+    {initialValue: null}
   );
   protected readonly isDark = this.themeService.isDark;
   protected readonly currentLang = this.translateService.currentLang;
@@ -61,7 +61,7 @@ export class UserSettings {
 
   protected readonly languages: LanguageOption[] = [
     {code: 'en', label: 'language.english'},
-    {code: 'hu', label: 'language.hungarian'},
+    {code: 'hu', label: 'language.hungarian'}
   ];
 
   protected readonly positions: ConnectedPosition[] = [
@@ -70,15 +70,15 @@ export class UserSettings {
       originY: 'bottom',
       overlayX: 'end',
       overlayY: 'top',
-      offsetY: 8,
+      offsetY: 8
     },
     {
       originX: 'end',
       originY: 'top',
       overlayX: 'end',
       overlayY: 'bottom',
-      offsetY: -8,
-    },
+      offsetY: -8
+    }
   ];
 
   protected toggleMenu(): void {
@@ -118,7 +118,7 @@ export class UserSettings {
       .open(ChangeUsernameDialog, {
         width: '90%',
         maxWidth: '420px',
-        data: {currentUsername: this.userResponse()?.username},
+        data: {currentUsername: this.userResponse()?.username}
       })
       .afterClosed()
       .subscribe((changed: boolean) => {
@@ -132,7 +132,7 @@ export class UserSettings {
     this.closeMenu();
     this.dialog.open(ChangePasswordDialog, {
       width: '90%',
-      maxWidth: '420px',
+      maxWidth: '420px'
     });
   }
 
@@ -143,8 +143,8 @@ export class UserSettings {
       this.dialog.open(DailyLimitDialog, {
         data: {
           dailyLimit: dailyLimit,
-          descriptionTranslationKey: 'dailyLimitDialog.changeDescription',
-        },
+          descriptionTranslationKey: 'dailyLimitDialog.changeDescription'
+        }
       });
     });
   }
@@ -164,8 +164,8 @@ export class UserSettings {
           titleTranslateKey: 'settings.user.deactivateTitle',
           detailsTranslateKey: 'settings.user.deactivateDetails',
           confirmTranslateKey: 'settings.user.delete',
-          confirmClass: 'warn',
-        },
+          confirmClass: 'warn'
+        }
       })
       .afterClosed()
       .subscribe(confirm => {

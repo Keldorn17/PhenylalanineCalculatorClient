@@ -4,7 +4,7 @@ import {
   computed,
   inject,
   OnInit,
-  signal,
+  signal
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCard, MatCardContent } from '@angular/material/card';
@@ -57,11 +57,11 @@ export interface SliderBounds {
     MatProgressSpinner,
     MatBadgeModule,
     TranslatePipe,
-    FoodCard,
+    FoodCard
   ],
   templateUrl: './food.html',
   styleUrl: './food.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Food implements OnInit {
   private readonly foodService = inject(FoodService);
@@ -82,22 +82,22 @@ export class Food implements OnInit {
     'protein' | 'calories' | 'phe' | 'multiplier',
     SliderBounds
   > = {
-    protein: { min: 0, max: 100, step: 1 },
-    calories: { min: 0, max: 1000, step: 10 },
-    phe: { min: 0, max: 5000, step: 25 },
-    multiplier: { min: 0, max: 100, step: 1 },
+    protein: {min: 0, max: 100, step: 1},
+    calories: {min: 0, max: 1000, step: 10},
+    phe: {min: 0, max: 5000, step: 25},
+    multiplier: {min: 0, max: 100, step: 1}
   };
 
   protected readonly sortOptions: SortOption[] = [
-    { value: '', labelKey: 'food.filters.sortDefault' },
-    { value: 'name,asc', labelKey: 'food.filters.sortNameAsc' },
-    { value: 'name,desc', labelKey: 'food.filters.sortNameDesc' },
-    { value: 'phenylalanine,asc', labelKey: 'food.filters.sortPheAsc' },
-    { value: 'phenylalanine,desc', labelKey: 'food.filters.sortPheDesc' },
-    { value: 'protein,asc', labelKey: 'food.filters.sortProteinAsc' },
-    { value: 'protein,desc', labelKey: 'food.filters.sortProteinDesc' },
-    { value: 'calories,asc', labelKey: 'food.filters.sortCaloriesAsc' },
-    { value: 'calories,desc', labelKey: 'food.filters.sortCaloriesDesc' },
+    {value: '', labelKey: 'food.filters.sortDefault'},
+    {value: 'name,asc', labelKey: 'food.filters.sortNameAsc'},
+    {value: 'name,desc', labelKey: 'food.filters.sortNameDesc'},
+    {value: 'phenylalanine,asc', labelKey: 'food.filters.sortPheAsc'},
+    {value: 'phenylalanine,desc', labelKey: 'food.filters.sortPheDesc'},
+    {value: 'protein,asc', labelKey: 'food.filters.sortProteinAsc'},
+    {value: 'protein,desc', labelKey: 'food.filters.sortProteinDesc'},
+    {value: 'calories,asc', labelKey: 'food.filters.sortCaloriesAsc'},
+    {value: 'calories,desc', labelKey: 'food.filters.sortCaloriesDesc'}
   ];
 
   protected readonly filterForm: FormGroup = this.formBuilder.group({
@@ -111,7 +111,7 @@ export class Food implements OnInit {
     pheMin: [this.sliderBounds.phe.min],
     pheMax: [this.sliderBounds.phe.max],
     multiplierMin: [this.sliderBounds.multiplier.min],
-    multiplierMax: [this.sliderBounds.multiplier.max],
+    multiplierMax: [this.sliderBounds.multiplier.max]
   });
 
   protected readonly hasSearchText = computed(() => {
@@ -160,9 +160,9 @@ export class Food implements OnInit {
         pheMin: this.sliderBounds.phe.min,
         pheMax: this.sliderBounds.phe.max,
         multiplierMin: this.sliderBounds.multiplier.min,
-        multiplierMax: this.sliderBounds.multiplier.max,
+        multiplierMax: this.sliderBounds.multiplier.max
       },
-      { emitEvent: false },
+      {emitEvent: false}
     );
     this.updateActiveFiltersCount();
     this.pageIndex.set(0);
@@ -302,7 +302,7 @@ export class Food implements OnInit {
         page: this.pageIndex(),
         size: this.pageSize(),
         query,
-        sort,
+        sort
       })
       .subscribe({
         next: (response) => {
@@ -323,7 +323,7 @@ export class Food implements OnInit {
           this.foods.set([]);
           this.totalElements.set(0);
           this.isLoading.set(false);
-        },
+        }
       });
   }
 }

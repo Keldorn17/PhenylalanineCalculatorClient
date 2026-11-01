@@ -6,19 +6,19 @@ import {
   OnInit,
   signal
 } from '@angular/core';
-import {DatePipe} from '@angular/common';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {MatIcon} from '@angular/material/icon';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {TranslatePipe} from '@ngx-translate/core';
-import {ProgressBar} from '../progress-bar/progress-bar';
-import {ProgressBarService} from '../progress-bar/progress-bar-service';
-import {DailyIntakeResponse} from '../daily-intake/daily-intake-types';
-import {FoodConsumptionService} from '../food-consumption/food-consumption-service';
-import {FoodConsumptionResponse} from '../food-consumption/food-consumption-types';
-import {FoodConsumptionCard} from '../food-consumption/food-consumption-card/food-consumption-card';
-import {DateSwitcher} from '../date-switcher/date-switcher';
+import { DatePipe } from '@angular/common';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TranslatePipe } from '@ngx-translate/core';
+import { ProgressBar } from '../progress-bar/progress-bar';
+import { ProgressBarService } from '../progress-bar/progress-bar-service';
+import { DailyIntakeResponse } from '../daily-intake/daily-intake-types';
+import { FoodConsumptionService } from '../food-consumption/food-consumption-service';
+import { FoodConsumptionResponse } from '../food-consumption/food-consumption-types';
+import { FoodConsumptionCard } from '../food-consumption/food-consumption-card/food-consumption-card';
+import { DateSwitcher } from '../date-switcher/date-switcher';
 
 @Component({
   selector: 'home',

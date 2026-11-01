@@ -1,5 +1,5 @@
-import {describe, it, expect, beforeEach} from 'vitest';
-import {ProgressBarService} from './progress-bar-service';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { ProgressBarService } from './progress-bar-service';
 
 describe('ProgressBarService', () => {
   let service: ProgressBarService;

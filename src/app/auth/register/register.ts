@@ -1,20 +1,20 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDividerModule} from '@angular/material/divider';
-import {EMPTY, merge} from 'rxjs';
-import {catchError, filter, switchMap, tap} from 'rxjs/operators';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {AuthService} from '../auth-service';
-import {UserService} from '../../user/user-service';
-import {passwordMatchValidator, passwordValidator} from '../../validator/password-validator';
-import {TranslatePipe} from '@ngx-translate/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { EMPTY, merge } from 'rxjs';
+import { catchError, filter, switchMap, tap } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AuthService } from '../auth-service';
+import { UserService } from '../../user/user-service';
+import { passwordMatchValidator, passwordValidator } from '../../validator/password-validator';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'register',
@@ -28,11 +28,11 @@ import {TranslatePipe} from '@ngx-translate/core';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatDividerModule,
+    MatDividerModule
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Register {
   private readonly authService = inject(AuthService);
@@ -47,13 +47,13 @@ export class Register {
     email: ['', [Validators.required, Validators.email]],
     username: ['', [Validators.required]],
     password: ['', [Validators.required, passwordValidator]],
-    confirmPassword: ['', [Validators.required]],
+    confirmPassword: ['', [Validators.required]]
   }, {
-    validators: [passwordMatchValidator],
+    validators: [passwordMatchValidator]
   });
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
-    dailyLimit: [null, [Validators.required, Validators.min(1)]],
+    dailyLimit: [null, [Validators.required, Validators.min(1)]]
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -104,7 +104,7 @@ export class Register {
         console.error('Registration failed:', err);
         this.currentStep.set(2);
         this.errorMessage.set('register.errorFailed');
-      },
+      }
     });
   }
 
@@ -125,7 +125,7 @@ export class Register {
         error: (err) => {
           console.error('Failed to set daily limit:', err);
           this.errorMessage.set('register.errorDailyLimitFailed');
-        },
+        }
       });
       return;
     }
@@ -150,7 +150,7 @@ export class Register {
       error: (err) => {
         console.error('Failed to set daily limit:', err);
         this.errorMessage.set('register.errorDailyLimitFailed');
-      },
+      }
     });
   }
 }

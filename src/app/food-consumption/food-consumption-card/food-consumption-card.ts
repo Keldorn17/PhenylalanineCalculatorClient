@@ -1,17 +1,17 @@
-import {ChangeDetectionStrategy, Component, inject, input, output} from '@angular/core';
-import {DatePipe, DecimalPipe} from '@angular/common';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
-import {MatTooltip} from '@angular/material/tooltip';
-import {MatDialog} from '@angular/material/dialog';
-import {TranslatePipe} from '@ngx-translate/core';
-import {FoodConsumptionResponse} from '../food-consumption-types';
-import {FoodConsumptionService} from '../food-consumption-service';
-import {ProgressBarService} from '../../progress-bar/progress-bar-service';
-import {ConfirmDialog} from '../../confirm-dialog/confirm-dialog';
-import {EditFoodConsumptionDialog} from '../edit-food-consumption-dialog/edit-food-consumption-dialog';
-import {MatDivider} from '@angular/material/list';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { DatePipe, DecimalPipe } from '@angular/common';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatDialog } from '@angular/material/dialog';
+import { TranslatePipe } from '@ngx-translate/core';
+import { FoodConsumptionResponse } from '../food-consumption-types';
+import { FoodConsumptionService } from '../food-consumption-service';
+import { ProgressBarService } from '../../progress-bar/progress-bar-service';
+import { ConfirmDialog } from '../../confirm-dialog/confirm-dialog';
+import { EditFoodConsumptionDialog } from '../edit-food-consumption-dialog/edit-food-consumption-dialog';
+import { MatDivider } from '@angular/material/list';
 
 @Component({
   selector: 'food-consumption-card',

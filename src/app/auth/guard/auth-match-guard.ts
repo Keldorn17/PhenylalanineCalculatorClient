@@ -1,7 +1,7 @@
-import {inject} from '@angular/core';
-import {CanMatchFn} from '@angular/router';
-import {catchError, map, of} from 'rxjs';
-import {AuthService} from '../auth-service';
+import { inject } from '@angular/core';
+import { CanMatchFn } from '@angular/router';
+import { catchError, map, of } from 'rxjs';
+import { AuthService } from '../auth-service';
 
 export const authMatchGuard: CanMatchFn = () => {
   const authService = inject(AuthService);
@@ -12,6 +12,6 @@ export const authMatchGuard: CanMatchFn = () => {
 
   return authService.refresh().pipe(
     map(() => true),
-    catchError(() => of(false)),
+    catchError(() => of(false))
   );
 };

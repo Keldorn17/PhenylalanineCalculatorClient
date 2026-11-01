@@ -16,13 +16,13 @@
         <span class="selected-date-label">{{ selectedDate() | date: 'yyyy. MM. dd.' }}</span>
       </div>
       <span class="items-count-badge">
-        {{ 'home.itemsCount' | translate: { count: totalElements() } }}
+        {{ 'home.itemsCount' | translate: {count: totalElements()} }}
       </span>
     </div>
 
     @if (isLoading()) {
       <div class="loading-container">
-        <mat-spinner diameter="40" />
+        <mat-spinner diameter="40"/>
         <span>{{ 'home.loading' | translate }}</span>
       </div>
     } @else if (consumptions().length === 0) {

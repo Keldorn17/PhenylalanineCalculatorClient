@@ -1,13 +1,13 @@
-import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';
-import {provideRouter, withComponentInputBinding} from '@angular/router';
-import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {provideTranslateService} from '@ngx-translate/core';
-import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
-import {provideNativeDateAdapter} from '@angular/material/core';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
-import {routes} from './app.routes';
-import {authInterceptor} from './auth/auth-interceptor';
+import { routes } from './app.routes';
+import { authInterceptor } from './auth/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,15 +18,15 @@ export const appConfig: ApplicationConfig = {
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './i18n/',
-        suffix: '.json',
+        suffix: '.json'
       }),
-      fallbackLang: 'en',
+      fallbackLang: 'en'
     }),
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: {
-        subscriptSizing: 'dynamic',
-      },
-    },
-  ],
+        subscriptSizing: 'dynamic'
+      }
+    }
+  ]
 };

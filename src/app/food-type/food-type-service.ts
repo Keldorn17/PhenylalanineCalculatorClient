@@ -1,10 +1,10 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {ApiPath} from '../http/api-path';
-import {ApiQueryParams, PagedResponse} from '../http/api-types';
-import {buildQueryParams} from '../http/api-utils';
-import {FoodTypeRequest, FoodTypeResponse} from './food-type-types';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ApiPath } from '../http/api-path';
+import { ApiQueryParams, PagedResponse } from '../http/api-types';
+import { buildQueryParams } from '../http/api-utils';
+import { FoodTypeRequest, FoodTypeResponse } from './food-type-types';
 
 @Injectable({
   providedIn: 'root'

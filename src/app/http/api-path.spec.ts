@@ -1,5 +1,5 @@
-import {describe, it, expect} from 'vitest';
-import {ApiPath} from './api-path';
+import { describe, it, expect } from 'vitest';
+import { ApiPath } from './api-path';
 
 describe('ApiPath', () => {
   it('should resolve placeholders with arguments', () => {

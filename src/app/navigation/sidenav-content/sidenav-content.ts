@@ -1,13 +1,13 @@
-import {ChangeDetectionStrategy, Component, computed, inject, input, signal} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {Router, RouterLink, RouterLinkActive} from '@angular/router';
-import {MatListModule} from '@angular/material/list';
-import {MatDividerModule} from '@angular/material/divider';
-import {TranslatePipe} from '@ngx-translate/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {AuthService} from '../../auth/auth-service';
-import {MenuItem} from '../navigation-types';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AuthService } from '../../auth/auth-service';
+import { MenuItem } from '../navigation-types';
 
 @Component({
   selector: 'sidenav-content',
@@ -19,11 +19,11 @@ import {MenuItem} from '../navigation-types';
     MatDividerModule,
     TranslatePipe,
     MatIconModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   templateUrl: './sidenav-content.html',
   styleUrl: './sidenav-content.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavContent {
   private readonly authService = inject(AuthService);
@@ -35,18 +35,18 @@ export class SidenavContent {
     {
       icon: 'home',
       label: 'nav.home',
-      route: '/',
+      route: '/'
     },
     {
       icon: 'restaurant',
       label: 'nav.foods',
-      route: '/foods',
+      route: '/foods'
     },
     {
       icon: 'restaurant_menu',
       label: 'nav.foodTypes',
-      route: '/food-types',
-    },
+      route: '/food-types'
+    }
   ]);
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
 
@@ -56,7 +56,7 @@ export class SidenavContent {
     }
     this.authService.logout().subscribe({
       next: () => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'}),
-      error: () => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'}),
+      error: () => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'})
     });
   }
 }

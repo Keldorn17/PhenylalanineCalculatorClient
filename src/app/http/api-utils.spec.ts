@@ -1,5 +1,5 @@
-import {describe, it, expect} from 'vitest';
-import {buildQueryParams, formatIsoDate, RsqlBuilder} from './api-utils';
+import { describe, it, expect } from 'vitest';
+import { buildQueryParams, formatIsoDate, RsqlBuilder } from './api-utils';
 
 describe('ApiUtils', () => {
   describe('buildQueryParams', () => {
@@ -8,7 +8,7 @@ describe('ApiUtils', () => {
         page: 0,
         size: 20,
         query: 'name==apple',
-        sort: 'name,asc',
+        sort: 'name,asc'
       });
 
       expect(params.get('page')).toBe('0');
@@ -40,7 +40,7 @@ describe('ApiUtils', () => {
         .gt('amount', 50)
         .build();
 
-      expect(query).toBe("status=='ACTIVE' and own==true and amount=gt=50");
+      expect(query).toBe('status==\'ACTIVE\' and own==true and amount=gt=50');
     });
 
     it('should support ilike and or', () => {
@@ -50,7 +50,7 @@ describe('ApiUtils', () => {
         .lt('phenylalanine', 10)
         .build();
 
-      expect(query).toBe("name=ilike='apple' or phenylalanine=lt=10");
+      expect(query).toBe('name=ilike=\'apple\' or phenylalanine=lt=10');
     });
 
     it('should support group, ge, and le', () => {
@@ -63,7 +63,7 @@ describe('ApiUtils', () => {
         .build();
 
       expect(query).toBe(
-        "(name=ilike='apple' or foodTypeName=ilike='apple') and protein=ge=1 and protein=le=10",
+        '(name=ilike=\'apple\' or foodTypeName=ilike=\'apple\') and protein=ge=1 and protein=le=10'
       );
     });
   });

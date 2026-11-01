@@ -1,7 +1,7 @@
-import {Injectable, NgZone, OnDestroy, Signal, inject, signal} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, catchError, finalize, firstValueFrom, from, shareReplay, tap, throwError} from 'rxjs';
-import {ApiPath} from '../http/api-path';
+import { Injectable, NgZone, OnDestroy, Signal, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, finalize, firstValueFrom, from, shareReplay, tap, throwError } from 'rxjs';
+import { ApiPath } from '../http/api-path';
 import {
   AuthBroadcastMessage, AuthPasswordChangeRequest,
   AuthRegisterRequest,
@@ -9,7 +9,7 @@ import {
   AuthResponse,
   AuthUsernameChangeRequest
 } from './auth-types';
-import {UserService} from '../user/user-service';
+import { UserService } from '../user/user-service';
 
 @Injectable({
   providedIn: 'root'
@@ -115,7 +115,7 @@ export class AuthService implements OnDestroy {
         const expiresAt = Date.now() + response.expiresIn * 1000;
         this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'LOGIN_SUCCESS');
       })
-    )
+    );
   }
 
   public ngOnDestroy(): void {
