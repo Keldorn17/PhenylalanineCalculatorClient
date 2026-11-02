@@ -141,6 +141,24 @@
             }
           </mat-form-field>
 
+          <div class="terms-consent">
+            <mat-checkbox formControlName="acceptTerms">
+              <span class="terms-label">
+                {{ 'register.acceptTermsPrefix' | translate }}
+                <a
+                  routerLink="/terms-and-privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="terms-link"
+                  (click)="$event.stopPropagation()"
+                >{{ 'register.acceptTermsLink' | translate }}</a>{{ 'register.acceptTermsSuffix' | translate }}
+              </span>
+            </mat-checkbox>
+            @if (registerForm.get('acceptTerms')?.touched && registerForm.get('acceptTerms')?.hasError('required')) {
+              <div class="terms-error">{{ 'register.errorTermsRequired' | translate }}</div>
+            }
+          </div>
+
           <button
             mat-flat-button
             type="submit"

@@ -109,7 +109,11 @@
     "saveDailyLimit": "Regisztráció befejezése",
     "errorDailyLimitRequired": "A napi limit megadása kötelező.",
     "errorDailyLimitMin": "A napi limitnek 0-nál nagyobbnak kell lennie.",
-    "errorDailyLimitFailed": "Nem sikerült menteni a napi limitet. Kérjük, próbálja újra."
+    "errorDailyLimitFailed": "Nem sikerült menteni a napi limitet. Kérjük, próbálja újra.",
+    "acceptTermsPrefix": "Elolvastam és elfogadom a ",
+    "acceptTermsLink": "Felhasználási feltételeket és az Adatkezelési tájékoztatót",
+    "acceptTermsSuffix": ", és hozzájárulok étrendi adataim kezeléséhez.",
+    "errorTermsRequired": "A regisztrációhoz el kell fogadnia a Felhasználási feltételeket és az Adatkezelési tájékoztatót."
   },
   "dailyLimitDialog": {
     "title": "Napi limit beállítása",
@@ -269,7 +273,8 @@
     }
   },
   "footer": {
-    "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért."
+    "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért.",
+    "termsAndPrivacy": "Felhasználási feltételek és Adatkezelési tájékoztató"
   },
   "dialog": {
     "confirm": "Elfogad",

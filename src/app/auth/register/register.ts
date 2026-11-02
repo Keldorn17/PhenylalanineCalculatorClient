@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { EMPTY, merge } from 'rxjs';
 import { catchError, filter, switchMap, tap } from 'rxjs/operators';
@@ -30,7 +31,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCheckboxModule
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
@@ -46,14 +48,18 @@ export class Register {
   protected readonly currentStep = signal<2 | 3>(2);
   protected readonly isRegistered = signal(false);
 
-  protected readonly registerForm: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required, passwordValidator]],
-    confirmPassword: ['', [Validators.required]]
-  }, {
-    validators: [passwordMatchValidator]
-  });
+  protected readonly registerForm: FormGroup = this.formBuilder.group(
+    {
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, passwordValidator]],
+      confirmPassword: ['', [Validators.required]],
+      acceptTerms: [false, [Validators.requiredTrue]]
+    },
+    {
+      validators: [passwordMatchValidator]
+    }
+  );
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
     dailyLimit: [null, [Validators.required, Validators.min(1)]]
@@ -135,26 +141,29 @@ export class Register {
 
     const {email, username, password} = this.registerForm.value;
 
-    this.authService.register({email, username, password}).pipe(
-      tap(() => {
-        this.isRegistered.set(true);
-      }),
-      catchError((err) => {
-        console.error('Registration failed:', err);
-        this.currentStep.set(2);
-        this.errorMessage.set('register.errorFailed');
-        return EMPTY;
-      }),
-      switchMap(() => this.userService.patchUser({dailyLimit}))
-    ).subscribe({
-      next: () => {
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.error('Failed to set daily limit:', err);
-        this.errorMessage.set('register.errorDailyLimitFailed');
-      }
-    });
+    this.authService
+      .register({email, username, password})
+      .pipe(
+        tap(() => {
+          this.isRegistered.set(true);
+        }),
+        catchError((err) => {
+          console.error('Registration failed:', err);
+          this.currentStep.set(2);
+          this.errorMessage.set('register.errorFailed');
+          return EMPTY;
+        }),
+        switchMap(() => this.userService.patchUser({dailyLimit}))
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Failed to set daily limit:', err);
+          this.errorMessage.set('register.errorDailyLimitFailed');
+        }
+      });
   }
 
   private checkDailyLimitAndNavigate(): void {

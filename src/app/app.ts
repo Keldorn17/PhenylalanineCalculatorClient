@@ -42,7 +42,7 @@ export class App implements OnInit {
     this.authService.refresh().subscribe({
       next: (): void => {
         console.log('[Auth] Startup session restoration complete.');
-        if (!this.router.url.includes('/register')) {
+        if (!this.router.url.includes('/register') && !this.router.url.includes('/terms-and-privacy')) {
           this.userService.getUser().subscribe({
             next: (user): void => {
               if (!user.dailyLimit) {
