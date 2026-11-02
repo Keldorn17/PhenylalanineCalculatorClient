@@ -14,17 +14,24 @@
         <span class="current-amount" [class.over-limit]="isOverLimit()">
           {{ displayCurrent() | number: '1.0-2' }}
         </span>
-        <span class="total-amount">/ {{ displayTotal() | number: '1.0-2' }} {{ unit() }}</span>
-        <span class="percentage-badge" [class.over-limit]="isOverLimit()">
-          {{ percentage() }}%
-        </span>
+        @if (hasDailyLimit()) {
+          <span class="total-amount">/ {{ displayTotal()! | number: '1.0-2' }} {{ unit() }}</span>
+          <span class="percentage-badge" [class.over-limit]="isOverLimit()">
+            {{ percentage() }}%
+          </span>
+        } @else {
+          <span class="total-amount">{{ unit() }}</span>
+          <span class="no-limit-badge">
+            {{ 'progressBar.noLimitBadge' | translate }}
+          </span>
+        }
       </div>
     </div>
 
     <div class="progress-bar-track-area" [style.height.px]="height()">
       <mat-progress-bar
         mode="determinate"
-        [value]="baseAllowanceWidth()"
+        [value]="hasDailyLimit() ? baseAllowanceWidth() : 0"
         [style.--mat-progress-bar-track-height.px]="height()"
         [style.--mat-progress-bar-active-indicator-height.px]="height()"
         [style.height.px]="height()"
@@ -40,7 +47,18 @@
     </div>
 
     <div class="progress-footer">
-      @if (isOverLimit()) {
+      @if (!hasDailyLimit()) {
+        <div class="no-limit-footer">
+          <span class="status-info no-limit">
+            <mat-icon>info_outline</mat-icon>
+            <span>{{ 'progressBar.noLimit' | translate }}</span>
+          </span>
+          <button mat-button class="set-limit-btn" (click)="openSetLimitDialog()">
+            <mat-icon>add</mat-icon>
+            <span>{{ 'progressBar.setLimit' | translate }}</span>
+          </button>
+        </div>
+      } @else if (isOverLimit()) {
         <span class="status-info over-limit">
           <mat-icon>error_outline</mat-icon>
           <span>{{ 'progressBar.exceeded' | translate: {amount: (exceeded() | number: '1.0-2'), unit: unit()} }}</span>

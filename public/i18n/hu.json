@@ -109,7 +109,11 @@
     "saveDailyLimit": "Regisztráció befejezése",
     "errorDailyLimitRequired": "A napi limit megadása kötelező.",
     "errorDailyLimitMin": "A napi limitnek 0-nál nagyobbnak kell lennie.",
-    "errorDailyLimitFailed": "Nem sikerült menteni a napi limitet. Kérjük, próbálja újra."
+    "errorDailyLimitFailed": "Nem sikerült menteni a napi limitet. Kérjük, próbálja újra.",
+    "acceptTermsPrefix": "Elolvastam és elfogadom a ",
+    "acceptTermsLink": "Felhasználási feltételeket és az Adatkezelési tájékoztatót",
+    "acceptTermsSuffix": ", és hozzájárulok étrendi adataim kezeléséhez.",
+    "errorTermsRequired": "A regisztrációhoz el kell fogadnia a Felhasználási feltételeket és az Adatkezelési tájékoztatót."
   },
   "dailyLimitDialog": {
     "title": "Napi limit beállítása",
@@ -122,7 +126,10 @@
     "title": "Napi bevitel",
     "remaining": "{{amount}} {{unit}} maradt",
     "exceeded": "{{amount}} {{unit}} a napi limit felett",
-    "limitReached": "Napi limit elérve"
+    "limitReached": "Napi limit elérve",
+    "noLimit": "Nincs napi limit beállítva",
+    "noLimitBadge": "Nincs limit",
+    "setLimit": "Limit megadása"
   },
   "home": {
     "today": "Ma",
@@ -266,7 +273,8 @@
     }
   },
   "footer": {
-    "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért."
+    "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért.",
+    "termsAndPrivacy": "Felhasználási feltételek és Adatkezelési tájékoztató"
   },
   "dialog": {
     "confirm": "Elfogad",
@@ -275,9 +283,8 @@
   "landing": {
     "badge": "Napi Fenilalanin Követő",
     "heroTitle": "Kövesse nyomon napi fenilalanin bevitelét egyszerűen",
-    "heroSubtitle": "Tartsa szemmel napi keretét, rögzítse étkezéseit másodpercek alatt, és kezelje saját ételeit és étel típusait egyetlen átlátható felületen.",
+    "heroSubtitle": "Tartsa szemmel napi keretét, rögzítse étkezéseit másodpercek alatt, és kezelje saját ételeit és ételtípusait egyetlen átlátható felületen.",
     "getStarted": "Kezdés",
-    "previewBadge": "Felület előnézete",
     "preview": {
       "remainingSuffix": "maradt",
       "itemsSuffix": "tétel",
@@ -298,5 +305,14 @@
         "salad": "Kerti zöldségsaláta"
       }
     }
+  },
+  "paginator": {
+    "itemsPerPage": "Elemek száma oldalanként:",
+    "nextPage": "Következő oldal",
+    "previousPage": "Előző oldal",
+    "firstPage": "Első oldal",
+    "lastPage": "Utolsó oldal",
+    "range": "{{start}} – {{end}} / {{length}}",
+    "rangeZero": "0 / {{length}}"
   }
 }

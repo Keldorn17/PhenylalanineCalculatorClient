@@ -53,7 +53,9 @@ export class FoodConsumptionCard {
       });
   }
 
-  public openDeleteDialog(): void {
+  public openDeleteDialog(event?: MouseEvent): void {
+    event?.stopPropagation();
+
     this.dialog
       .open(ConfirmDialog, {
         data: {

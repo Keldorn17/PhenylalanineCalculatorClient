@@ -11,6 +11,7 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProgressBar } from '../progress-bar/progress-bar';
 import { ProgressBarService } from '../progress-bar/progress-bar-service';
@@ -39,8 +40,9 @@ import { DateSwitcher } from '../date-switcher/date-switcher';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home implements OnInit {
-  private readonly progressBarService = inject(ProgressBarService);
   private readonly foodConsumptionService = inject(FoodConsumptionService);
+  private readonly progressBarService = inject(ProgressBarService);
+  private readonly router = inject(Router);
 
   public readonly dailyIntake = input.required<DailyIntakeResponse>();
 
@@ -87,6 +89,10 @@ export class Home implements OnInit {
       a.getMonth() === b.getMonth() &&
       a.getDate() === b.getDate()
     );
+  }
+
+  protected navigateToFood(): void {
+    this.router.navigate(['/foods']);
   }
 
   private loadConsumptions(): void {

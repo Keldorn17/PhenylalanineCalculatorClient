@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use 'color-theme' as color-theme;
+
 @include mat.core();
 @include mat.system-classes();
 
@@ -48,6 +49,11 @@ body {
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+app-root {
+  display: block;
+  height: 100%;
 }
 
 .warn {
@@ -101,3 +107,7 @@ input[type='number'] {
     margin: 0;
   }
 }
+
+@include mat.dialog-overrides((
+  container-color: var(--mat-sys-surface-container),
+));

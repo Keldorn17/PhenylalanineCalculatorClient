@@ -1,17 +1,19 @@
 <mat-nav-list [class.collapsed]="isCollapsed()">
-  @for (item of menuItems(); track item.label) {
-    <mat-list-item
-      [routerLink]="item.route"
-      routerLinkActive="active-item"
-      [routerLinkActiveOptions]="{exact: true}"
-      [matTooltip]="item.label | translate"
-      [matTooltipDisabled]="!isCollapsed()"
-      matTooltipPosition="right"
-    >
-      <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-      <span matListItemTitle class="item-title">{{ item.label | translate }}</span>
-    </mat-list-item>
-  }
+  <div class="nav-links">
+    @for (item of menuItems(); track item.label) {
+      <mat-list-item
+        [routerLink]="item.route"
+        routerLinkActive="active-item"
+        [routerLinkActiveOptions]="{exact: true}"
+        [matTooltip]="item.label | translate"
+        [matTooltipDisabled]="!isCollapsed()"
+        matTooltipPosition="right"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle class="item-title">{{ item.label | translate }}</span>
+      </mat-list-item>
+    }
+  </div>
   @if (isLoggedIn()) {
     <div class="bottom">
       <mat-divider/>

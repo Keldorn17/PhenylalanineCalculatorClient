@@ -109,7 +109,11 @@
     "saveDailyLimit": "Complete Registration",
     "errorDailyLimitRequired": "Daily limit is required.",
     "errorDailyLimitMin": "Daily limit must be greater than 0.",
-    "errorDailyLimitFailed": "Failed to save daily limit. Please try again."
+    "errorDailyLimitFailed": "Failed to save daily limit. Please try again.",
+    "acceptTermsPrefix": "I have read and accept the ",
+    "acceptTermsLink": "Terms of Use and Data Processing Notice",
+    "acceptTermsSuffix": ", and consent to the processing of my dietary data.",
+    "errorTermsRequired": "You must accept the Terms of Use and Data Processing Notice to register."
   },
   "dailyLimitDialog": {
     "title": "Set Your Daily Limit",
@@ -122,7 +126,10 @@
     "title": "Daily Intake",
     "remaining": "{{amount}} {{unit}} remaining",
     "exceeded": "{{amount}} {{unit}} over daily limit",
-    "limitReached": "Daily limit reached"
+    "limitReached": "Daily limit reached",
+    "noLimit": "No daily limit set",
+    "noLimitBadge": "No limit",
+    "setLimit": "Set Limit"
   },
   "home": {
     "today": "Today",
@@ -266,7 +273,8 @@
     }
   },
   "footer": {
-    "description": "Disclaimer: This application does not provide professional medical or nutritional advice. Please consult a registered dietitian or healthcare provider regarding your diet. The data provided may contain inaccuracies, and we accept no liability for incorrect daily intake calculations (including phenylalanine tracking)."
+    "description": "Disclaimer: This application does not provide professional medical or nutritional advice. Please consult a registered dietitian or healthcare provider regarding your diet. The data provided may contain inaccuracies, and we accept no liability for incorrect daily intake calculations (including phenylalanine tracking).",
+    "termsAndPrivacy": "Terms of Use & Data Processing Notice"
   },
   "dialog": {
     "confirm": "Confirm",
@@ -277,7 +285,6 @@
     "heroTitle": "Track Your Daily Phenylalanine Intake with Ease",
     "heroSubtitle": "Monitor your daily allowance, log meals in seconds, and manage custom foods and food types in one clean, intuitive dashboard.",
     "getStarted": "Get Started",
-    "previewBadge": "Dashboard Preview",
     "preview": {
       "remainingSuffix": "remaining",
       "itemsSuffix": "items",
@@ -298,5 +305,14 @@
         "salad": "Garden Vegetable Salad"
       }
     }
+  },
+  "paginator": {
+    "itemsPerPage": "Items per page:",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "firstPage": "First page",
+    "lastPage": "Last page",
+    "range": "{{start}} – {{end}} of {{length}}",
+    "rangeZero": "0 of {{length}}"
   }
 }

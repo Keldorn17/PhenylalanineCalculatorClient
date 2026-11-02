@@ -40,6 +40,10 @@ export const routes: Routes = [
     canActivate: [guestGuard]
   },
   {
+    path: 'terms-and-privacy',
+    loadComponent: () => import('./terms-and-privacy/terms-and-privacy').then(m => m.TermsAndPrivacy)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
