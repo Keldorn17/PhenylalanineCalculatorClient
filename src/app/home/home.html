@@ -26,7 +26,7 @@
         <span>{{ 'home.loading' | translate }}</span>
       </div>
     } @else if (consumptions().length === 0) {
-      <mat-card appearance="outlined" class="empty-state-card">
+      <mat-card appearance="outlined" class="empty-state-card" (click)="navigateToFood()">
         <mat-card-content class="empty-state-content">
           <div class="empty-icon-wrapper">
             <mat-icon>no_meals</mat-icon>
