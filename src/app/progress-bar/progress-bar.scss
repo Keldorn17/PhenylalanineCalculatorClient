@@ -11,9 +11,7 @@
   background-color: var(--mat-sys-surface-container-low);
   border: 1px solid var(--mat-sys-outline-variant);
   box-shadow: none;
-  transition:
-    border-color 0.25s ease,
-    background-color 0.25s ease;
+  transition: border-color 0.25s;
 
   &:hover {
     border-color: color-mix(in srgb, var(--mat-sys-primary) 35%, var(--mat-sys-outline-variant));
@@ -50,12 +48,10 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    border-radius: var(--mat-sys-corner-full, 9999px);
+    border-radius: 9999px;
     background-color: color-mix(in srgb, var(--mat-sys-primary) 14%, transparent);
     color: var(--mat-sys-primary);
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
+    transition: background-color 0.2s, color 0.2s;
 
     mat-icon {
       font-size: 1.35rem;
@@ -73,7 +69,6 @@
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--mat-sys-on-surface);
-    letter-spacing: 0.01em;
   }
 }
 
@@ -100,23 +95,33 @@
     color: var(--mat-sys-on-surface-variant);
   }
 
-  .percentage-badge {
+  .percentage-badge,
+  .no-limit-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 0.8125rem;
-    font-weight: 600;
     padding: 0.2rem 0.65rem;
-    border-radius: var(--mat-sys-corner-full, 9999px);
+    border-radius: 9999px;
+    margin-left: 0.35rem;
+  }
+
+  .percentage-badge {
+    font-weight: 600;
     background-color: color-mix(in srgb, var(--mat-sys-primary) 14%, transparent);
     color: var(--mat-sys-primary);
-    margin-left: 0.35rem;
     font-variant-numeric: tabular-nums;
 
     &.over-limit {
       background-color: color-mix(in srgb, var(--mat-sys-error) 15%, transparent);
       color: var(--mat-sys-error);
     }
+  }
+
+  .no-limit-badge {
+    font-weight: 500;
+    background-color: var(--mat-sys-surface-container-highest);
+    color: var(--mat-sys-on-surface-variant);
   }
 }
 
@@ -130,12 +135,8 @@
     --mat-progress-bar-track-height: 18px;
     --mat-progress-bar-active-indicator-height: 18px;
     --mat-progress-bar-track-shape: 9999px;
-    --mat-progress-bar-track-color: var(--mat-sys-surface-container-highest);
-    --mat-progress-bar-active-indicator-color: var(--mat-sys-primary);
-
     height: 18px;
     border-radius: 9999px;
-    overflow: hidden;
   }
 
   .overflow-segment {
@@ -144,8 +145,7 @@
     z-index: 1;
     box-sizing: border-box;
     border-left: 2px solid var(--mat-sys-surface);
-    border-top-right-radius: 9999px;
-    border-bottom-right-radius: 9999px;
+    border-radius: 0 9999px 9999px 0;
     background: repeating-linear-gradient(
       -45deg,
       var(--mat-sys-error),
@@ -153,9 +153,7 @@
       color-mix(in srgb, var(--mat-sys-error) 70%, var(--mat-sys-surface)) 6px,
       color-mix(in srgb, var(--mat-sys-error) 70%, var(--mat-sys-surface)) 12px
     );
-    transition:
-      left 250ms cubic-bezier(0.4, 0, 0.6, 1),
-      width 250ms cubic-bezier(0.4, 0, 0.6, 1);
+    transition: left 0.25s, width 0.25s;
   }
 }
 
@@ -165,34 +163,46 @@
   align-items: center;
   font-size: 0.875rem;
 
-  .status-info {
+  .no-limit-footer {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.4rem;
-    font-weight: 500;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 
-    &.in-progress {
-      color: var(--mat-sys-on-surface-variant);
-    }
-
-    &.at-limit {
+    .set-limit-btn {
+      font-weight: 600;
       color: var(--mat-sys-primary);
 
       mat-icon {
         font-size: 1.1rem;
         width: 1.1rem;
         height: 1.1rem;
+        margin-right: 0.25rem;
       }
+    }
+  }
+
+  .status-info {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface-variant);
+
+    mat-icon {
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    &.at-limit {
+      color: var(--mat-sys-primary);
     }
 
     &.over-limit {
       color: var(--mat-sys-error);
-
-      mat-icon {
-        font-size: 1.1rem;
-        width: 1.1rem;
-        height: 1.1rem;
-      }
     }
   }
 }

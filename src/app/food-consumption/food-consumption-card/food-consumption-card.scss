@@ -9,6 +9,7 @@
   background: var(--mat-sys-surface-container-low);
   border: 1px solid var(--mat-sys-outline-variant);
   box-shadow: none;
+  cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
@@ -73,6 +74,13 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      @media (max-width: 768px) {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        overflow-wrap: anywhere;
+      }
     }
 
     .consumed-time {
@@ -156,13 +164,13 @@
       width: 1.1rem;
       height: 1.1rem;
     }
-  }
 
-  .edit-btn {
-    color: var(--mat-sys-primary);
-  }
+    &.delete-btn {
+      color: var(--mat-sys-error);
 
-  .delete-btn {
-    color: var(--mat-sys-error);
+      &:hover {
+        background-color: color-mix(in srgb, var(--mat-sys-error) 8%, transparent);
+      }
+    }
   }
 }

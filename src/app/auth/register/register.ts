@@ -8,11 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog } from '@angular/material/dialog';
 import { EMPTY, merge } from 'rxjs';
 import { catchError, filter, switchMap, tap } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../auth-service';
 import { UserService } from '../../user/user-service';
+import { DailyLimitDialog } from '../../daily-limit-dialog/daily-limit-dialog';
 import { passwordMatchValidator, passwordValidator } from '../../validator/password-validator';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -38,6 +40,7 @@ export class Register {
   private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
   private readonly formBuilder = inject(FormBuilder);
+  private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
 
   protected readonly currentStep = signal<2 | 3>(2);
@@ -89,7 +92,7 @@ export class Register {
     this.errorMessage.set(null);
 
     if (this.isRegistered()) {
-      this.router.navigate(['/']);
+      this.checkDailyLimitAndNavigate();
       return;
     }
 
@@ -98,7 +101,7 @@ export class Register {
     this.authService.register({email, username, password}).subscribe({
       next: () => {
         this.isRegistered.set(true);
-        this.router.navigate(['/']);
+        this.checkDailyLimitAndNavigate();
       },
       error: (err) => {
         console.error('Registration failed:', err);
@@ -150,6 +153,22 @@ export class Register {
       error: (err) => {
         console.error('Failed to set daily limit:', err);
         this.errorMessage.set('register.errorDailyLimitFailed');
+      }
+    });
+  }
+
+  private checkDailyLimitAndNavigate(): void {
+    this.router.navigate(['/']);
+    this.userService.getUser().subscribe({
+      next: (user) => {
+        if (!user.dailyLimit) {
+          this.dialog.open(DailyLimitDialog, {
+            disableClose: true
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Failed to check user daily limit:', err);
       }
     });
   }

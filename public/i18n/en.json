@@ -122,7 +122,10 @@
     "title": "Daily Intake",
     "remaining": "{{amount}} {{unit}} remaining",
     "exceeded": "{{amount}} {{unit}} over daily limit",
-    "limitReached": "Daily limit reached"
+    "limitReached": "Daily limit reached",
+    "noLimit": "No daily limit set",
+    "noLimitBadge": "No limit",
+    "setLimit": "Set Limit"
   },
   "home": {
     "today": "Today",
@@ -277,7 +280,6 @@
     "heroTitle": "Track Your Daily Phenylalanine Intake with Ease",
     "heroSubtitle": "Monitor your daily allowance, log meals in seconds, and manage custom foods and food types in one clean, intuitive dashboard.",
     "getStarted": "Get Started",
-    "previewBadge": "Dashboard Preview",
     "preview": {
       "remainingSuffix": "remaining",
       "itemsSuffix": "items",
@@ -298,5 +300,14 @@
         "salad": "Garden Vegetable Salad"
       }
     }
+  },
+  "paginator": {
+    "itemsPerPage": "Items per page:",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "firstPage": "First page",
+    "lastPage": "Last page",
+    "range": "{{start}} – {{end}} of {{length}}",
+    "rangeZero": "0 of {{length}}"
   }
 }

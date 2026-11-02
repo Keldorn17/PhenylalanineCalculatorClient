@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="consumption-card">
+<mat-card appearance="outlined" class="consumption-card" (click)="openEditDialog()">
   <mat-card-content class="card-body">
     <div class="card-header">
       <div class="food-title-group">
@@ -35,18 +35,8 @@
         <button
           matIconButton
           type="button"
-          class="action-btn edit-btn"
-          (click)="openEditDialog()"
-          [matTooltip]="'consumption.edit' | translate"
-          [attr.aria-label]="'consumption.edit' | translate"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          matIconButton
-          type="button"
           class="action-btn delete-btn"
-          (click)="openDeleteDialog()"
+          (click)="openDeleteDialog($event)"
           [matTooltip]="'consumption.delete' | translate"
           [attr.aria-label]="'consumption.delete' | translate"
         >

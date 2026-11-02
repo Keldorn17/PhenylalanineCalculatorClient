@@ -5,9 +5,11 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './auth/auth-interceptor';
+import { PaginatorIntlService } from './paginator/paginator-intl-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +29,10 @@ export const appConfig: ApplicationConfig = {
       useValue: {
         subscriptSizing: 'dynamic'
       }
+    },
+    {
+      provide: MatPaginatorIntl,
+      useClass: PaginatorIntlService
     }
   ]
 };

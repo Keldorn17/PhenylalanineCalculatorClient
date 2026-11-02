@@ -122,7 +122,10 @@
     "title": "Napi bevitel",
     "remaining": "{{amount}} {{unit}} maradt",
     "exceeded": "{{amount}} {{unit}} a napi limit felett",
-    "limitReached": "Napi limit elérve"
+    "limitReached": "Napi limit elérve",
+    "noLimit": "Nincs napi limit beállítva",
+    "noLimitBadge": "Nincs limit",
+    "setLimit": "Limit megadása"
   },
   "home": {
     "today": "Ma",
@@ -275,9 +278,8 @@
   "landing": {
     "badge": "Napi Fenilalanin Követő",
     "heroTitle": "Kövesse nyomon napi fenilalanin bevitelét egyszerűen",
-    "heroSubtitle": "Tartsa szemmel napi keretét, rögzítse étkezéseit másodpercek alatt, és kezelje saját ételeit és étel típusait egyetlen átlátható felületen.",
+    "heroSubtitle": "Tartsa szemmel napi keretét, rögzítse étkezéseit másodpercek alatt, és kezelje saját ételeit és ételtípusait egyetlen átlátható felületen.",
     "getStarted": "Kezdés",
-    "previewBadge": "Felület előnézete",
     "preview": {
       "remainingSuffix": "maradt",
       "itemsSuffix": "tétel",
@@ -298,5 +300,14 @@
         "salad": "Kerti zöldségsaláta"
       }
     }
+  },
+  "paginator": {
+    "itemsPerPage": "Elemek száma oldalanként:",
+    "nextPage": "Következő oldal",
+    "previousPage": "Előző oldal",
+    "firstPage": "Első oldal",
+    "lastPage": "Utolsó oldal",
+    "range": "{{start}} – {{end}} / {{length}}",
+    "rangeZero": "0 / {{length}}"
   }
 }
