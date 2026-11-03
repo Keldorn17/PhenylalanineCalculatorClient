@@ -21,6 +21,7 @@
     "themeLight": "Light Mode",
     "themeDark": "Dark Mode",
     "errorUsernameRequired": "Username is required.",
+    "errorUsernamePattern": "Username must be 3-32 characters long without spaces.",
     "errorPasswordRequired": "Password is required.",
     "errorPasswordStrength": "Password must be at least 8 characters, and contain uppercase, lowercase, number, and special character.",
     "dontHaveAccount": "Don't have an account? Register"
@@ -54,6 +55,7 @@
       "currentPassword": "Current Password",
       "currentPasswordPlaceholder": "Enter current password",
       "errorUsernameRequired": "New username is required.",
+      "errorUsernamePattern": "Username must be 3-32 characters long without spaces.",
       "errorPasswordRequired": "Current password is required.",
       "errorFailed": "Failed to change username. Please check your password or try a different username."
     },
@@ -91,6 +93,7 @@
     "errorEmailRequired": "Email is required.",
     "errorEmailInvalid": "Please enter a valid email address.",
     "errorUsernameRequired": "Username is required.",
+    "errorUsernamePattern": "Username must be 3-32 characters long without spaces.",
     "errorPasswordRequired": "Password is required.",
     "errorPasswordStrength": "Password must be at least 8 characters, and contain uppercase, lowercase, number, and special character.",
     "errorPasswordMismatch": "Passwords do not match.",

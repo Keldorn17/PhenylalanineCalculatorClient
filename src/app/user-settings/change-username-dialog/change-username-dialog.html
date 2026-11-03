@@ -23,6 +23,9 @@
       @if (form.get('username')?.touched && form.get('username')?.hasError('required')) {
         <mat-error>{{ 'settings.changeUsernameDialog.errorUsernameRequired' | translate }}</mat-error>
       }
+      @if (form.get('username')?.touched && form.get('username')?.hasError('pattern')) {
+        <mat-error>{{ 'settings.changeUsernameDialog.errorUsernamePattern' | translate }}</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
