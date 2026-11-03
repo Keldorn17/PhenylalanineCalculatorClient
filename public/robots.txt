@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /foods
+Disallow: /food-types
+Disallow: /config.json
+
+Sitemap: https://phe.keldorn.com/sitemap.xml
