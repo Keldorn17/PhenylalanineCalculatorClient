@@ -15,6 +15,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth-service';
+import { usernameValidator } from '../../validator/username-validator';
 
 export interface ChangeUsernameDialogData {
   currentUsername?: string;
@@ -44,7 +45,7 @@ export class ChangeUsernameDialog {
   protected readonly data = inject<ChangeUsernameDialogData | null>(MAT_DIALOG_DATA, {optional: true});
 
   protected readonly form: FormGroup = this.formBuilder.group({
-    username: ['', [Validators.required]],
+    username: ['', [Validators.required, usernameValidator]],
     password: ['', [Validators.required]]
   });
 

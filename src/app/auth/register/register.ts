@@ -17,6 +17,7 @@ import { AuthService } from '../auth-service';
 import { UserService } from '../../user/user-service';
 import { DailyLimitDialog } from '../../daily-limit-dialog/daily-limit-dialog';
 import { passwordMatchValidator, passwordValidator } from '../../validator/password-validator';
+import { usernameValidator } from '../../validator/username-validator';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -51,7 +52,7 @@ export class Register {
   protected readonly registerForm: FormGroup = this.formBuilder.group(
     {
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required, usernameValidator]],
       password: ['', [Validators.required, passwordValidator]],
       confirmPassword: ['', [Validators.required]],
       acceptTerms: [false, [Validators.requiredTrue]]

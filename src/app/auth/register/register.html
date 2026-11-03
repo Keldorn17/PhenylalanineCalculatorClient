@@ -83,6 +83,9 @@
             @if (registerForm.get('username')?.touched && registerForm.get('username')?.hasError('required')) {
               <mat-error>{{ 'register.errorUsernameRequired' | translate }}</mat-error>
             }
+            @if (registerForm.get('username')?.touched && registerForm.get('username')?.hasError('pattern')) {
+              <mat-error>{{ 'register.errorUsernamePattern' | translate }}</mat-error>
+            }
           </mat-form-field>
 
           <mat-form-field appearance="outline" subscriptSizing="dynamic">
