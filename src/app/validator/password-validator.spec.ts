@@ -14,7 +14,7 @@ describe('Password Validators', () => {
       expect(passwordValidator(shortControl)).toEqual({
         pattern: {
           actualValue: 'Pass1!',
-          requiredPattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#\\-!%*?&])[A-Za-z\\d@$#\\-!%*?&]{8,}$/'
+          requiredPattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#\\-!%*?&_+=.])[A-Za-z\\d@$#\\-!%*?&_+=.]{8,}$/'
         }
       });
     });
