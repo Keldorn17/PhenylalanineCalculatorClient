@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FoodConsumptionResponse } from '../food-consumption-types';
 import { FoodConsumptionService } from '../food-consumption-service';
 import { ProgressBarService } from '../../progress-bar/progress-bar-service';
@@ -34,9 +34,13 @@ export class FoodConsumptionCard {
   private readonly dialog = inject(MatDialog);
   private readonly foodConsumptionService = inject(FoodConsumptionService);
   private readonly progressBarService = inject(ProgressBarService);
+  private readonly translateService = inject(TranslateService);
 
   public readonly consumption = input.required<FoodConsumptionResponse>();
   public readonly changed = output<void>();
+
+  protected readonly currentLang = this.translateService.currentLang;
+  protected readonly timeFormat = computed(() => (this.currentLang() ?? 'en') === 'hu' ? 'HH:mm' : 'h:mm a');
 
   public openEditDialog(): void {
     this.dialog

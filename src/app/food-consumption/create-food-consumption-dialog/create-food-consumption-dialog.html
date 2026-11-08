@@ -32,43 +32,7 @@
       }
     </mat-form-field>
 
-    <div class="date-time-row">
-      <mat-form-field appearance="outline" subscriptSizing="dynamic">
-        <mat-label>{{ 'consumption.editDialog.date' | translate }}</mat-label>
-        <input
-          matInput
-          [matDatepicker]="datePicker"
-          formControlName="date"
-          [placeholder]="'consumption.editDialog.datePlaceholder' | translate"
-        />
-        <mat-datepicker-toggle matIconSuffix [for]="datePicker"/>
-        <mat-datepicker #datePicker/>
-        @if (form.get('date')?.touched && form.get('date')?.hasError('required')) {
-          <mat-error>{{ 'consumption.editDialog.errorDateRequired' | translate }}</mat-error>
-        }
-        @if (form.get('date')?.touched && form.get('date')?.hasError('matDatepickerParse')) {
-          <mat-error>{{ 'consumption.editDialog.errorDateInvalid' | translate }}</mat-error>
-        }
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" subscriptSizing="dynamic">
-        <mat-label>{{ 'consumption.editDialog.time' | translate }}</mat-label>
-        <input
-          matInput
-          [matTimepicker]="timePicker"
-          formControlName="time"
-          [placeholder]="'consumption.editDialog.timePlaceholder' | translate"
-        />
-        <mat-timepicker-toggle matIconSuffix [for]="timePicker"/>
-        <mat-timepicker interval="15m" #timePicker/>
-        @if (form.get('time')?.touched && form.get('time')?.hasError('required')) {
-          <mat-error>{{ 'consumption.editDialog.errorTimeRequired' | translate }}</mat-error>
-        }
-        @if (form.get('time')?.touched && form.get('time')?.hasError('matTimepickerParse')) {
-          <mat-error>{{ 'consumption.editDialog.errorTimeInvalid' | translate }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
+    <date-time-picker [control]="consumedAtControl"/>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

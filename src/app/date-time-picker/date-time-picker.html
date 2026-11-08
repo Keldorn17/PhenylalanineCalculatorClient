@@ -1,0 +1,32 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>{{ labelTranslateKey() | translate }}</mat-label>
+  <input
+    matInput
+    [owlDateTime]="dtPicker"
+    [owlDateTimeTrigger]="dtPicker"
+    [formControl]="control()"
+    [placeholder]="placeholderTranslateKey() | translate"
+  />
+  <button
+    matIconButton
+    matIconSuffix
+    type="button"
+    [owlDateTimeTrigger]="dtPicker"
+    [attr.aria-label]="placeholderTranslateKey() | translate"
+  >
+    <mat-icon>calendar_today</mat-icon>
+  </button>
+  <owl-date-time
+    #dtPicker
+    [pickerMode]="pickerMode()"
+    [pickerType]="pickerType()"
+    [hour12Timer]="hour12Timer()"
+    [showSecondsTimer]="showSecondsTimer()"
+  />
+  @if (control().touched && control().hasError('required')) {
+    <mat-error>{{ requiredErrorTranslateKey() | translate }}</mat-error>
+  }
+  @if (control().touched && control().hasError('owlDateTimeParse')) {
+    <mat-error>{{ invalidErrorTranslateKey() | translate }}</mat-error>
+  }
+</mat-form-field>

@@ -22,9 +22,17 @@
   >
     <div class="floating-panel mat-shadow-3">
       @if (currentView() === 'main') {
-        <div class="menu-section">
-          <div class="username">
-            {{ userResponse()?.username }}
+        <div class="menu-section user-info">
+          <div class="user-avatar">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="user-details">
+            <div class="username">
+              {{ userResponse()?.username }}
+            </div>
+            <div class="email">
+              {{ userResponse()?.email }}
+            </div>
           </div>
         </div>
 

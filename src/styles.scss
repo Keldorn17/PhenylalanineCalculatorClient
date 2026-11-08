@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use '@danielmoncada/angular-datetime-picker/assets/style/picker.min.css';
 @use 'color-theme' as color-theme;
 
 @include mat.core();
@@ -111,3 +112,88 @@ input[type='number'] {
 @include mat.dialog-overrides((
   container-color: var(--mat-sys-surface-container),
 ));
+
+.owl-dt-container,
+.owl-dialog-container .owl-dt-container {
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+  border-radius: var(--mat-sys-corner-large, 16px);
+  border: 1px solid var(--mat-sys-outline-variant);
+  box-shadow: var(--mat-sys-level3);
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.owl-dt-container-row {
+  border-bottom-color: var(--mat-sys-outline-variant);
+}
+
+.owl-dt-calendar-control {
+  color: var(--mat-sys-on-surface);
+
+  .owl-dt-calendar-control-content .owl-dt-calendar-control-button:hover {
+    background-color: var(--mat-sys-surface-container-highest);
+  }
+}
+
+.owl-dt-control-period-button:hover > .owl-dt-control-button-content {
+  background-color: var(--mat-sys-surface-container-highest);
+}
+
+.owl-dt-control-arrow-button[disabled] {
+  color: var(--mat-sys-outline);
+}
+
+.owl-dt-calendar-table {
+  .owl-dt-calendar-header {
+    color: var(--mat-sys-on-surface-variant);
+
+    .owl-dt-calendar-table-divider::after {
+      background: var(--mat-sys-outline-variant);
+    }
+  }
+
+  .owl-dt-calendar-cell {
+    color: var(--mat-sys-on-surface);
+  }
+
+  .owl-dt-calendar-cell-today:not(.owl-dt-calendar-cell-selected) {
+    border-color: var(--mat-sys-primary);
+  }
+
+  .owl-dt-calendar-cell-selected {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+  }
+
+  .owl-dt-calendar-cell-active:focus > .owl-dt-calendar-cell-content:not(.owl-dt-calendar-cell-selected),
+  :not(.owl-dt-calendar-cell-disabled):hover > .owl-dt-calendar-cell-content:not(.owl-dt-calendar-cell-selected) {
+    background-color: var(--mat-sys-surface-container-highest);
+  }
+}
+
+.owl-dt-timer-content .owl-dt-timer-input {
+  background-color: var(--mat-sys-surface-container-highest);
+  color: var(--mat-sys-on-surface);
+  border-color: var(--mat-sys-outline);
+  border-radius: var(--mat-sys-corner-extra-small, 4px);
+}
+
+.owl-dt-timer-hour12 {
+  color: var(--mat-sys-primary);
+
+  .owl-dt-timer-hour12-box:focus .owl-dt-control-button-content,
+  .owl-dt-timer-hour12-box:hover .owl-dt-control-button-content {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+  }
+}
+
+.owl-dt-container-buttons {
+  color: var(--mat-sys-primary);
+  height: 2.5em;
+}
+
+.owl-dt-container-control-button:hover .owl-dt-control-button-content {
+  background-color: var(--mat-sys-surface-container-highest);
+}
