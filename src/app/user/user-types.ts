@@ -5,4 +5,5 @@ export interface UserRequest {
 export interface UserResponse {
   username: string;
   dailyLimit: number | null;
+  email: string;
 }

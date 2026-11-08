@@ -166,10 +166,14 @@
       "datePlaceholder": "Select date",
       "time": "Time",
       "timePlaceholder": "Select time",
+      "dateTime": "Date & Time",
+      "dateTimePlaceholder": "Select date and time",
       "errorDateRequired": "Date is required.",
       "errorDateInvalid": "Invalid date.",
       "errorTimeRequired": "Time is required.",
-      "errorTimeInvalid": "Invalid time."
+      "errorTimeInvalid": "Invalid time.",
+      "errorDateTimeRequired": "Date and time are required.",
+      "errorDateTimeInvalid": "Invalid date or time."
     },
     "deleteDialog": {
       "title": "Delete Food Consumption",
@@ -282,6 +286,9 @@
   "dialog": {
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "dateTimePicker": {
+    "set": "Save"
   },
   "landing": {
     "badge": "Daily Phenylalanine Tracker",

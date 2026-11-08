@@ -62,7 +62,7 @@
   transition: background-color 0.15s ease;
 
   &:hover {
-    background-color: var(--mat-sys-surface-container-high);
+    background-color: var(--mat-sys-secondary-container);
   }
 
   .item-icon {
@@ -99,19 +99,51 @@
   }
 }
 
-.username {
-  font-size: 1rem;
-  font-weight: bold;
+.user-info {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+}
+
+.user-avatar {
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 44px;
-  padding: 0 16px;
-  background: transparent;
-  border: none;
-  font-family: inherit;
-  text-align: left;
-  color: var(--mat-sys-on-surface);
-  transition: background-color 0.15s ease;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+  flex-shrink: 0;
 
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.username {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.email {
+  font-size: 0.75rem;
+  color: var(--mat-sys-on-surface-variant);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

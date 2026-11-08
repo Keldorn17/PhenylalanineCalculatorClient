@@ -166,10 +166,14 @@
       "datePlaceholder": "Dátum kiválasztása",
       "time": "Időpont",
       "timePlaceholder": "Időpont kiválasztása",
+      "dateTime": "Dátum és időpont",
+      "dateTimePlaceholder": "Dátum és időpont kiválasztása",
       "errorDateRequired": "A dátum megadása kötelező.",
       "errorDateInvalid": "Érvénytelen dátum.",
       "errorTimeRequired": "Az időpont megadása kötelező.",
-      "errorTimeInvalid": "Érvénytelen időpont."
+      "errorTimeInvalid": "Érvénytelen időpont.",
+      "errorDateTimeRequired": "A dátum és időpont megadása kötelező.",
+      "errorDateTimeInvalid": "Érvénytelen dátum vagy időpont."
     },
     "deleteDialog": {
       "title": "Ételfogyasztás törlése",
@@ -282,6 +286,9 @@
   "dialog": {
     "confirm": "Elfogad",
     "cancel": "Mégse"
+  },
+  "dateTimePicker": {
+    "set": "Mentés"
   },
   "landing": {
     "badge": "Napi Fenilalanin Követő",

@@ -11,7 +11,7 @@
           </span>
           <span class="consumed-time">
             <mat-icon>schedule</mat-icon>
-            <span>{{ consumption().consumedAt | date: 'HH:mm' }}</span>
+            <span>{{ consumption().consumedAt | date: timeFormat() }}</span>
           </span>
         </div>
       </div>
