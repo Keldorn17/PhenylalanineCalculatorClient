@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -42,6 +43,7 @@ import { FoodDialogData, PheInputMode } from './food-dialog-types';
     MatIconModule,
     MatAutocompleteModule,
     MatButtonToggleModule,
+    MatSlideToggleModule,
     TranslatePipe
   ],
   templateUrl: './food-dialog.html',
@@ -84,7 +86,8 @@ export class FoodDialog implements OnInit {
     phenylalanine: [
       this.data?.food?.phenylalanine ?? null,
       this.isEditMode ? [Validators.required, Validators.min(0)] : []
-    ]
+    ],
+    isPrivate: [this.data?.food?.isPrivate ?? false]
   });
 
   constructor() {
@@ -181,13 +184,15 @@ export class FoodDialog implements OnInit {
     const name = String(this.form.value.name).trim();
     const protein = Number(this.form.value.protein);
     const calories = Number(this.form.value.calories);
+    const isPrivate = Boolean(this.form.value.isPrivate);
     const selectedType = this.selectedFoodType();
 
     if (this.isEditMode && this.data?.food) {
       const updatePayload: FoodRequest = {
         name,
         protein,
-        calories
+        calories,
+        isPrivate
       };
       if (selectedType) {
         updatePayload.foodTypeId = selectedType.id;
@@ -212,7 +217,8 @@ export class FoodDialog implements OnInit {
     const createPayload: FoodRequest = {
       name,
       protein,
-      calories
+      calories,
+      isPrivate
     };
 
     if (selectedType) {

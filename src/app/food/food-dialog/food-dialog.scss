@@ -68,3 +68,15 @@
     color: var(--mat-sys-on-surface-variant);
   }
 }
+
+.private-toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.25rem;
+
+  .private-toggle-hint {
+    font-size: 0.75rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}

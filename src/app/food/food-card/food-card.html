@@ -47,6 +47,19 @@
     <mat-divider/>
 
     <div class="card-footer">
+      <div class="footer-badges">
+        @if (food().isPrivate) {
+          <div
+            class="private-indicator"
+            [matTooltip]="'food.privateTooltip' | translate"
+            [attr.aria-label]="'food.privateTooltip' | translate"
+          >
+            <mat-icon>visibility_off</mat-icon>
+            <span>{{ 'food.private' | translate }}</span>
+          </div>
+        }
+      </div>
+
       @if (food().canEdit) {
         <div class="card-actions">
           <button

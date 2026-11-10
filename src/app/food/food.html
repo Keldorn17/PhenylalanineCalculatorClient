@@ -58,9 +58,15 @@
         <mat-card appearance="outlined" class="filters-panel">
           <mat-card-content class="filters-panel-content">
             <div class="filters-top-row">
-              <mat-slide-toggle formControlName="onlyOwn" (change)="applyFilters()">
-                {{ 'food.filters.onlyOwn' | translate }}
-              </mat-slide-toggle>
+              <div class="filters-toggles">
+                <mat-slide-toggle formControlName="onlyOwn" (change)="applyFilters()">
+                  {{ 'food.filters.onlyOwn' | translate }}
+                </mat-slide-toggle>
+
+                <mat-slide-toggle formControlName="onlyPrivate" (change)="applyFilters()">
+                  {{ 'food.filters.onlyPrivate' | translate }}
+                </mat-slide-toggle>
+              </div>
 
               <mat-form-field appearance="outline" subscriptSizing="dynamic" class="sort-field">
                 <mat-label>{{ 'food.filters.sortBy' | translate }}</mat-label>

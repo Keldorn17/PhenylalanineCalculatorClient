@@ -4,6 +4,7 @@ export interface FoodRequest {
   calories: number;
   phenylalanine?: number;
   foodTypeId?: number;
+  isPrivate?: boolean;
 }
 
 export interface FoodResponse {
@@ -15,4 +16,5 @@ export interface FoodResponse {
   foodTypeName: string;
   multiplier: number;
   canEdit: boolean;
+  isPrivate: boolean;
 }

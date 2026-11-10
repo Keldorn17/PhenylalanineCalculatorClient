@@ -150,6 +150,13 @@
         }
       </mat-form-field>
     }
+
+    <div class="private-toggle-wrapper">
+      <mat-slide-toggle formControlName="isPrivate">
+        {{ 'food.dialog.isPrivate' | translate }}
+      </mat-slide-toggle>
+      <span class="private-toggle-hint">{{ 'food.dialog.isPrivateHint' | translate }}</span>
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
