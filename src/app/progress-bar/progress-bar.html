@@ -61,7 +61,10 @@
       } @else if (isOverLimit()) {
         <span class="status-info over-limit">
           <mat-icon>error_outline</mat-icon>
-          <span>{{ 'progressBar.exceeded' | translate: {amount: (exceeded() | number: '1.0-2'), unit: unit()} }}</span>
+          <span>{{
+            'progressBar.exceeded'
+              | translate: { amount: (exceeded() | number: '1.0-2'), unit: unit() }
+          }}</span>
         </span>
       } @else if (isAtLimit()) {
         <span class="status-info at-limit">
@@ -71,11 +74,13 @@
       } @else {
         <span class="status-info in-progress">
           <span>{{
-              'progressBar.remaining' | translate: {
-                amount: (remaining() | number: '1.0-2'),
-                unit: unit()
-              }
-            }}</span>
+            'progressBar.remaining'
+              | translate
+                : {
+                    amount: (remaining() | number: '1.0-2'),
+                    unit: unit(),
+                  }
+          }}</span>
         </span>
       }
     </div>

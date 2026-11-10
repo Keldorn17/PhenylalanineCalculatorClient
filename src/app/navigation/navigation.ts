@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
@@ -24,11 +24,10 @@ import { AuthService } from '../auth/auth-service';
     SidenavContent,
     TranslatePipe,
     UserSettings,
-    MatButton
+    MatButton,
   ],
   templateUrl: './navigation.html',
   styleUrl: './navigation.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Navigation {
   private readonly breakpointObserver = inject(BreakpointObserver);
@@ -45,16 +44,16 @@ export class Navigation {
 
   protected readonly isMobile = toSignal(
     this.breakpointObserver
-      .observe(`(max-width: ${ this.mobileWidth }px)`)
-      .pipe(map(result => result.matches)),
-    {initialValue: typeof window !== 'undefined' ? window.innerWidth <= this.mobileWidth : false}
+      .observe(`(max-width: ${this.mobileWidth}px)`)
+      .pipe(map((result) => result.matches)),
+    { initialValue: typeof window !== 'undefined' ? window.innerWidth <= this.mobileWidth : false },
   );
 
   constructor() {
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
-        takeUntilDestroyed()
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         if (this.isMobile()) {
@@ -64,11 +63,11 @@ export class Navigation {
   }
 
   protected toggleCollapse(): void {
-    this.isCollapsed.update(collapsed => !collapsed);
+    this.isCollapsed.update((collapsed) => !collapsed);
   }
 
   protected toggleMobileSidenav(): void {
-    this.mobileOpened.update(opened => !opened);
+    this.mobileOpened.update((opened) => !opened);
   }
 
   protected onMobileOpenedChange(opened: boolean): void {

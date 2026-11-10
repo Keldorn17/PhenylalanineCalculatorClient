@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
   public readonly isDark;
@@ -10,7 +10,10 @@ export class ThemeService {
   constructor() {
     this.isDark = this.isDarkSignal.asReadonly();
     const savedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
-    const prefersDark = typeof window !== 'undefined' && typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-color-scheme: dark)').matches : false;
+    const prefersDark =
+      typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+        : false;
     const isDarkTheme = savedTheme === 'dark' || (!savedTheme && prefersDark);
     this.isDarkSignal.set(isDarkTheme);
     this.applyTheme(isDarkTheme);

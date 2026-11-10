@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIconButton } from '@angular/material/button';
@@ -24,11 +24,10 @@ import { MatDivider } from '@angular/material/list';
     MatIcon,
     MatTooltip,
     TranslatePipe,
-    MatDivider
+    MatDivider,
   ],
   templateUrl: './food-consumption-card.html',
   styleUrl: './food-consumption-card.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodConsumptionCard {
   private readonly dialog = inject(MatDialog);
@@ -40,17 +39,19 @@ export class FoodConsumptionCard {
   public readonly changed = output<void>();
 
   protected readonly currentLang = this.translateService.currentLang;
-  protected readonly timeFormat = computed(() => (this.currentLang() ?? 'en') === 'hu' ? 'HH:mm' : 'h:mm a');
+  protected readonly timeFormat = computed(() =>
+    (this.currentLang() ?? 'en') === 'hu' ? 'HH:mm' : 'h:mm a',
+  );
 
   public openEditDialog(): void {
     this.dialog
       .open(EditFoodConsumptionDialog, {
         data: {
-          consumption: this.consumption()
-        }
+          consumption: this.consumption(),
+        },
       })
       .afterClosed()
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           this.changed.emit();
         }
@@ -66,11 +67,11 @@ export class FoodConsumptionCard {
           titleTranslateKey: 'consumption.deleteDialog.title',
           detailsTranslateKey: 'consumption.deleteDialog.details',
           confirmTranslateKey: 'consumption.deleteDialog.delete',
-          confirmClass: 'warn'
-        }
+          confirmClass: 'warn',
+        },
       })
       .afterClosed()
-      .subscribe(confirmed => {
+      .subscribe((confirmed) => {
         if (!confirmed) {
           return;
         }

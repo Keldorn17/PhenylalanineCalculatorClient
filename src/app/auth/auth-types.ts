@@ -20,7 +20,6 @@ export type AuthBroadcastMessage =
   | { type: 'LOGIN_SUCCESS'; accessToken: string; expiresIn: number; expiresAt: number }
   | { type: 'LOGOUT' };
 
-
 export interface AuthUsernameChangeRequest {
   username: string;
   password: string;

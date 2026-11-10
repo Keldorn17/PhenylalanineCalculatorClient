@@ -4,3 +4,4 @@
 /.angular
 /coverage
 package-lock.json
+wrangler.jsonc

@@ -3,7 +3,7 @@ import { OwlDateTimeIntl } from '@danielmoncada/angular-datetime-picker';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DateTimeIntlService extends OwlDateTimeIntl {
   private readonly translateService = inject(TranslateService);

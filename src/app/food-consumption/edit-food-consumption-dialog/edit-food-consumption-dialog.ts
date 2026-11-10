@@ -1,11 +1,17 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -31,11 +37,10 @@ import { EditFoodConsumptionDialogData } from './edit-food-consumption-dialog-ty
     MatButtonModule,
     MatIconModule,
     DateTimePicker,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './edit-food-consumption-dialog.html',
   styleUrl: './edit-food-consumption-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditFoodConsumptionDialog {
   public readonly data = inject<EditFoodConsumptionDialogData>(MAT_DIALOG_DATA);
@@ -45,12 +50,12 @@ export class EditFoodConsumptionDialog {
   private readonly formBuilder = inject(FormBuilder);
 
   protected readonly consumedAtControl = new FormControl<Date | null>(this.getInitialConsumedAt(), [
-    Validators.required
+    Validators.required,
   ]);
 
   protected readonly form: FormGroup = this.formBuilder.group({
     amount: [this.data?.consumption?.amount ?? null, [Validators.required, Validators.min(0.1)]],
-    consumedAt: this.consumedAtControl
+    consumedAt: this.consumedAtControl,
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -59,7 +64,7 @@ export class EditFoodConsumptionDialog {
     this.form.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -82,7 +87,7 @@ export class EditFoodConsumptionDialog {
     consumedAt.setSeconds(0, 0);
 
     this.foodConsumptionService
-      .putFoodConsumption(this.data.consumption.id, {amount, consumedAt})
+      .putFoodConsumption(this.data.consumption.id, { amount, consumedAt })
       .subscribe({
         next: (updated) => {
           this.progressBarService.triggerRefresh();
@@ -90,7 +95,7 @@ export class EditFoodConsumptionDialog {
         },
         error: () => {
           this.errorMessage.set('consumption.editDialog.errorFailed');
-        }
+        },
       });
   }
 

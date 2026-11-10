@@ -8,8 +8,7 @@ export interface RsqlParams {
   sort?: string;
 }
 
-export interface ApiQueryParams extends PageParams, RsqlParams {
-}
+export interface ApiQueryParams extends PageParams, RsqlParams {}
 
 export interface PageResponse {
   size: number;

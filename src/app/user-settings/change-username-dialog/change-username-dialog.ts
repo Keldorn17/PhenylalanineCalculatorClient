@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,21 +32,22 @@ export interface ChangeUsernameDialogData {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './change-username-dialog.html',
   styleUrl: './change-username-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangeUsernameDialog {
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly dialogRef = inject(MatDialogRef<ChangeUsernameDialog>);
-  protected readonly data = inject<ChangeUsernameDialogData | null>(MAT_DIALOG_DATA, {optional: true});
+  protected readonly data = inject<ChangeUsernameDialogData | null>(MAT_DIALOG_DATA, {
+    optional: true,
+  });
 
   protected readonly form: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required, usernameValidator]],
-    password: ['', [Validators.required]]
+    password: ['', [Validators.required]],
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -57,7 +58,7 @@ export class ChangeUsernameDialog {
     this.form.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -76,9 +77,9 @@ export class ChangeUsernameDialog {
     this.errorMessage.set(null);
     this.isLoading.set(true);
 
-    const {username, password} = this.form.value;
+    const { username, password } = this.form.value;
 
-    this.authService.changeUsername({username, password}).subscribe({
+    this.authService.changeUsername({ username, password }).subscribe({
       next: () => {
         this.isLoading.set(false);
         this.dialogRef.close(true);
@@ -87,7 +88,7 @@ export class ChangeUsernameDialog {
         console.error('Failed to change username:', err);
         this.isLoading.set(false);
         this.errorMessage.set('settings.changeUsernameDialog.errorFailed');
-      }
+      },
     });
   }
 }

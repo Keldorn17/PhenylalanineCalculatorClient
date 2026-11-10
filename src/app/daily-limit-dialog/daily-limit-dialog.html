@@ -28,10 +28,16 @@
       />
       <mat-icon matPrefix>monitor_heart</mat-icon>
       <span matTextSuffix>mg</span>
-      @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('required')) {
+      @if (
+        dailyLimitForm.get('dailyLimit')?.touched &&
+        dailyLimitForm.get('dailyLimit')?.hasError('required')
+      ) {
         <mat-error>{{ 'register.errorDailyLimitRequired' | translate }}</mat-error>
       }
-      @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('min')) {
+      @if (
+        dailyLimitForm.get('dailyLimit')?.touched &&
+        dailyLimitForm.get('dailyLimit')?.hasError('min')
+      ) {
         <mat-error>{{ 'register.errorDailyLimitMin' | translate }}</mat-error>
       }
     </mat-form-field>

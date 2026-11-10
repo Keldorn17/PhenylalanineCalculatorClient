@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButton } from '@angular/material/button';
@@ -19,11 +19,10 @@ import { FoodConsumptionResponse } from '../food-consumption/food-consumption-ty
     TranslatePipe,
     ProgressBar,
     DateSwitcher,
-    FoodConsumptionCard
+    FoodConsumptionCard,
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Landing {
   private readonly translateService = inject(TranslateService);
@@ -40,7 +39,7 @@ export class Landing {
         foodName: this.translateService.instant('landing.preview.foods.apple'),
         amount: 150,
         phenylalanineAmount: 45,
-        consumedAt: new Date(base.getTime() + (8 * 60 + 30) * 60000)
+        consumedAt: new Date(base.getTime() + (8 * 60 + 30) * 60000),
       },
       {
         id: 2,
@@ -48,7 +47,7 @@ export class Landing {
         foodName: this.translateService.instant('landing.preview.foods.bread'),
         amount: 80,
         phenylalanineAmount: 60,
-        consumedAt: new Date(base.getTime() + (10 * 60 + 15) * 60000)
+        consumedAt: new Date(base.getTime() + (10 * 60 + 15) * 60000),
       },
       {
         id: 3,
@@ -56,7 +55,7 @@ export class Landing {
         foodName: this.translateService.instant('landing.preview.foods.rice'),
         amount: 200,
         phenylalanineAmount: 140,
-        consumedAt: new Date(base.getTime() + 13 * 60 * 60000)
+        consumedAt: new Date(base.getTime() + 13 * 60 * 60000),
       },
       {
         id: 4,
@@ -64,8 +63,8 @@ export class Landing {
         foodName: this.translateService.instant('landing.preview.foods.salad'),
         amount: 180,
         phenylalanineAmount: 75,
-        consumedAt: new Date(base.getTime() + (18 * 60 + 45) * 60000)
-      }
+        consumedAt: new Date(base.getTime() + (18 * 60 + 45) * 60000),
+      },
     ];
   });
 }

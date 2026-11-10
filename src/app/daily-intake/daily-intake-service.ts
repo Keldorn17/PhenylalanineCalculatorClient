@@ -6,7 +6,7 @@ import { ApiPath } from '../http/api-path';
 import { formatIsoDate } from '../http/api-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DailyIntakeService {
   private readonly httpClient = inject(HttpClient);
@@ -14,7 +14,7 @@ export class DailyIntakeService {
   public getDailyIntake(date: Date): Observable<DailyIntakeResponse> {
     const formattedDate = formatIsoDate(date);
     return this.httpClient.get<DailyIntakeResponse>(
-      ApiPath.resolve(ApiPath.dailyIntake.get, formattedDate)
+      ApiPath.resolve(ApiPath.dailyIntake.get, formattedDate),
     );
   }
 }

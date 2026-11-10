@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  OnInit,
-  signal
-} from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
@@ -33,11 +26,10 @@ import { DateSwitcher } from '../date-switcher/date-switcher';
     TranslatePipe,
     ProgressBar,
     DateSwitcher,
-    FoodConsumptionCard
+    FoodConsumptionCard,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home implements OnInit {
   private readonly foodConsumptionService = inject(FoodConsumptionService);
@@ -101,13 +93,17 @@ export class Home implements OnInit {
       .getFoodConsumption(
         {
           page: this.pageIndex(),
-          size: this.pageSize()
+          size: this.pageSize(),
         },
-        this.selectedDate()
+        this.selectedDate(),
       )
       .subscribe({
-        next: response => {
-          if (response.content.length === 0 && this.pageIndex() > 0 && response.page.totalElements > 0) {
+        next: (response) => {
+          if (
+            response.content.length === 0 &&
+            this.pageIndex() > 0 &&
+            response.page.totalElements > 0
+          ) {
             this.pageIndex.set(this.pageIndex() - 1);
             this.loadConsumptions();
             return;
@@ -120,7 +116,7 @@ export class Home implements OnInit {
           this.consumptions.set([]);
           this.totalElements.set(0);
           this.isLoading.set(false);
-        }
+        },
       });
   }
 

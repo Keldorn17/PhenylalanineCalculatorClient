@@ -47,10 +47,11 @@ mat-sidenav-container {
   ::ng-deep .mat-drawer-backdrop {
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
-    transition: backdrop-filter 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
-    -webkit-backdrop-filter 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
-    background-color 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
-    visibility 400ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    transition:
+      backdrop-filter 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
+      -webkit-backdrop-filter 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
+      background-color 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
+      visibility 400ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 
     &.mat-drawer-shown {
       backdrop-filter: blur(4px);
@@ -96,8 +97,9 @@ mat-sidenav {
 
   &.sidenav {
     padding: 0;
-    transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
-    width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition:
+      transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
+      width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 }
 

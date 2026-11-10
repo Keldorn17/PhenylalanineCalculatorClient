@@ -3,7 +3,13 @@
     <div class="stepper-container">
       <div class="step-badge">{{ 'register.step' | translate }} {{ currentStep() }}/3</div>
 
-      <div class="stepper" role="progressbar" [attr.aria-valuenow]="currentStep()" aria-valuemin="1" aria-valuemax="3">
+      <div
+        class="stepper"
+        role="progressbar"
+        [attr.aria-valuenow]="currentStep()"
+        aria-valuemin="1"
+        aria-valuemax="3"
+      >
         <div class="step completed">
           <div class="step-circle">
             <mat-icon>check</mat-icon>
@@ -13,7 +19,11 @@
 
         <div class="step-line completed"></div>
 
-        <div class="step" [class.active]="currentStep() === 2" [class.completed]="currentStep() === 3">
+        <div
+          class="step"
+          [class.active]="currentStep() === 2"
+          [class.completed]="currentStep() === 3"
+        >
           <div class="step-circle">
             @if (currentStep() === 3) {
               <mat-icon>check</mat-icon>
@@ -36,8 +46,12 @@
     </div>
 
     <mat-card-header>
-      <mat-card-title>{{ (currentStep() === 2 ? 'register.title' : 'register.dailyLimitTitle') | translate }}</mat-card-title>
-      <mat-card-subtitle>{{ (currentStep() === 2 ? 'register.subtitle' : 'register.dailyLimitSubtitle') | translate }}</mat-card-subtitle>
+      <mat-card-title>{{
+        (currentStep() === 2 ? 'register.title' : 'register.dailyLimitTitle') | translate
+      }}</mat-card-title>
+      <mat-card-subtitle>{{
+        (currentStep() === 2 ? 'register.subtitle' : 'register.dailyLimitSubtitle') | translate
+      }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -61,10 +75,14 @@
               autocomplete="email"
             />
             <mat-icon matPrefix>email</mat-icon>
-            @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')) {
+            @if (
+              registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')
+            ) {
               <mat-error>{{ 'register.errorEmailRequired' | translate }}</mat-error>
             }
-            @if (registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')) {
+            @if (
+              registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')
+            ) {
               <mat-error>{{ 'register.errorEmailInvalid' | translate }}</mat-error>
             }
           </mat-form-field>
@@ -80,10 +98,16 @@
               autocomplete="username"
             />
             <mat-icon matPrefix>person</mat-icon>
-            @if (registerForm.get('username')?.touched && registerForm.get('username')?.hasError('required')) {
+            @if (
+              registerForm.get('username')?.touched &&
+              registerForm.get('username')?.hasError('required')
+            ) {
               <mat-error>{{ 'register.errorUsernameRequired' | translate }}</mat-error>
             }
-            @if (registerForm.get('username')?.touched && registerForm.get('username')?.hasError('pattern')) {
+            @if (
+              registerForm.get('username')?.touched &&
+              registerForm.get('username')?.hasError('pattern')
+            ) {
               <mat-error>{{ 'register.errorUsernamePattern' | translate }}</mat-error>
             }
           </mat-form-field>
@@ -108,10 +132,16 @@
             >
               <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
-            @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')) {
+            @if (
+              registerForm.get('password')?.touched &&
+              registerForm.get('password')?.hasError('required')
+            ) {
               <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
             }
-            @if (registerForm.get('password')?.touched && registerForm.get('password')?.hasError('pattern')) {
+            @if (
+              registerForm.get('password')?.touched &&
+              registerForm.get('password')?.hasError('pattern')
+            ) {
               <mat-error>{{ 'register.errorPasswordStrength' | translate }}</mat-error>
             }
           </mat-form-field>
@@ -136,10 +166,16 @@
             >
               <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
-            @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('required')) {
+            @if (
+              registerForm.get('confirmPassword')?.touched &&
+              registerForm.get('confirmPassword')?.hasError('required')
+            ) {
               <mat-error>{{ 'register.errorPasswordRequired' | translate }}</mat-error>
             }
-            @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('passwordMismatch')) {
+            @if (
+              registerForm.get('confirmPassword')?.touched &&
+              registerForm.get('confirmPassword')?.hasError('passwordMismatch')
+            ) {
               <mat-error>{{ 'register.errorPasswordMismatch' | translate }}</mat-error>
             }
           </mat-form-field>
@@ -154,10 +190,14 @@
                   rel="noopener noreferrer"
                   class="terms-link"
                   (click)="$event.stopPropagation()"
-                >{{ 'register.acceptTermsLink' | translate }}</a>{{ 'register.acceptTermsSuffix' | translate }}
+                  >{{ 'register.acceptTermsLink' | translate }}</a
+                >{{ 'register.acceptTermsSuffix' | translate }}
               </span>
             </mat-checkbox>
-            @if (registerForm.get('acceptTerms')?.touched && registerForm.get('acceptTerms')?.hasError('required')) {
+            @if (
+              registerForm.get('acceptTerms')?.touched &&
+              registerForm.get('acceptTerms')?.hasError('required')
+            ) {
               <div class="terms-error">{{ 'register.errorTermsRequired' | translate }}</div>
             }
           </div>
@@ -173,7 +213,7 @@
           </button>
         </form>
 
-        <mat-divider/>
+        <mat-divider />
 
         <div class="auth-footer">
           <a routerLink="/login">
@@ -194,10 +234,16 @@
             />
             <mat-icon matPrefix>monitor_heart</mat-icon>
             <span matTextSuffix>mg</span>
-            @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('required')) {
+            @if (
+              dailyLimitForm.get('dailyLimit')?.touched &&
+              dailyLimitForm.get('dailyLimit')?.hasError('required')
+            ) {
               <mat-error>{{ 'register.errorDailyLimitRequired' | translate }}</mat-error>
             }
-            @if (dailyLimitForm.get('dailyLimit')?.touched && dailyLimitForm.get('dailyLimit')?.hasError('min')) {
+            @if (
+              dailyLimitForm.get('dailyLimit')?.touched &&
+              dailyLimitForm.get('dailyLimit')?.hasError('min')
+            ) {
               <mat-error>{{ 'register.errorDailyLimitMin' | translate }}</mat-error>
             }
           </mat-form-field>

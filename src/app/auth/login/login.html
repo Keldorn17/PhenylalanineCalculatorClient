@@ -24,7 +24,9 @@
             autocomplete="username"
           />
           <mat-icon matPrefix>person</mat-icon>
-          @if (loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')) {
+          @if (
+            loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')
+          ) {
             <mat-error>{{ 'login.errorUsernameRequired' | translate }}</mat-error>
           }
         </mat-form-field>
@@ -49,7 +51,9 @@
           >
             <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-          @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
+          @if (
+            loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')
+          ) {
             <mat-error>{{ 'login.errorPasswordRequired' | translate }}</mat-error>
           }
         </mat-form-field>
@@ -65,7 +69,7 @@
         </button>
       </form>
 
-      <mat-divider/>
+      <mat-divider />
 
       <div class="auth-footer">
         <a routerLink="/register">

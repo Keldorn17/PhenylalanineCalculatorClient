@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -28,11 +28,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatDividerModule
+    MatDividerModule,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login {
   private readonly formBuilder = inject(FormBuilder);
@@ -43,7 +42,7 @@ export class Login {
 
   protected readonly loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required]]
+    password: ['', [Validators.required]],
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -53,7 +52,7 @@ export class Login {
     this.loginForm.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -63,28 +62,28 @@ export class Login {
   protected loginClicked(): void {
     this.errorMessage.set(null);
 
-    const {username, password} = this.loginForm.value;
+    const { username, password } = this.loginForm.value;
 
-    this.authService.login({username, password}).subscribe({
+    this.authService.login({ username, password }).subscribe({
       next: () => {
         this.router.navigate(['/']);
         this.userService.getUser().subscribe({
           next: (user) => {
             if (!user.dailyLimit) {
               this.dialog.open(DailyLimitDialog, {
-                disableClose: true
+                disableClose: true,
               });
             }
           },
           error: (err) => {
             console.error('Failed to check user daily limit:', err);
-          }
+          },
         });
       },
       error: (err) => {
         console.error('Login failed:', err);
         this.errorMessage.set('login.errorInvalid');
-      }
+      },
     });
   }
 }

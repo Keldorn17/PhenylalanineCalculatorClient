@@ -1,24 +1,20 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  OnInit,
-  signal
-} from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -44,14 +40,13 @@ import { FoodDialogData, PheInputMode } from './food-dialog-types';
     MatAutocompleteModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './food-dialog.html',
   styleUrl: './food-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodDialog implements OnInit {
-  public readonly data = inject<FoodDialogData | null>(MAT_DIALOG_DATA, {optional: true});
+  public readonly data = inject<FoodDialogData | null>(MAT_DIALOG_DATA, { optional: true });
   private readonly dialogRef = inject(MatDialogRef<FoodDialog>);
   private readonly foodTypeService = inject(FoodTypeService);
   private readonly foodService = inject(FoodService);
@@ -81,20 +76,20 @@ export class FoodDialog implements OnInit {
     calories: [this.data?.food?.calories ?? null, [Validators.required, Validators.min(0)]],
     foodTypeSearch: [
       this.data?.food?.foodTypeName ?? '',
-      this.isEditMode ? [] : [Validators.required]
+      this.isEditMode ? [] : [Validators.required],
     ],
     phenylalanine: [
       this.data?.food?.phenylalanine ?? null,
-      this.isEditMode ? [Validators.required, Validators.min(0)] : []
+      this.isEditMode ? [Validators.required, Validators.min(0)] : [],
     ],
-    isPrivate: [this.data?.food?.isPrivate ?? false]
+    isPrivate: [this.data?.food?.isPrivate ?? false],
   });
 
   constructor() {
     this.form.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -107,7 +102,7 @@ export class FoodDialog implements OnInit {
         if (typeof value === 'string') {
           this.foodTypeSearchText.set(value);
           const exactMatch = this.foodTypes().find(
-            (item) => item.name.toLowerCase() === value.trim().toLowerCase()
+            (item) => item.name.toLowerCase() === value.trim().toLowerCase(),
           );
           this.selectedFoodType.set(exactMatch ?? null);
         } else if (value && typeof value === 'object') {
@@ -145,7 +140,7 @@ export class FoodDialog implements OnInit {
     const foodType = event.option.value as FoodTypeResponse;
     this.selectedFoodType.set(foodType);
     this.foodTypeSearchText.set(foodType.name);
-    this.form.get('foodTypeSearch')?.setValue(foodType.name, {emitEvent: false});
+    this.form.get('foodTypeSearch')?.setValue(foodType.name, { emitEvent: false });
   }
 
   protected clearFoodTypeSelection(): void {
@@ -192,7 +187,7 @@ export class FoodDialog implements OnInit {
         name,
         protein,
         calories,
-        isPrivate
+        isPrivate,
       };
       if (selectedType) {
         updatePayload.foodTypeId = selectedType.id;
@@ -209,7 +204,7 @@ export class FoodDialog implements OnInit {
         error: () => {
           this.isLoading.set(false);
           this.errorMessage.set('food.dialog.errorEditFailed');
-        }
+        },
       });
       return;
     }
@@ -218,7 +213,7 @@ export class FoodDialog implements OnInit {
       name,
       protein,
       calories,
-      isPrivate
+      isPrivate,
     };
 
     if (selectedType) {
@@ -237,24 +232,24 @@ export class FoodDialog implements OnInit {
       error: () => {
         this.isLoading.set(false);
         this.errorMessage.set('food.dialog.errorCreateFailed');
-      }
+      },
     });
   }
 
   private loadFoodTypes(): void {
-    this.foodTypeService.getFoodTypes({page: 0, size: 100}).subscribe({
+    this.foodTypeService.getFoodTypes({ page: 0, size: 100 }).subscribe({
       next: (response) => {
         this.foodTypes.set(response.content);
         const existingName = this.data?.food?.foodTypeName;
         if (existingName) {
           const match = response.content.find(
-            (item) => item.name.toLowerCase() === existingName.toLowerCase()
+            (item) => item.name.toLowerCase() === existingName.toLowerCase(),
           );
           if (match) {
             this.selectedFoodType.set(match);
           }
         }
-      }
+      },
     });
   }
 }

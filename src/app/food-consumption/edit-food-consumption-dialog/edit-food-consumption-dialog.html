@@ -1,7 +1,7 @@
 <h2 matDialogTitle>{{ 'consumption.editDialog.title' | translate }}</h2>
 <mat-dialog-content>
   <p class="dialog-description">
-    {{ 'consumption.editDialog.description' | translate: {foodName: data.consumption.foodName} }}
+    {{ 'consumption.editDialog.description' | translate: { foodName: data.consumption.foodName } }}
   </p>
 
   @if (errorMessage()) {
@@ -14,7 +14,7 @@
   <form [formGroup]="form" class="edit-consumption-form">
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>{{ 'consumption.amount' | translate }} (g)</mat-label>
-      <input matInput type="number" min="0.1" step="any" formControlName="amount"/>
+      <input matInput type="number" min="0.1" step="any" formControlName="amount" />
       <mat-icon matPrefix>scale</mat-icon>
       <span matTextSuffix>g</span>
       @if (form.get('amount')?.touched && form.get('amount')?.hasError('required')) {
@@ -25,7 +25,7 @@
       }
     </mat-form-field>
 
-    <date-time-picker [control]="consumedAtControl"/>
+    <date-time-picker [control]="consumedAtControl" />
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

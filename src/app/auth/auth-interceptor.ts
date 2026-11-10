@@ -1,4 +1,10 @@
-import { HttpInterceptorFn, HttpErrorResponse, HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
+import {
+  HttpInterceptorFn,
+  HttpErrorResponse,
+  HttpRequest,
+  HttpHandlerFn,
+  HttpEvent,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from './auth-service';
 import { Observable, throwError } from 'rxjs';
@@ -7,7 +13,7 @@ import { ApiPath } from '../http/api-path';
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
-  next: HttpHandlerFn
+  next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> => {
   const authService = inject(AuthService);
 
@@ -25,31 +31,31 @@ export const authInterceptor: HttpInterceptorFn = (
 
   let headers = req.headers;
   if (token && !isAuthRequest) {
-    headers = headers.set('Authorization', `Bearer ${ token }`);
+    headers = headers.set('Authorization', `Bearer ${token}`);
   }
 
   const authReq = req.clone({
     headers,
-    withCredentials: true
+    withCredentials: true,
   });
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401 && !isAuthRequest) {
         return authService.refresh().pipe(
-          switchMap(response => {
+          switchMap((response) => {
             const retriedReq = req.clone({
               withCredentials: true,
               setHeaders: {
-                Authorization: `Bearer ${ response.accessToken }`
-              }
+                Authorization: `Bearer ${response.accessToken}`,
+              },
             });
             return next(retriedReq);
           }),
-          catchError(refreshError => throwError(() => refreshError))
+          catchError((refreshError) => throwError(() => refreshError)),
         );
       }
       return throwError(() => error);
-    })
+    }),
   );
 };

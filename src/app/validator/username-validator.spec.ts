@@ -16,8 +16,8 @@ describe('Username Validator', () => {
     expect(usernameValidator(control)).toEqual({
       pattern: {
         actualValue: 'ab',
-        requiredPattern: USERNAME_PATTERN.toString()
-      }
+        requiredPattern: USERNAME_PATTERN.toString(),
+      },
     });
   });
 
@@ -26,8 +26,8 @@ describe('Username Validator', () => {
     expect(usernameValidator(control)).toEqual({
       pattern: {
         actualValue: 'a'.repeat(33),
-        requiredPattern: USERNAME_PATTERN.toString()
-      }
+        requiredPattern: USERNAME_PATTERN.toString(),
+      },
     });
   });
 

@@ -51,7 +51,9 @@
     border-radius: 9999px;
     background-color: color-mix(in srgb, var(--mat-sys-primary) 14%, transparent);
     color: var(--mat-sys-primary);
-    transition: background-color 0.2s, color 0.2s;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
 
     mat-icon {
       font-size: 1.35rem;
@@ -153,7 +155,9 @@
       color-mix(in srgb, var(--mat-sys-error) 70%, var(--mat-sys-surface)) 6px,
       color-mix(in srgb, var(--mat-sys-error) 70%, var(--mat-sys-surface)) 12px
     );
-    transition: left 0.25s, width 0.25s;
+    transition:
+      left 0.25s,
+      width 0.25s;
   }
 }
 

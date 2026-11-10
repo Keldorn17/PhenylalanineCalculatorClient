@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,7 +9,7 @@ import {
   OwlDateTimeModule,
   OwlNativeDateTimeModule,
   PickerMode,
-  PickerType
+  PickerType,
 } from '@danielmoncada/angular-datetime-picker';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
@@ -23,11 +23,10 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
     MatIconModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './date-time-picker.html',
   styleUrl: './date-time-picker.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateTimePicker {
   private readonly dateTimeAdapter = inject<DateTimeAdapter<Date>>(DateTimeAdapter);
@@ -35,9 +34,15 @@ export class DateTimePicker {
 
   public readonly control = input.required<FormControl<Date | null>>();
   public readonly labelTranslateKey = input<string>('consumption.editDialog.dateTime');
-  public readonly placeholderTranslateKey = input<string>('consumption.editDialog.dateTimePlaceholder');
-  public readonly requiredErrorTranslateKey = input<string>('consumption.editDialog.errorDateTimeRequired');
-  public readonly invalidErrorTranslateKey = input<string>('consumption.editDialog.errorDateTimeInvalid');
+  public readonly placeholderTranslateKey = input<string>(
+    'consumption.editDialog.dateTimePlaceholder',
+  );
+  public readonly requiredErrorTranslateKey = input<string>(
+    'consumption.editDialog.errorDateTimeRequired',
+  );
+  public readonly invalidErrorTranslateKey = input<string>(
+    'consumption.editDialog.errorDateTimeInvalid',
+  );
   public readonly pickerMode = input<PickerMode>('popup');
   public readonly pickerType = input<PickerType>('both');
   public readonly showSecondsTimer = input<boolean>(false);

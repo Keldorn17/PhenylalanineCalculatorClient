@@ -21,10 +21,14 @@
       />
       <mat-icon matPrefix>person</mat-icon>
       @if (form.get('username')?.touched && form.get('username')?.hasError('required')) {
-        <mat-error>{{ 'settings.changeUsernameDialog.errorUsernameRequired' | translate }}</mat-error>
+        <mat-error>{{
+          'settings.changeUsernameDialog.errorUsernameRequired' | translate
+        }}</mat-error>
       }
       @if (form.get('username')?.touched && form.get('username')?.hasError('pattern')) {
-        <mat-error>{{ 'settings.changeUsernameDialog.errorUsernamePattern' | translate }}</mat-error>
+        <mat-error>{{
+          'settings.changeUsernameDialog.errorUsernamePattern' | translate
+        }}</mat-error>
       }
     </mat-form-field>
 
@@ -49,7 +53,9 @@
         <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       @if (form.get('password')?.touched && form.get('password')?.hasError('required')) {
-        <mat-error>{{ 'settings.changeUsernameDialog.errorPasswordRequired' | translate }}</mat-error>
+        <mat-error>{{
+          'settings.changeUsernameDialog.errorPasswordRequired' | translate
+        }}</mat-error>
       }
     </mat-form-field>
   </form>
@@ -59,7 +65,12 @@
   <button matButton type="button" (click)="cancel()" [disabled]="isLoading()">
     {{ 'dialog.cancel' | translate }}
   </button>
-  <button matButton="filled" type="button" (click)="submit()" [disabled]="!form.valid || isLoading()">
+  <button
+    matButton="filled"
+    type="button"
+    (click)="submit()"
+    [disabled]="!form.valid || isLoading()"
+  >
     {{ 'dialog.confirm' | translate }}
   </button>
 </mat-dialog-actions>

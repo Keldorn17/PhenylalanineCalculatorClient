@@ -9,42 +9,43 @@ export const routes: Routes = [
     path: '',
     pathMatch: 'full',
     canMatch: [authMatchGuard],
-    loadComponent: () => import('./home/home').then(m => m.Home),
+    loadComponent: () => import('./home/home').then((m) => m.Home),
     resolve: {
-      dailyIntake: getDailyIntakeResolver
-    }
+      dailyIntake: getDailyIntakeResolver,
+    },
   },
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () => import('./landing/landing').then(m => m.Landing)
+    loadComponent: () => import('./landing/landing').then((m) => m.Landing),
   },
   {
     path: 'foods',
-    loadComponent: () => import('./food/food').then(m => m.Food),
-    canActivate: [authGuard]
+    loadComponent: () => import('./food/food').then((m) => m.Food),
+    canActivate: [authGuard],
   },
   {
     path: 'food-types',
-    loadComponent: () => import('./food-type/food-type').then(m => m.FoodType),
-    canActivate: [authGuard]
+    loadComponent: () => import('./food-type/food-type').then((m) => m.FoodType),
+    canActivate: [authGuard],
   },
   {
     path: 'login',
-    loadComponent: () => import('./auth/login/login').then(m => m.Login),
-    canActivate: [guestGuard]
+    loadComponent: () => import('./auth/login/login').then((m) => m.Login),
+    canActivate: [guestGuard],
   },
   {
     path: 'register',
-    loadComponent: () => import('./auth/register/register').then(m => m.Register),
-    canActivate: [guestGuard]
+    loadComponent: () => import('./auth/register/register').then((m) => m.Register),
+    canActivate: [guestGuard],
   },
   {
     path: 'terms-and-privacy',
-    loadComponent: () => import('./terms-and-privacy/terms-and-privacy').then(m => m.TermsAndPrivacy)
+    loadComponent: () =>
+      import('./terms-and-privacy/terms-and-privacy').then((m) => m.TermsAndPrivacy),
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];

@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  linkedSignal
-} from '@angular/core';
+import { Component, computed, inject, input, linkedSignal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { MatCard, MatCardContent } from '@angular/material/card';
@@ -29,11 +22,10 @@ import { DailyLimitDialog } from '../daily-limit-dialog/daily-limit-dialog';
     MatProgressBar,
     MatIcon,
     MatButton,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './progress-bar.html',
   styleUrl: './progress-bar.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressBar {
   private readonly progressBarService = inject(ProgressBarService);
@@ -109,30 +101,30 @@ export class ProgressBar {
   constructor() {
     toObservable(this.progressBarService.refreshEvent)
       .pipe(
-        filter(event => event !== null),
-        switchMap(event =>
+        filter((event) => event !== null),
+        switchMap((event) =>
           this.dailyIntakeService.getDailyIntake(event.date).pipe(
             catchError(() =>
               this.userService.getUser().pipe(
-                map(user => ({
+                map((user) => ({
                   date: event.date,
                   consumedPhenylalanine: 0,
-                  dailyLimit: user.dailyLimit
+                  dailyLimit: user.dailyLimit,
                 })),
                 catchError(() =>
                   of({
                     date: event.date,
                     consumedPhenylalanine: 0,
-                    dailyLimit: this.displayTotal()
-                  })
-                )
-              )
-            )
-          )
+                    dailyLimit: this.displayTotal(),
+                  }),
+                ),
+              ),
+            ),
+          ),
         ),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
-      .subscribe(intake => {
+      .subscribe((intake) => {
         this.displayCurrent.set(intake.consumedPhenylalanine);
         this.displayTotal.set(intake.dailyLimit);
       });
@@ -142,8 +134,8 @@ export class ProgressBar {
     this.dialog.open(DailyLimitDialog, {
       data: {
         dailyLimit: this.displayTotal() ?? undefined,
-        descriptionTranslationKey: 'dailyLimitDialog.changeDescription'
-      }
+        descriptionTranslationKey: 'dailyLimitDialog.changeDescription',
+      },
     });
   }
 }

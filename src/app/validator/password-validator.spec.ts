@@ -14,8 +14,9 @@ describe('Password Validators', () => {
       expect(passwordValidator(shortControl)).toEqual({
         pattern: {
           actualValue: 'Pass1!',
-          requiredPattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#\\-!%*?&_+=.])[A-Za-z\\d@$#\\-!%*?&_+=.]{8,}$/'
-        }
+          requiredPattern:
+            '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#\\-!%*?&_+=.])[A-Za-z\\d@$#\\-!%*?&_+=.]{8,}$/',
+        },
       });
     });
 
@@ -29,7 +30,7 @@ describe('Password Validators', () => {
     it('should pass when password and confirmPassword match', () => {
       const form = new FormGroup({
         password: new FormControl('Secret123!'),
-        confirmPassword: new FormControl('Secret123!')
+        confirmPassword: new FormControl('Secret123!'),
       });
 
       expect(passwordMatchValidator(form)).toBeNull();
@@ -39,10 +40,10 @@ describe('Password Validators', () => {
     it('should set passwordMismatch error when passwords differ', () => {
       const form = new FormGroup({
         password: new FormControl('Secret123!'),
-        confirmPassword: new FormControl('Different123!')
+        confirmPassword: new FormControl('Different123!'),
       });
 
-      expect(passwordMatchValidator(form)).toEqual({passwordMismatch: true});
+      expect(passwordMatchValidator(form)).toEqual({ passwordMismatch: true });
       expect(form.get('confirmPassword')?.hasError('passwordMismatch')).toBe(true);
     });
 

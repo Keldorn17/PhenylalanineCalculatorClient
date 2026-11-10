@@ -12,6 +12,6 @@ export const authMatchGuard: CanMatchFn = () => {
 
   return authService.refresh().pipe(
     map(() => true),
-    catchError(() => of(false))
+    catchError(() => of(false)),
   );
 };

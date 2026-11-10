@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   computed,
   effect,
@@ -10,11 +9,15 @@ import {
   linkedSignal,
   output,
   signal,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
-import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerInputEvent,
+} from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { DateAdapter, provideNativeDateAdapter } from '@angular/material/core';
@@ -40,12 +43,11 @@ export interface DayChipItem {
     MatDatepickerInput,
     MatIcon,
     MatTooltip,
-    TranslatePipe
+    TranslatePipe,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './date-switcher.html',
   styleUrl: './date-switcher.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateSwitcher implements AfterViewInit {
   private readonly translateService = inject(TranslateService);
@@ -59,15 +61,16 @@ export class DateSwitcher implements AfterViewInit {
   protected readonly centerDate = signal<Date>(this.today);
   protected readonly isDragging = signal<boolean>(false);
 
-  protected readonly daysScrollContainer = viewChild<ElementRef<HTMLElement>>('daysScrollContainer');
+  protected readonly daysScrollContainer =
+    viewChild<ElementRef<HTMLElement>>('daysScrollContainer');
   protected readonly currentLang = this.translateService.currentLang;
 
   protected readonly visibleDayItems = computed<DayChipItem[]>((): DayChipItem[] => {
     const center = this.centerDate();
     const lang = this.currentLang() ?? 'en';
     const locale = lang === 'hu' ? 'hu-HU' : 'en-US';
-    const weekdayFormatter = new Intl.DateTimeFormat(locale, {weekday: 'short'});
-    const monthFormatter = new Intl.DateTimeFormat(locale, {month: 'short'});
+    const weekdayFormatter = new Intl.DateTimeFormat(locale, { weekday: 'short' });
+    const monthFormatter = new Intl.DateTimeFormat(locale, { month: 'short' });
 
     const items: DayChipItem[] = [];
     for (let offset = -30; offset <= 30; offset++) {
@@ -77,7 +80,7 @@ export class DateSwitcher implements AfterViewInit {
         key: formatIsoDate(date),
         weekday: weekdayFormatter.format(date),
         dayNumber: date.getDate(),
-        month: monthFormatter.format(date)
+        month: monthFormatter.format(date),
       });
     }
     return items;
@@ -118,7 +121,7 @@ export class DateSwitcher implements AfterViewInit {
     const alreadySelected = this.isSameDay(normalized, this.activeDate());
 
     const diffFromCenter = Math.round(
-      (normalized.getTime() - this.centerDate().getTime()) / (1000 * 60 * 60 * 24)
+      (normalized.getTime() - this.centerDate().getTime()) / (1000 * 60 * 60 * 24),
     );
     if (Math.abs(diffFromCenter) > 20) {
       this.centerDate.set(normalized);
@@ -212,7 +215,7 @@ export class DateSwitcher implements AfterViewInit {
         activeElem.scrollIntoView({
           behavior,
           inline: 'center',
-          block: 'nearest'
+          block: 'nearest',
         });
       }
     }, 0);

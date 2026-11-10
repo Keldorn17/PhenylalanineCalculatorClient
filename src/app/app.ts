@@ -12,7 +12,7 @@ import { Footer } from './footer/footer';
   selector: 'app-root',
   imports: [RouterOutlet, Navigation, Footer],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App implements OnInit {
   private readonly translateService = inject(TranslateService);
@@ -42,24 +42,27 @@ export class App implements OnInit {
     this.authService.refresh().subscribe({
       next: (): void => {
         console.log('[Auth] Startup session restoration complete.');
-        if (!this.router.url.includes('/register') && !this.router.url.includes('/terms-and-privacy')) {
+        if (
+          !this.router.url.includes('/register') &&
+          !this.router.url.includes('/terms-and-privacy')
+        ) {
           this.userService.getUser().subscribe({
             next: (user): void => {
               if (!user.dailyLimit) {
                 this.dialog.open(DailyLimitDialog, {
-                  disableClose: true
+                  disableClose: true,
                 });
               }
             },
             error: (err: unknown): void => {
               console.error('[Auth] Failed to check user daily limit on startup:', err);
-            }
+            },
           });
         }
       },
       error: (err: unknown): void => {
         console.log('[Auth] No active session on startup:', err);
-      }
+      },
     });
   }
 }

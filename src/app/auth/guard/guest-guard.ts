@@ -13,6 +13,6 @@ export const guestGuard: CanActivateFn = () => {
 
   return authService.refresh().pipe(
     map(() => router.createUrlTree(['/'])),
-    catchError(() => of(true))
+    catchError(() => of(true)),
   );
 };

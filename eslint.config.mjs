@@ -2,6 +2,7 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config(
   {
@@ -79,6 +80,7 @@ export default tseslint.config(
       '@angular-eslint/computed-must-return': 'error',
       '@angular-eslint/sort-lifecycle-methods': 'error',
       '@angular-eslint/prefer-output-readonly': 'error',
+      '@angular-eslint/prefer-signals': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -98,4 +100,5 @@ export default tseslint.config(
       '@angular-eslint/template/no-duplicate-attributes': 'error',
     },
   },
+  eslintConfigPrettier,
 );

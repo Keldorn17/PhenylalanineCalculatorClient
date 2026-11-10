@@ -53,7 +53,11 @@
 
 .warning-card {
   border-radius: var(--mat-sys-corner-large, 16px);
-  background-color: color-mix(in srgb, var(--mat-sys-error) 10%, var(--mat-sys-surface-container-low));
+  background-color: color-mix(
+    in srgb,
+    var(--mat-sys-error) 10%,
+    var(--mat-sys-surface-container-low)
+  );
   border: 1px solid color-mix(in srgb, var(--mat-sys-error) 40%, var(--mat-sys-outline-variant));
   box-shadow: none;
 

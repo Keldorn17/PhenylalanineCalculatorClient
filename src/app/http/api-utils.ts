@@ -32,7 +32,7 @@ export function formatIsoDate(date: Date): string {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
-  return `${ year }-${ month }-${ day }`;
+  return `${year}-${month}-${day}`;
 }
 
 /**
@@ -52,8 +52,8 @@ export class RsqlBuilder {
    * Field equals value (==)
    */
   public eq(field: string, value: string | number | boolean): this {
-    const formatted = typeof value === 'string' ? `'${ value }'` : value;
-    this.parts.push(`${ field }==${ formatted }`);
+    const formatted = typeof value === 'string' ? `'${value}'` : value;
+    this.parts.push(`${field}==${formatted}`);
     return this;
   }
 
@@ -61,8 +61,8 @@ export class RsqlBuilder {
    * Field not equals value (!=)
    */
   public ne(field: string, value: string | number | boolean): this {
-    const formatted = typeof value === 'string' ? `'${ value }'` : value;
-    this.parts.push(`${ field }!=${ formatted }`);
+    const formatted = typeof value === 'string' ? `'${value}'` : value;
+    this.parts.push(`${field}!=${formatted}`);
     return this;
   }
 
@@ -70,7 +70,7 @@ export class RsqlBuilder {
    * Field less than value (=lt=)
    */
   public lt(field: string, value: number): this {
-    this.parts.push(`${ field }=lt=${ value }`);
+    this.parts.push(`${field}=lt=${value}`);
     return this;
   }
 
@@ -78,7 +78,7 @@ export class RsqlBuilder {
    * Field less than or equal to value (=le=)
    */
   public le(field: string, value: number): this {
-    this.parts.push(`${ field }=le=${ value }`);
+    this.parts.push(`${field}=le=${value}`);
     return this;
   }
 
@@ -86,7 +86,7 @@ export class RsqlBuilder {
    * Field greater than value (=gt=)
    */
   public gt(field: string, value: number): this {
-    this.parts.push(`${ field }=gt=${ value }`);
+    this.parts.push(`${field}=gt=${value}`);
     return this;
   }
 
@@ -94,7 +94,7 @@ export class RsqlBuilder {
    * Field greater than or equal to value (=ge=)
    */
   public ge(field: string, value: number): this {
-    this.parts.push(`${ field }=ge=${ value }`);
+    this.parts.push(`${field}=ge=${value}`);
     return this;
   }
 
@@ -102,7 +102,7 @@ export class RsqlBuilder {
    * Field contains case-insensitive string (=ilike=)
    */
   public ilike(field: string, value: string): this {
-    this.parts.push(`${ field }=ilike='${ value }'`);
+    this.parts.push(`${field}=ilike='${value}'`);
     return this;
   }
 
@@ -114,7 +114,7 @@ export class RsqlBuilder {
     builderFn(subBuilder);
     const subQuery = subBuilder.build();
     if (subQuery) {
-      this.parts.push(`(${ subQuery })`);
+      this.parts.push(`(${subQuery})`);
     }
     return this;
   }

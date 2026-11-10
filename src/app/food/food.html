@@ -4,7 +4,7 @@
       <div class="section-title-group">
         <h2 class="section-title">{{ 'food.title' | translate }}</h2>
         <span class="items-count-badge">
-          {{ 'home.itemsCount' | translate: {count: totalElements()} }}
+          {{ 'home.itemsCount' | translate: { count: totalElements() } }}
         </span>
       </div>
 
@@ -93,8 +93,8 @@
                   [step]="sliderBounds.protein.step"
                   discrete
                 >
-                  <input matSliderStartThumb formControlName="proteinMin"/>
-                  <input matSliderEndThumb formControlName="proteinMax"/>
+                  <input matSliderStartThumb formControlName="proteinMin" />
+                  <input matSliderEndThumb formControlName="proteinMax" />
                 </mat-slider>
               </div>
 
@@ -112,8 +112,8 @@
                   [step]="sliderBounds.calories.step"
                   discrete
                 >
-                  <input matSliderStartThumb formControlName="caloriesMin"/>
-                  <input matSliderEndThumb formControlName="caloriesMax"/>
+                  <input matSliderStartThumb formControlName="caloriesMin" />
+                  <input matSliderEndThumb formControlName="caloriesMax" />
                 </mat-slider>
               </div>
 
@@ -121,8 +121,7 @@
                 <div class="slider-header">
                   <span class="slider-label">{{ 'food.phenylalanine' | translate }}</span>
                   <span class="slider-value-badge">
-                    {{ filterForm.get('pheMin')?.value }} –
-                    {{ filterForm.get('pheMax')?.value }} mg
+                    {{ filterForm.get('pheMin')?.value }} – {{ filterForm.get('pheMax')?.value }} mg
                   </span>
                 </div>
                 <mat-slider
@@ -131,8 +130,8 @@
                   [step]="sliderBounds.phe.step"
                   discrete
                 >
-                  <input matSliderStartThumb formControlName="pheMin"/>
-                  <input matSliderEndThumb formControlName="pheMax"/>
+                  <input matSliderStartThumb formControlName="pheMin" />
+                  <input matSliderEndThumb formControlName="pheMax" />
                 </mat-slider>
               </div>
 
@@ -150,8 +149,8 @@
                   [step]="sliderBounds.multiplier.step"
                   discrete
                 >
-                  <input matSliderStartThumb formControlName="multiplierMin"/>
-                  <input matSliderEndThumb formControlName="multiplierMax"/>
+                  <input matSliderStartThumb formControlName="multiplierMin" />
+                  <input matSliderEndThumb formControlName="multiplierMax" />
                 </mat-slider>
               </div>
             </div>
@@ -171,7 +170,7 @@
 
     @if (isLoading()) {
       <div class="loading-container">
-        <mat-spinner diameter="40"/>
+        <mat-spinner diameter="40" />
         <span>{{ 'food.loading' | translate }}</span>
       </div>
     } @else if (foods().length === 0) {
@@ -188,7 +187,7 @@
       <div class="foods-grid">
         @for (item of foods(); track item.id) {
           <div class="food-grid-item">
-            <food-card [food]="item" (changed)="onFoodChanged()"/>
+            <food-card [food]="item" (changed)="onFoodChanged()" />
           </div>
         }
       </div>

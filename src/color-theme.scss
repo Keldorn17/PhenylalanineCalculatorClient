@@ -28,7 +28,7 @@ $_shared-neutrals: (
     87: #dbdada,
     92: #e9e8e8,
     94: #efedee,
-    96: #f5f3f3
+    96: #f5f3f3,
   ),
   neutral-variant: (
     0: #000000,
@@ -46,8 +46,8 @@ $_shared-neutrals: (
     95: #edf1f5,
     98: #f5fafd,
     99: #fafcff,
-    100: #ffffff
-  )
+    100: #ffffff,
+  ),
 );
 
 $_light-palettes: (
@@ -67,7 +67,7 @@ $_light-palettes: (
     95: #e2faec,
     98: #f3fff7,
     99: #f9fffb,
-    100: #ffffff
+    100: #ffffff,
   ),
   secondary: (
     0: #000000,
@@ -85,7 +85,7 @@ $_light-palettes: (
     95: #ddf7e7,
     98: #edfff3,
     99: #f6fff8,
-    100: #ffffff
+    100: #ffffff,
   ),
   tertiary: (
     0: #000000,
@@ -103,7 +103,7 @@ $_light-palettes: (
     95: #e1f4ff,
     98: #f4faff,
     99: #fafdff,
-    100: #ffffff
+    100: #ffffff,
   ),
   error: (
     0: #000000,
@@ -121,8 +121,8 @@ $_light-palettes: (
     95: #ffedea,
     98: #fff8f7,
     99: #fffbff,
-    100: #ffffff
-  )
+    100: #ffffff,
+  ),
 );
 
 $_dark-palettes: (
@@ -142,7 +142,7 @@ $_dark-palettes: (
     95: #e2faec,
     98: #f3fff7,
     99: #f9fffb,
-    100: #ffffff
+    100: #ffffff,
   ),
   secondary: (
     0: #000000,
@@ -160,7 +160,7 @@ $_dark-palettes: (
     95: #ddf7e7,
     98: #edfff3,
     99: #f6fff8,
-    100: #ffffff
+    100: #ffffff,
   ),
   tertiary: (
     0: #000000,
@@ -178,7 +178,7 @@ $_dark-palettes: (
     95: #e1f4ff,
     98: #f4faff,
     99: #fafdff,
-    100: #ffffff
+    100: #ffffff,
   ),
   error: (
     0: #000000,
@@ -196,22 +196,22 @@ $_dark-palettes: (
     95: #ffedea,
     98: #fff8f7,
     99: #fffbff,
-    100: #ffffff
-  )
+    100: #ffffff,
+  ),
 );
 
 $_light-rest: (
   secondary: map.get($_light-palettes, secondary),
   neutral: map.get($_shared-neutrals, neutral),
   neutral-variant: map.get($_shared-neutrals, neutral-variant),
-  error: map.get($_light-palettes, error)
+  error: map.get($_light-palettes, error),
 );
 
 $_dark-rest: (
   secondary: map.get($_dark-palettes, secondary),
   neutral: map.get($_shared-neutrals, neutral),
   neutral-variant: map.get($_shared-neutrals, neutral-variant),
-  error: map.get($_dark-palettes, error)
+  error: map.get($_dark-palettes, error),
 );
 
 $light-primary-palette: map.merge(map.get($_light-palettes, primary), $_light-rest);

@@ -21,20 +21,20 @@ describe('PaginatorIntlService', () => {
           'paginator.previousPage': 'Previous page',
           'paginator.firstPage': 'First page',
           'paginator.lastPage': 'Last page',
-          'paginator.rangeZero': `0 of ${ params?.['length'] }`,
-          'paginator.range': `${ params?.['start'] } – ${ params?.['end'] } of ${ params?.['length'] }`
+          'paginator.rangeZero': `0 of ${params?.['length']}`,
+          'paginator.range': `${params?.['start']} – ${params?.['end']} of ${params?.['length']}`,
         };
         return translations[key] ?? key;
       },
       onLangChange: new EventEmitter<{ lang: string }>(),
-      onTranslationChange: new EventEmitter<unknown>()
+      onTranslationChange: new EventEmitter<unknown>(),
     };
 
     TestBed.configureTestingModule({
       providers: [
         PaginatorIntlService,
-        {provide: TranslateService, useValue: mockTranslateService}
-      ]
+        { provide: TranslateService, useValue: mockTranslateService },
+      ],
     });
 
     service = TestBed.inject(PaginatorIntlService);
@@ -64,7 +64,7 @@ describe('PaginatorIntlService', () => {
       return key;
     };
 
-    mockTranslateService.onLangChange.emit({lang: 'hu'});
+    mockTranslateService.onLangChange.emit({ lang: 'hu' });
     expect(service.itemsPerPageLabel).toBe('Elemek száma oldalanként:');
   });
 });

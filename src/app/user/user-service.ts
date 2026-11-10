@@ -5,7 +5,7 @@ import { ApiPath } from '../http/api-path';
 import { UserRequest, UserResponse } from './user-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   private readonly httpClient = inject(HttpClient);

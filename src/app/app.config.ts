@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideBrowserGlobalErrorListeners,
+} from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -9,7 +13,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import {
   OwlDateTimeIntl,
   OwlDateTimeModule,
-  OwlNativeDateTimeModule
+  OwlNativeDateTimeModule,
 } from '@danielmoncada/angular-datetime-picker';
 
 import { routes } from './app.routes';
@@ -27,23 +31,23 @@ export const appConfig: ApplicationConfig = {
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './i18n/',
-        suffix: '.json'
+        suffix: '.json',
       }),
-      fallbackLang: 'en'
+      fallbackLang: 'en',
     }),
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: {
-        subscriptSizing: 'dynamic'
-      }
+        subscriptSizing: 'dynamic',
+      },
     },
     {
       provide: MatPaginatorIntl,
-      useClass: PaginatorIntlService
+      useClass: PaginatorIntlService,
     },
     {
       provide: OwlDateTimeIntl,
-      useClass: DateTimeIntlService
-    }
-  ]
+      useClass: DateTimeIntlService,
+    },
+  ],
 };

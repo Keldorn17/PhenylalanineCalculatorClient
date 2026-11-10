@@ -6,7 +6,7 @@ export interface ProgressBarRefreshEvent {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProgressBarService {
   private readonly activeDateSignal = signal<Date>(new Date());
@@ -26,7 +26,7 @@ export class ProgressBarService {
     }
     this.refreshSignal.set({
       date: targetDate,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
   }
 }

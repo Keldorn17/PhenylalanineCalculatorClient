@@ -4,10 +4,7 @@
     [current]="dailyIntake().consumedPhenylalanine"
   />
 
-  <date-switcher
-    [selectedDate]="selectedDate()"
-    (dateChange)="selectDate($event)"
-  />
+  <date-switcher [selectedDate]="selectedDate()" (dateChange)="selectDate($event)" />
 
   <section class="consumptions-section">
     <div class="section-header">
@@ -16,13 +13,13 @@
         <span class="selected-date-label">{{ selectedDate() | date: 'yyyy. MM. dd.' }}</span>
       </div>
       <span class="items-count-badge">
-        {{ 'home.itemsCount' | translate: {count: totalElements()} }}
+        {{ 'home.itemsCount' | translate: { count: totalElements() } }}
       </span>
     </div>
 
     @if (isLoading()) {
       <div class="loading-container">
-        <mat-spinner diameter="40"/>
+        <mat-spinner diameter="40" />
         <span>{{ 'home.loading' | translate }}</span>
       </div>
     } @else if (consumptions().length === 0) {
@@ -39,10 +36,7 @@
       <div class="consumptions-grid">
         @for (item of consumptions(); track item.id) {
           <div class="consumption-grid-item">
-            <food-consumption-card
-              [consumption]="item"
-              (changed)="onConsumptionChanged()"
-            />
+            <food-consumption-card [consumption]="item" (changed)="onConsumptionChanged()" />
           </div>
         }
       </div>

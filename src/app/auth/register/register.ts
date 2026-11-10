@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -33,11 +33,10 @@ import { TranslatePipe } from '@ngx-translate/core';
     MatIconModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Register {
   private readonly authService = inject(AuthService);
@@ -55,15 +54,15 @@ export class Register {
       username: ['', [Validators.required, usernameValidator]],
       password: ['', [Validators.required, passwordValidator]],
       confirmPassword: ['', [Validators.required]],
-      acceptTerms: [false, [Validators.requiredTrue]]
+      acceptTerms: [false, [Validators.requiredTrue]],
     },
     {
-      validators: [passwordMatchValidator]
-    }
+      validators: [passwordMatchValidator],
+    },
   );
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
-    dailyLimit: [null, [Validators.required, Validators.min(1)]]
+    dailyLimit: [null, [Validators.required, Validators.min(1)]],
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -74,7 +73,7 @@ export class Register {
     merge(this.registerForm.valueChanges, this.dailyLimitForm.valueChanges)
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -103,9 +102,9 @@ export class Register {
       return;
     }
 
-    const {email, username, password} = this.registerForm.value;
+    const { email, username, password } = this.registerForm.value;
 
-    this.authService.register({email, username, password}).subscribe({
+    this.authService.register({ email, username, password }).subscribe({
       next: () => {
         this.isRegistered.set(true);
         this.checkDailyLimitAndNavigate();
@@ -114,7 +113,7 @@ export class Register {
         console.error('Registration failed:', err);
         this.currentStep.set(2);
         this.errorMessage.set('register.errorFailed');
-      }
+      },
     });
   }
 
@@ -128,22 +127,22 @@ export class Register {
     const dailyLimit = Number(this.dailyLimitForm.value.dailyLimit);
 
     if (this.isRegistered()) {
-      this.userService.patchUser({dailyLimit}).subscribe({
+      this.userService.patchUser({ dailyLimit }).subscribe({
         next: () => {
           this.router.navigate(['/']);
         },
         error: (err) => {
           console.error('Failed to set daily limit:', err);
           this.errorMessage.set('register.errorDailyLimitFailed');
-        }
+        },
       });
       return;
     }
 
-    const {email, username, password} = this.registerForm.value;
+    const { email, username, password } = this.registerForm.value;
 
     this.authService
-      .register({email, username, password})
+      .register({ email, username, password })
       .pipe(
         tap(() => {
           this.isRegistered.set(true);
@@ -154,7 +153,7 @@ export class Register {
           this.errorMessage.set('register.errorFailed');
           return EMPTY;
         }),
-        switchMap(() => this.userService.patchUser({dailyLimit}))
+        switchMap(() => this.userService.patchUser({ dailyLimit })),
       )
       .subscribe({
         next: () => {
@@ -163,7 +162,7 @@ export class Register {
         error: (err) => {
           console.error('Failed to set daily limit:', err);
           this.errorMessage.set('register.errorDailyLimitFailed');
-        }
+        },
       });
   }
 
@@ -173,13 +172,13 @@ export class Register {
       next: (user) => {
         if (!user.dailyLimit) {
           this.dialog.open(DailyLimitDialog, {
-            disableClose: true
+            disableClose: true,
           });
         }
       },
       error: (err) => {
         console.error('Failed to check user daily limit:', err);
-      }
+      },
     });
   }
 }

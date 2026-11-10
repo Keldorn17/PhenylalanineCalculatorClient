@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIconButton } from '@angular/material/button';
@@ -22,11 +22,10 @@ import { FoodTypeDialog } from '../food-type-dialog/food-type-dialog';
     MatIcon,
     MatTooltip,
     TranslatePipe,
-    MatDivider
+    MatDivider,
   ],
   templateUrl: './food-type-card.html',
   styleUrl: './food-type-card.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodTypeCard {
   private readonly foodTypeService = inject(FoodTypeService);
@@ -44,8 +43,8 @@ export class FoodTypeCard {
     this.dialog
       .open(FoodTypeDialog, {
         data: {
-          foodType: item
-        }
+          foodType: item,
+        },
       })
       .afterClosed()
       .subscribe((result) => {
@@ -67,8 +66,8 @@ export class FoodTypeCard {
           titleTranslateKey: 'foodType.deleteDialog.title',
           detailsTranslateKey: 'foodType.deleteDialog.details',
           confirmTranslateKey: 'foodType.deleteDialog.delete',
-          confirmClass: 'warn'
-        }
+          confirmClass: 'warn',
+        },
       })
       .afterClosed()
       .subscribe((confirmed) => {

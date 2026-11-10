@@ -5,33 +5,52 @@ import { Observable } from 'rxjs';
 import {
   FoodConsumptionCreateRequest,
   FoodConsumptionRequest,
-  FoodConsumptionResponse
+  FoodConsumptionResponse,
 } from './food-consumption-types';
 import { ApiPath } from '../http/api-path';
 import { buildQueryParams, formatIsoDate } from '../http/api-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FoodConsumptionService {
   private readonly httpClient = inject(HttpClient);
 
-  public getFoodConsumption(params: ApiQueryParams, date: Date): Observable<PagedResponse<FoodConsumptionResponse>> {
+  public getFoodConsumption(
+    params: ApiQueryParams,
+    date: Date,
+  ): Observable<PagedResponse<FoodConsumptionResponse>> {
     const queryParams = buildQueryParams(params).set('date', formatIsoDate(date));
-    return this.httpClient.get<PagedResponse<FoodConsumptionResponse>>(ApiPath.foodConsumption.get, {
-      params: queryParams
-    });
+    return this.httpClient.get<PagedResponse<FoodConsumptionResponse>>(
+      ApiPath.foodConsumption.get,
+      {
+        params: queryParams,
+      },
+    );
   }
 
-  public postFoodConsumption(foodConsumptionCreateRequest: FoodConsumptionCreateRequest): Observable<FoodConsumptionResponse> {
-    return this.httpClient.post<FoodConsumptionResponse>(ApiPath.foodConsumption.post, foodConsumptionCreateRequest);
+  public postFoodConsumption(
+    foodConsumptionCreateRequest: FoodConsumptionCreateRequest,
+  ): Observable<FoodConsumptionResponse> {
+    return this.httpClient.post<FoodConsumptionResponse>(
+      ApiPath.foodConsumption.post,
+      foodConsumptionCreateRequest,
+    );
   }
 
   public deleteFoodConsumption(foodConsumptionId: number): Observable<void> {
-    return this.httpClient.delete<void>(ApiPath.resolve(ApiPath.foodConsumption.delete, foodConsumptionId));
+    return this.httpClient.delete<void>(
+      ApiPath.resolve(ApiPath.foodConsumption.delete, foodConsumptionId),
+    );
   }
 
-  public putFoodConsumption(foodConsumptionId: number, foodConsumptionRequest: FoodConsumptionRequest): Observable<FoodConsumptionResponse> {
-    return this.httpClient.put<FoodConsumptionResponse>(ApiPath.resolve(ApiPath.foodConsumption.put, foodConsumptionId), foodConsumptionRequest);
+  public putFoodConsumption(
+    foodConsumptionId: number,
+    foodConsumptionRequest: FoodConsumptionRequest,
+  ): Observable<FoodConsumptionResponse> {
+    return this.httpClient.put<FoodConsumptionResponse>(
+      ApiPath.resolve(ApiPath.foodConsumption.put, foodConsumptionId),
+      foodConsumptionRequest,
+    );
   }
 }

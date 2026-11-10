@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { OverlayModule, ConnectedPosition } from '@angular/cdk/overlay';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,11 +26,10 @@ import { DailyLimitDialog } from '../daily-limit-dialog/daily-limit-dialog';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './user-settings.html',
   styleUrl: './user-settings.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserSettings {
   private readonly translateService = inject(TranslateService);
@@ -44,14 +43,14 @@ export class UserSettings {
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
   protected readonly userResponse = toSignal(
     toObservable(computed(() => (this.isLoggedIn() ? this.refreshUserTrigger() : null))).pipe(
-      switchMap(trigger => {
+      switchMap((trigger) => {
         if (trigger === null) {
           return of(null);
         }
         return this.userService.getUser();
-      })
+      }),
     ),
-    {initialValue: null}
+    { initialValue: null },
   );
   protected readonly isDark = this.themeService.isDark;
   protected readonly currentLang = this.translateService.currentLang;
@@ -60,8 +59,8 @@ export class UserSettings {
   protected readonly currentView = signal<'main' | 'language'>('main');
 
   protected readonly languages: LanguageOption[] = [
-    {code: 'en', label: 'language.english'},
-    {code: 'hu', label: 'language.hungarian'}
+    { code: 'en', label: 'language.english' },
+    { code: 'hu', label: 'language.hungarian' },
   ];
 
   protected readonly positions: ConnectedPosition[] = [
@@ -70,19 +69,19 @@ export class UserSettings {
       originY: 'bottom',
       overlayX: 'end',
       overlayY: 'top',
-      offsetY: 8
+      offsetY: 8,
     },
     {
       originX: 'end',
       originY: 'top',
       overlayX: 'end',
       overlayY: 'bottom',
-      offsetY: -8
-    }
+      offsetY: -8,
+    },
   ];
 
   protected toggleMenu(): void {
-    this.isOpen.update(open => !open);
+    this.isOpen.update((open) => !open);
     if (!this.isOpen()) {
       this.currentView.set('main');
     }
@@ -118,12 +117,12 @@ export class UserSettings {
       .open(ChangeUsernameDialog, {
         width: '90%',
         maxWidth: '420px',
-        data: {currentUsername: this.userResponse()?.username}
+        data: { currentUsername: this.userResponse()?.username },
       })
       .afterClosed()
       .subscribe((changed: boolean) => {
         if (changed) {
-          this.refreshUserTrigger.update(v => v + 1);
+          this.refreshUserTrigger.update((v) => v + 1);
         }
       });
   }
@@ -132,19 +131,19 @@ export class UserSettings {
     this.closeMenu();
     this.dialog.open(ChangePasswordDialog, {
       width: '90%',
-      maxWidth: '420px'
+      maxWidth: '420px',
     });
   }
 
   protected changeDailyLimit(): void {
     this.closeMenu();
-    this.userService.getUser().subscribe(response => {
+    this.userService.getUser().subscribe((response) => {
       const dailyLimit = response.dailyLimit;
       this.dialog.open(DailyLimitDialog, {
         data: {
           dailyLimit: dailyLimit,
-          descriptionTranslationKey: 'dailyLimitDialog.changeDescription'
-        }
+          descriptionTranslationKey: 'dailyLimitDialog.changeDescription',
+        },
       });
     });
   }
@@ -164,18 +163,18 @@ export class UserSettings {
           titleTranslateKey: 'settings.user.deactivateTitle',
           detailsTranslateKey: 'settings.user.deactivateDetails',
           confirmTranslateKey: 'settings.user.delete',
-          confirmClass: 'warn'
-        }
+          confirmClass: 'warn',
+        },
       })
       .afterClosed()
-      .subscribe(confirm => {
+      .subscribe((confirm) => {
         if (!confirm) {
           return;
         }
 
         this.authService
           .deleteAccount()
-          .subscribe(() => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'}));
+          .subscribe(() => this.router.navigate(['/'], { onSameUrlNavigation: 'reload' }));
       });
   }
 }

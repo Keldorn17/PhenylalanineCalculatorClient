@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
@@ -19,11 +19,10 @@ import { MenuItem } from '../navigation-types';
     MatDividerModule,
     TranslatePipe,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   templateUrl: './sidenav-content.html',
   styleUrl: './sidenav-content.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavContent {
   private readonly authService = inject(AuthService);
@@ -35,18 +34,18 @@ export class SidenavContent {
     {
       icon: 'home',
       label: 'nav.home',
-      route: '/'
+      route: '/',
     },
     {
       icon: 'restaurant',
       label: 'nav.foods',
-      route: '/foods'
+      route: '/foods',
     },
     {
       icon: 'restaurant_menu',
       label: 'nav.foodTypes',
-      route: '/food-types'
-    }
+      route: '/food-types',
+    },
   ]);
   protected readonly isLoggedIn = computed(() => this.authService.isAuthenticated());
 
@@ -55,8 +54,8 @@ export class SidenavContent {
       document.activeElement.blur();
     }
     this.authService.logout().subscribe({
-      next: () => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'}),
-      error: () => this.router.navigate(['/'], {onSameUrlNavigation: 'reload'})
+      next: () => this.router.navigate(['/'], { onSameUrlNavigation: 'reload' }),
+      error: () => this.router.navigate(['/'], { onSameUrlNavigation: 'reload' }),
     });
   }
 }

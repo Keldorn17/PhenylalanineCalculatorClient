@@ -4,7 +4,7 @@
 <mat-dialog-content>
   <p class="dialog-description">
     @if (isEditMode) {
-      {{ 'food.dialog.editDescription' | translate: {foodName: data?.food?.name} }}
+      {{ 'food.dialog.editDescription' | translate: { foodName: data?.food?.name } }}
     } @else {
       {{ 'food.dialog.createDescription' | translate }}
     }
@@ -27,8 +27,10 @@
         [placeholder]="'food.dialog.namePlaceholder' | translate"
       />
       <mat-icon matPrefix>restaurant</mat-icon>
-      @if (form.get('name')?.touched &&
-      (form.get('name')?.hasError('required') || form.get('name')?.hasError('pattern'))) {
+      @if (
+        form.get('name')?.touched &&
+        (form.get('name')?.hasError('required') || form.get('name')?.hasError('pattern'))
+      ) {
         <mat-error>{{ 'food.dialog.errorNameRequired' | translate }}</mat-error>
       }
     </mat-form-field>
@@ -107,9 +109,11 @@
           </mat-option>
         }
       </mat-autocomplete>
-      @if (form.get('foodTypeSearch')?.touched &&
-      (form.get('foodTypeSearch')?.hasError('required') ||
-        (foodTypeSearchText().trim().length > 0 && !selectedFoodType()))) {
+      @if (
+        form.get('foodTypeSearch')?.touched &&
+        (form.get('foodTypeSearch')?.hasError('required') ||
+          (foodTypeSearchText().trim().length > 0 && !selectedFoodType()))
+      ) {
         <mat-error>{{ 'food.dialog.errorFoodTypeRequired' | translate }}</mat-error>
       }
     </mat-form-field>
@@ -143,9 +147,13 @@
         />
         <mat-icon matPrefix>science</mat-icon>
         <span matTextSuffix>mg</span>
-        @if (form.get('phenylalanine')?.touched && form.get('phenylalanine')?.hasError('required')) {
+        @if (
+          form.get('phenylalanine')?.touched && form.get('phenylalanine')?.hasError('required')
+        ) {
           <mat-error>{{ 'food.dialog.errorPheRequired' | translate }}</mat-error>
-        } @else if (form.get('phenylalanine')?.touched && form.get('phenylalanine')?.hasError('min')) {
+        } @else if (
+          form.get('phenylalanine')?.touched && form.get('phenylalanine')?.hasError('min')
+        ) {
           <mat-error>{{ 'food.dialog.errorPheMin' | translate }}</mat-error>
         }
       </mat-form-field>

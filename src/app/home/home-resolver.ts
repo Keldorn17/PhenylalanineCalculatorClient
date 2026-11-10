@@ -4,7 +4,9 @@ import { Observable, catchError, of } from 'rxjs';
 import { DailyIntakeResponse } from '../daily-intake/daily-intake-types';
 import { DailyIntakeService } from '../daily-intake/daily-intake-service';
 
-export const getDailyIntakeResolver: ResolveFn<DailyIntakeResponse> = (): Observable<DailyIntakeResponse> => {
+export const getDailyIntakeResolver: ResolveFn<
+  DailyIntakeResponse
+> = (): Observable<DailyIntakeResponse> => {
   const dailyIntakeService = inject(DailyIntakeService);
   const today = new Date();
 
@@ -13,8 +15,8 @@ export const getDailyIntakeResolver: ResolveFn<DailyIntakeResponse> = (): Observ
       of({
         date: today,
         consumedPhenylalanine: 0,
-        dailyLimit: null
-      })
-    )
+        dailyLimit: null,
+      }),
+    ),
   );
 };

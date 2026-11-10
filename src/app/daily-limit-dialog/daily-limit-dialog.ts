@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,11 +29,10 @@ import { DailyLimitDialogData } from './daily-limit-dialog-types';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './daily-limit-dialog.html',
   styleUrl: './daily-limit-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DailyLimitDialog {
   public readonly data = inject<DailyLimitDialogData>(MAT_DIALOG_DATA);
@@ -43,7 +42,7 @@ export class DailyLimitDialog {
   private readonly progressBarService = inject(ProgressBarService);
 
   protected readonly dailyLimitForm: FormGroup = this.formBuilder.group({
-    dailyLimit: [null, [Validators.min(1)]]
+    dailyLimit: [null, [Validators.min(1)]],
   });
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -52,16 +51,19 @@ export class DailyLimitDialog {
     this.dailyLimitForm.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.errorMessage.set(null);
       });
 
     if (this.data) {
-      this.dailyLimitForm.patchValue({
-        dailyLimit: this.data.dailyLimit
-      }, {emitEvent: false});
+      this.dailyLimitForm.patchValue(
+        {
+          dailyLimit: this.data.dailyLimit,
+        },
+        { emitEvent: false },
+      );
     }
   }
 
@@ -77,7 +79,7 @@ export class DailyLimitDialog {
     this.errorMessage.set(null);
     const dailyLimit = Number(this.dailyLimitForm.value.dailyLimit);
 
-    this.userService.patchUser({dailyLimit}).subscribe({
+    this.userService.patchUser({ dailyLimit }).subscribe({
       next: () => {
         this.progressBarService.triggerRefresh();
         this.dialogRef.close(true);
@@ -85,7 +87,7 @@ export class DailyLimitDialog {
       error: (err) => {
         console.error('Failed to update daily limit:', err);
         this.errorMessage.set('register.errorDailyLimitFailed');
-      }
+      },
     });
   }
 }

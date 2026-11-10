@@ -1,18 +1,28 @@
 import { Injectable, NgZone, OnDestroy, Signal, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, finalize, firstValueFrom, from, shareReplay, tap, throwError } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  finalize,
+  firstValueFrom,
+  from,
+  shareReplay,
+  tap,
+  throwError,
+} from 'rxjs';
 import { ApiPath } from '../http/api-path';
 import {
-  AuthBroadcastMessage, AuthPasswordChangeRequest,
+  AuthBroadcastMessage,
+  AuthPasswordChangeRequest,
   AuthRegisterRequest,
   AuthRequest,
   AuthResponse,
-  AuthUsernameChangeRequest
+  AuthUsernameChangeRequest,
 } from './auth-types';
 import { UserService } from '../user/user-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
   private readonly userService = inject(UserService);
@@ -45,19 +55,31 @@ export class AuthService implements OnDestroy {
 
   public login(authRequest: AuthRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(ApiPath.auth.authenticate, authRequest).pipe(
-      tap(response => {
+      tap((response) => {
         const expiresAt = Date.now() + response.expiresIn * 1000;
-        this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'LOGIN_SUCCESS');
-      })
+        this.applyTokenResponse(
+          response.accessToken,
+          response.expiresIn,
+          expiresAt,
+          true,
+          'LOGIN_SUCCESS',
+        );
+      }),
     );
   }
 
   public register(authRegisterRequest: AuthRegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(ApiPath.auth.register, authRegisterRequest).pipe(
-      tap(response => {
+      tap((response) => {
         const expiresAt = Date.now() + response.expiresIn * 1000;
-        this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'LOGIN_SUCCESS');
-      })
+        this.applyTokenResponse(
+          response.accessToken,
+          response.expiresIn,
+          expiresAt,
+          true,
+          'LOGIN_SUCCESS',
+        );
+      }),
     );
   }
 
@@ -70,7 +92,7 @@ export class AuthService implements OnDestroy {
       finalize(() => {
         this.inFlightRefresh = null;
       }),
-      shareReplay(1)
+      shareReplay(1),
     );
 
     return this.inFlightRefresh;
@@ -79,10 +101,10 @@ export class AuthService implements OnDestroy {
   public logout(): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(ApiPath.auth.logout, {}).pipe(
       tap(() => this.clearSession(true)),
-      catchError(error => {
+      catchError((error) => {
         this.clearSession(true);
         return throwError(() => error);
-      })
+      }),
     );
   }
 
@@ -93,28 +115,44 @@ export class AuthService implements OnDestroy {
   public deleteAccount(): Observable<void> {
     return this.userService.deleteUser().pipe(
       tap(() => this.clearSession(true)),
-      catchError(error => {
+      catchError((error) => {
         this.clearSession(true);
         return throwError(() => error);
-      })
+      }),
     );
   }
 
-  public changeUsername(authUsernameChangeRequest: AuthUsernameChangeRequest): Observable<AuthResponse> {
+  public changeUsername(
+    authUsernameChangeRequest: AuthUsernameChangeRequest,
+  ): Observable<AuthResponse> {
     return this.http.put<AuthResponse>(ApiPath.auth.changeUsername, authUsernameChangeRequest).pipe(
-      tap(response => {
+      tap((response) => {
         const expiresAt = Date.now() + response.expiresIn * 1000;
-        this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'LOGIN_SUCCESS');
-      })
+        this.applyTokenResponse(
+          response.accessToken,
+          response.expiresIn,
+          expiresAt,
+          true,
+          'LOGIN_SUCCESS',
+        );
+      }),
     );
   }
 
-  public changePassword(authPasswordChangeRequest: AuthPasswordChangeRequest): Observable<AuthResponse> {
+  public changePassword(
+    authPasswordChangeRequest: AuthPasswordChangeRequest,
+  ): Observable<AuthResponse> {
     return this.http.put<AuthResponse>(ApiPath.auth.changePassword, authPasswordChangeRequest).pipe(
-      tap(response => {
+      tap((response) => {
         const expiresAt = Date.now() + response.expiresIn * 1000;
-        this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'LOGIN_SUCCESS');
-      })
+        this.applyTokenResponse(
+          response.accessToken,
+          response.expiresIn,
+          expiresAt,
+          true,
+          'LOGIN_SUCCESS',
+        );
+      }),
     );
   }
 
@@ -143,7 +181,7 @@ export class AuthService implements OnDestroy {
         return this.createFreshResponse();
       }
 
-      await new Promise(resolve => setTimeout(resolve, 20));
+      await new Promise((resolve) => setTimeout(resolve, 20));
 
       if (this.isTokenFresh()) {
         return this.createFreshResponse();
@@ -155,10 +193,16 @@ export class AuthService implements OnDestroy {
 
       try {
         const response = await firstValueFrom(
-          this.http.post<AuthResponse>(ApiPath.auth.refresh, {})
+          this.http.post<AuthResponse>(ApiPath.auth.refresh, {}),
         );
         const expiresAt = Date.now() + response.expiresIn * 1000;
-        this.applyTokenResponse(response.accessToken, response.expiresIn, expiresAt, true, 'REFRESH_SUCCESS');
+        this.applyTokenResponse(
+          response.accessToken,
+          response.expiresIn,
+          expiresAt,
+          true,
+          'REFRESH_SUCCESS',
+        );
         return response;
       } catch (error) {
         this.lastRefreshFailureTime = Date.now();
@@ -171,14 +215,16 @@ export class AuthService implements OnDestroy {
   private async acquireCrossTabLock<T>(action: () => Promise<T>): Promise<T> {
     if (typeof navigator !== 'undefined' && 'locks' in navigator && navigator.locks?.request) {
       return new Promise<T>((resolve, reject) => {
-        navigator.locks.request(this.lockName, async () => {
-          try {
-            const result = await action();
-            resolve(result);
-          } catch (err) {
-            reject(err);
-          }
-        }).catch(reject);
+        navigator.locks
+          .request(this.lockName, async () => {
+            try {
+              const result = await action();
+              resolve(result);
+            } catch (err) {
+              reject(err);
+            }
+          })
+          .catch(reject);
       });
     }
 
@@ -208,7 +254,7 @@ export class AuthService implements OnDestroy {
       if (Date.now() - startTime > maxWaitMs) {
         break;
       }
-      await new Promise(resolve => setTimeout(resolve, pollIntervalMs));
+      await new Promise((resolve) => setTimeout(resolve, pollIntervalMs));
     }
 
     try {
@@ -230,10 +276,13 @@ export class AuthService implements OnDestroy {
   }
 
   private createFreshResponse(): AuthResponse {
-    const remainingSeconds = Math.max(1, Math.round(((this.tokenExpiresAt ?? 0) - Date.now()) / 1000));
+    const remainingSeconds = Math.max(
+      1,
+      Math.round(((this.tokenExpiresAt ?? 0) - Date.now()) / 1000),
+    );
     return {
       accessToken: this.accessTokenSignal()!,
-      expiresIn: remainingSeconds
+      expiresIn: remainingSeconds,
     };
   }
 
@@ -242,7 +291,7 @@ export class AuthService implements OnDestroy {
     expiresIn: number,
     expiresAt: number,
     broadcast: boolean,
-    messageType: 'REFRESH_SUCCESS' | 'LOGIN_SUCCESS' = 'REFRESH_SUCCESS'
+    messageType: 'REFRESH_SUCCESS' | 'LOGIN_SUCCESS' = 'REFRESH_SUCCESS',
   ): void {
     this.accessTokenSignal.set(accessToken);
     this.tokenExpiresAt = expiresAt;
@@ -255,7 +304,7 @@ export class AuthService implements OnDestroy {
           type: messageType,
           accessToken,
           expiresIn,
-          expiresAt
+          expiresAt,
         } satisfies AuthBroadcastMessage);
       } catch (err) {
         console.warn('[Auth] Failed to broadcast auth message:', err);
@@ -265,7 +314,7 @@ export class AuthService implements OnDestroy {
 
   private clearSession(
     broadcast: boolean,
-    messageType: 'LOGOUT' | 'REFRESH_FAILURE' = 'LOGOUT'
+    messageType: 'LOGOUT' | 'REFRESH_FAILURE' = 'LOGOUT',
   ): void {
     this.accessTokenSignal.set(null);
     this.tokenExpiresAt = null;
@@ -274,7 +323,7 @@ export class AuthService implements OnDestroy {
     if (broadcast && this.broadcastChannel) {
       try {
         this.broadcastChannel.postMessage({
-          type: messageType
+          type: messageType,
         } satisfies AuthBroadcastMessage);
       } catch (err) {
         console.warn('[Auth] Failed to broadcast logout message:', err);
@@ -293,7 +342,7 @@ export class AuthService implements OnDestroy {
           this.refresh().subscribe({
             error: (err: unknown) => {
               console.error('[Auth] Background proactive refresh failed:', err);
-            }
+            },
           });
         });
       }, refreshDelay);

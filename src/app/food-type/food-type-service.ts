@@ -7,7 +7,7 @@ import { buildQueryParams } from '../http/api-utils';
 import { FoodTypeRequest, FoodTypeResponse } from './food-type-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FoodTypeService {
   private readonly httpClient = inject(HttpClient);
@@ -18,7 +18,9 @@ export class FoodTypeService {
 
   public getFoodTypes(params: ApiQueryParams): Observable<PagedResponse<FoodTypeResponse>> {
     const queryParams = buildQueryParams(params);
-    return this.httpClient.get<PagedResponse<FoodTypeResponse>>(ApiPath.foodTypes.get, {params: queryParams});
+    return this.httpClient.get<PagedResponse<FoodTypeResponse>>(ApiPath.foodTypes.get, {
+      params: queryParams,
+    });
   }
 
   public deleteFoodType(id: number): Observable<void> {
@@ -26,7 +28,10 @@ export class FoodTypeService {
   }
 
   public putFoodType(id: number, foodTypeRequest: FoodTypeRequest): Observable<FoodTypeResponse> {
-    return this.httpClient.put<FoodTypeResponse>(ApiPath.resolve(ApiPath.foodTypes.put, id), foodTypeRequest);
+    return this.httpClient.put<FoodTypeResponse>(
+      ApiPath.resolve(ApiPath.foodTypes.put, id),
+      foodTypeRequest,
+    );
   }
 
   public postFoodType(foodTypeRequest: FoodTypeRequest): Observable<FoodTypeResponse> {

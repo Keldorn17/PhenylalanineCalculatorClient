@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,11 +27,10 @@ import { passwordMatchValidator, passwordValidator } from '../../validator/passw
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './change-password-dialog.html',
   styleUrl: './change-password-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordDialog {
   private readonly formBuilder = inject(FormBuilder);
@@ -42,11 +41,11 @@ export class ChangePasswordDialog {
     {
       oldPassword: ['', [Validators.required]],
       password: ['', [Validators.required, passwordValidator]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
     },
     {
-      validators: [passwordMatchValidator]
-    }
+      validators: [passwordMatchValidator],
+    },
   );
 
   protected readonly errorMessage = signal<string | null>(null);
@@ -59,7 +58,7 @@ export class ChangePasswordDialog {
     this.form.valueChanges
       .pipe(
         filter(() => this.errorMessage() !== null),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.errorMessage.set(null);
@@ -78,9 +77,9 @@ export class ChangePasswordDialog {
     this.errorMessage.set(null);
     this.isLoading.set(true);
 
-    const {oldPassword, password} = this.form.value;
+    const { oldPassword, password } = this.form.value;
 
-    this.authService.changePassword({oldPassword, password}).subscribe({
+    this.authService.changePassword({ oldPassword, password }).subscribe({
       next: () => {
         this.isLoading.set(false);
         this.dialogRef.close(true);
@@ -89,7 +88,7 @@ export class ChangePasswordDialog {
         console.error('Failed to change password:', err);
         this.isLoading.set(false);
         this.errorMessage.set('settings.changePasswordDialog.errorFailed');
-      }
+      },
     });
   }
 }

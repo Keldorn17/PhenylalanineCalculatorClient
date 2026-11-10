@@ -7,14 +7,16 @@ import { ApiPath } from '../http/api-path';
 import { buildQueryParams } from '../http/api-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FoodService {
   private readonly httpClient = inject(HttpClient);
 
   public getFoods(params: ApiQueryParams): Observable<PagedResponse<FoodResponse>> {
     const queryParams = buildQueryParams(params);
-    return this.httpClient.get<PagedResponse<FoodResponse>>(ApiPath.food.get, {params: queryParams});
+    return this.httpClient.get<PagedResponse<FoodResponse>>(ApiPath.food.get, {
+      params: queryParams,
+    });
   }
 
   public getByIdFood(id: number): Observable<FoodResponse> {

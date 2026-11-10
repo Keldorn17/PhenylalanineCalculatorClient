@@ -4,7 +4,7 @@
       <mat-list-item
         [routerLink]="item.route"
         routerLinkActive="active-item"
-        [routerLinkActiveOptions]="{exact: true}"
+        [routerLinkActiveOptions]="{ exact: true }"
         [matTooltip]="item.label | translate"
         [matTooltipDisabled]="!isCollapsed()"
         matTooltipPosition="right"
@@ -16,7 +16,7 @@
   </div>
   @if (isLoggedIn()) {
     <div class="bottom">
-      <mat-divider/>
+      <mat-divider />
       <mat-list-item
         class="warn"
         (click)="onLogout()"
