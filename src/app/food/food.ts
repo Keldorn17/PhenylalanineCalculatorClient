@@ -103,6 +103,7 @@ export class Food implements OnInit {
   protected readonly filterForm: FormGroup = this.formBuilder.group({
     search: [''],
     onlyOwn: [false],
+    onlyPrivate: [false],
     sort: [''],
     proteinMin: [this.sliderBounds.protein.min],
     proteinMax: [this.sliderBounds.protein.max],
@@ -152,6 +153,7 @@ export class Food implements OnInit {
       {
         search: currentSearch,
         onlyOwn: false,
+        onlyPrivate: false,
         sort: '',
         proteinMin: this.sliderBounds.protein.min,
         proteinMax: this.sliderBounds.protein.max,
@@ -194,6 +196,7 @@ export class Food implements OnInit {
     const val = this.filterForm.value;
     let count = 0;
     if (val.onlyOwn) count++;
+    if (val.onlyPrivate) count++;
     if (val.sort) count++;
     if (
       Number(val.proteinMin) > this.sliderBounds.protein.min ||
@@ -242,6 +245,11 @@ export class Food implements OnInit {
     if (val.onlyOwn) {
       addAndIfNeeded();
       builder.eq('own', true);
+    }
+
+    if (val.onlyPrivate) {
+      addAndIfNeeded();
+      builder.eq('isPrivate', true);
     }
 
     const proteinMin = Number(val.proteinMin);
