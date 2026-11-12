@@ -285,7 +285,7 @@
     }
   },
   "footer": {
-    "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért.",
+    "description": "Jogi nyilatkozat: Ez az alkalmazás nem minősül szakmai, illetve orvosi tanácsadásnak. Kérjük, étrendjével kapcsolatban mindig konzultáljon szakorvossal vagy dietetikussal! Az alapértelmezett adatok az USA FoodData Central adatbázisából származnak. A megjelenített adatok pontatlanságokat tartalmazhatnak, és az üzemeltető semmilyen felelősséget nem vállal a napi beviteli értékek (beleértve a fenilalanin értékek) esetleges téves számításáért.",
     "termsAndPrivacy": "Felhasználási feltételek és Adatkezelési tájékoztató"
   },
   "dialog": {

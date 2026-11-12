@@ -285,7 +285,7 @@
     }
   },
   "footer": {
-    "description": "Disclaimer: This application does not provide professional medical or nutritional advice. Please consult a registered dietitian or healthcare provider regarding your diet. The data provided may contain inaccuracies, and we accept no liability for incorrect daily intake calculations (including phenylalanine tracking).",
+    "description": "Disclaimer: This application does not provide professional medical or nutritional advice. Please consult a registered dietitian or healthcare provider regarding your diet. The default data is from USA FoodData Central. The data provided may contain inaccuracies, and we accept no liability for incorrect daily intake calculations (including phenylalanine tracking).",
     "termsAndPrivacy": "Terms of Use & Data Processing Notice"
   },
   "dialog": {
