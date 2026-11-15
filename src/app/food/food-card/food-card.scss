@@ -43,24 +43,6 @@
   min-width: 0;
   flex: 1;
 
-  .food-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
-    color: var(--mat-sys-primary);
-
-    mat-icon {
-      font-size: 1.15rem;
-      width: 1.15rem;
-      height: 1.15rem;
-    }
-  }
-
   .food-meta {
     display: flex;
     flex-direction: column;

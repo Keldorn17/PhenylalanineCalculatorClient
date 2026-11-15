@@ -2,9 +2,6 @@
   <mat-card-content class="card-content">
     <div class="progress-header">
       <div class="header-title-group">
-        <div class="header-icon-container" [class.over-limit]="isOverLimit()">
-          <mat-icon>{{ isOverLimit() ? 'warning' : 'monitor_heart' }}</mat-icon>
-        </div>
         <span class="header-title">
           {{ title() ? title() : ('progressBar.title' | translate) }}
         </span>
