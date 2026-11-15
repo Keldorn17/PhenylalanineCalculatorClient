@@ -5,8 +5,6 @@
 
 .progress-card {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
   border-radius: var(--mat-sys-corner-large, 16px);
   background-color: var(--mat-sys-surface-container-low);
   border: 1px solid var(--mat-sys-outline-variant);
@@ -41,31 +39,6 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-
-  .header-icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
-    background-color: color-mix(in srgb, var(--mat-sys-primary) 14%, transparent);
-    color: var(--mat-sys-primary);
-    transition:
-      background-color 0.2s,
-      color 0.2s;
-
-    mat-icon {
-      font-size: 1.35rem;
-      width: 1.35rem;
-      height: 1.35rem;
-    }
-
-    &.over-limit {
-      background-color: color-mix(in srgb, var(--mat-sys-error) 15%, transparent);
-      color: var(--mat-sys-error);
-    }
-  }
 
   .header-title {
     font-size: 1.125rem;
