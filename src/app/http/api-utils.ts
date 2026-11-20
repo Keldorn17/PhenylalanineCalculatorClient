@@ -36,6 +36,19 @@ export function formatIsoDate(date: Date): string {
 }
 
 /**
+ * Returns the browser's current IANA timezone identifier (e.g. "Europe/Budapest"),
+ * or undefined if it cannot be determined.
+ */
+export function getBrowserTimeZone(): string | undefined {
+  try {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return timeZone || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/**
  * A type-safe builder for RSQL query strings.
  */
 export class RsqlBuilder {

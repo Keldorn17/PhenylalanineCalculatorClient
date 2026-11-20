@@ -27,7 +27,7 @@ export const ApiPath = {
   },
 
   dailyIntake: {
-    get: `${env}/daily-intakes?date={}`,
+    get: `${env}/daily-intakes`,
   },
 
   foodConsumption: {
