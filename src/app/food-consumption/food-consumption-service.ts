@@ -8,7 +8,7 @@ import {
   FoodConsumptionResponse,
 } from './food-consumption-types';
 import { ApiPath } from '../http/api-path';
-import { buildQueryParams, formatIsoDate } from '../http/api-utils';
+import { buildQueryParams, formatIsoDate, getBrowserTimeZone } from '../http/api-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,13 @@ export class FoodConsumptionService {
   public getFoodConsumption(
     params: ApiQueryParams,
     date: Date,
+    timezone: string | undefined = getBrowserTimeZone(),
   ): Observable<PagedResponse<FoodConsumptionResponse>> {
-    const queryParams = buildQueryParams(params).set('date', formatIsoDate(date));
+    let queryParams = buildQueryParams(params).set('date', formatIsoDate(date));
+    if (timezone) {
+      queryParams = queryParams.set('timezone', timezone);
+    }
+
     return this.httpClient.get<PagedResponse<FoodConsumptionResponse>>(
       ApiPath.foodConsumption.get,
       {

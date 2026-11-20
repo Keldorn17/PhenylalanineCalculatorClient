@@ -1,7 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import { buildQueryParams, formatIsoDate, RsqlBuilder } from './api-utils';
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { buildQueryParams, formatIsoDate, getBrowserTimeZone, RsqlBuilder } from './api-utils';
 
 describe('ApiUtils', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   describe('buildQueryParams', () => {
     it('should correctly map page, size, query, and sort', () => {
       const params = buildQueryParams({
@@ -27,6 +31,32 @@ describe('ApiUtils', () => {
     it('should format a local date into YYYY-MM-DD', () => {
       const date = new Date(2026, 0, 5);
       expect(formatIsoDate(date)).toBe('2026-01-05');
+    });
+  });
+
+  describe('getBrowserTimeZone', () => {
+    it('should return the resolved IANA timezone from Intl.DateTimeFormat', () => {
+      vi.spyOn(Intl, 'DateTimeFormat').mockReturnValue({
+        resolvedOptions: () => ({ timeZone: 'Europe/Budapest' }),
+      } as Intl.DateTimeFormat);
+
+      expect(getBrowserTimeZone()).toBe('Europe/Budapest');
+    });
+
+    it('should return undefined when resolved timezone is empty', () => {
+      vi.spyOn(Intl, 'DateTimeFormat').mockReturnValue({
+        resolvedOptions: () => ({ timeZone: '' }),
+      } as Intl.DateTimeFormat);
+
+      expect(getBrowserTimeZone()).toBeUndefined();
+    });
+
+    it('should return undefined when Intl.DateTimeFormat throws', () => {
+      vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => {
+        throw new Error('Intl unavailable');
+      });
+
+      expect(getBrowserTimeZone()).toBeUndefined();
     });
   });
 
